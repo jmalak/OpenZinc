@@ -44,8 +44,14 @@
 //#define ZIL_UNICODE                   // Support for UNICODE
 //#define ZIL_DECOMPOSE                 // Support to decompose compound Unicode
 //#define ZIL_HARDWARE                  // Support for Non-AT MS-DOS machines.
+#if 0
+/* TODO!
+ * temporarily disabled, it is implementation dependant
+ * OW 2.0 use new layout need update appropriate code
+ */
 #define ZIL_REARRANGEARGS               // Support for argument rearrangement in
                                         // sprintf() and sscanf().
+#endif
 #define ZIL_DO_FILE_I18N                // Support for Internationalization
 #define ZIL_3x_COMPAT                   // Compatibility for 3x .dat files.
 #define ZIL_DO_OS_I18N                  // Do possibly broken OS i18n support
