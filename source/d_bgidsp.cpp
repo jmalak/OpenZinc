@@ -911,7 +911,7 @@ void UI_BGI_DISPLAY::SetPattern(const UI_PALETTE *palette, int xorInt)
 	static int _fillPattern = -1;
 	static int _backgroundColor = -1;
 	static int _foregroundColor = -1;
-	static int _xor = -1;
+	static int _xorInt = -1;
 	int fillPattern = palette->fillPattern;
 	int backgroundColor = MapColor(palette, FALSE);
 	int foregroundColor = MapColor(palette, TRUE);
@@ -930,10 +930,10 @@ void UI_BGI_DISPLAY::SetPattern(const UI_PALETTE *palette, int xorInt)
 		setcolor(foregroundColor);
 		_foregroundColor = foregroundColor;
 	}
-	if (xorInt != _xor)
+	if (xorInt != _xorInt)
 	{
 		setwritemode(xorInt ? XOR_PUT : COPY_PUT);
-		_xor = xorInt;
+		_xorInt = xorInt;
 	}
 #endif
 }

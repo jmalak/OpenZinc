@@ -352,7 +352,7 @@ void UI_OS2_DISPLAY::DestroyBitmapHandle(ZIL_SCREENID, ZIL_BITMAP_HANDLE *colorB
 
 void UI_OS2_DISPLAY::Ellipse(ZIL_SCREENID screenID, int column, int line,
         int startAngle, int endAngle, int xRadius, int yRadius,
-        const UI_PALETTE *palette, int fill, int _xor, const UI_REGION *clip)
+        const UI_PALETTE *palette, int fill, int _xorInt, const UI_REGION *clip)
 {
         // Virtualize the display. (This call set up UI_OS2_DISPLAY::hps.)
         int left = column - xRadius + 1;
@@ -394,7 +394,7 @@ void UI_OS2_DISPLAY::Ellipse(ZIL_SCREENID screenID, int column, int line,
                         palette->colorBackground : MapColor(palette, TRUE));
         }
         LONG mix;
-        if (_xor)
+        if (_xorInt)
         {
                 mix = GpiQueryMix(hps);
                 GpiSetMix(hps, FM_XOR);
@@ -440,7 +440,7 @@ void UI_OS2_DISPLAY::Ellipse(ZIL_SCREENID screenID, int column, int line,
                 GpiSetBackColor(hps, colorBackground);
                 GpiSetColor(hps, colorForeground);
         }
-        if (_xor)
+        if (_xorInt)
                 GpiSetMix(hps, mix);
 
         // Un-virtualize the display.
@@ -593,7 +593,7 @@ void UI_OS2_DISPLAY::DestroyIconHandle(ZIL_SCREENID, ZIL_ICON_HANDLE *icon)
 }
 
 void UI_OS2_DISPLAY::Line(ZIL_SCREENID screenID, int column1, int line1,
-        int column2, int line2, const UI_PALETTE *palette, int width, int _xor,
+        int column2, int line2, const UI_PALETTE *palette, int width, int _xorInt,
         const UI_REGION *clip)
 {
         // Virtualize the display. (This call set up UI_OS2_DISPLAY::hps.)
@@ -621,7 +621,7 @@ void UI_OS2_DISPLAY::Line(ZIL_SCREENID screenID, int column1, int line1,
                         palette->colorForeground : MapColor(palette, TRUE));
         }
         LONG mix;
-        if (_xor)
+        if (_xorInt)
         {
                 mix = GpiQueryMix(hps);
                 GpiSetMix(hps, FM_XOR);
@@ -649,7 +649,7 @@ void UI_OS2_DISPLAY::Line(ZIL_SCREENID screenID, int column1, int line1,
 
         if (palette)
                 GpiSetColor(hps, color);
-        if (_xor)
+        if (_xorInt)
                 GpiSetMix(hps, mix);
 
         // Un-virtualize the display.
@@ -686,7 +686,7 @@ ZIL_COLOR UI_OS2_DISPLAY::MapColor(const UI_PALETTE *palette, int foreground)
 }
 
 void UI_OS2_DISPLAY::Polygon(ZIL_SCREENID screenID, int numPoints,
-        const int *polygonPoints, const UI_PALETTE *palette, int fill, int _xor,
+        const int *polygonPoints, const UI_PALETTE *palette, int fill, int _xorInt,
         const UI_REGION *clip)
 {
         // Determine the maximum region that bounds the polygon.
@@ -741,7 +741,7 @@ void UI_OS2_DISPLAY::Polygon(ZIL_SCREENID screenID, int numPoints,
                         palette->colorBackground : MapColor(palette, FALSE));
         }
         LONG mix;
-        if (_xor)
+        if (_xorInt)
         {
                 mix = GpiQueryMix(hps);
                 GpiSetMix(hps, FM_XOR);
@@ -767,7 +767,7 @@ void UI_OS2_DISPLAY::Polygon(ZIL_SCREENID screenID, int numPoints,
                 GpiSetBackColor(hps, colorBackground);
                 GpiSetColor(hps, colorForeground);
         }
-        if (_xor)
+        if (_xorInt)
                 GpiSetMix(hps, mix);
 
         // Un-virtualize the display.
@@ -781,7 +781,7 @@ void UI_OS2_DISPLAY::Polygon(ZIL_SCREENID screenID, int numPoints,
 
 void UI_OS2_DISPLAY::Rectangle(ZIL_SCREENID screenID, int left, int top,
         int right, int bottom, const UI_PALETTE * palette, int width, int fill,
-        int _xor, const UI_REGION *clip)
+        int _xorInt, const UI_REGION *clip)
 {
         // Virtualize the display. (This call set up UI_OS2_DISPLAY::hps.)
         VirtualGet(screenID, left, top, right, bottom);
@@ -808,7 +808,7 @@ void UI_OS2_DISPLAY::Rectangle(ZIL_SCREENID screenID, int left, int top,
         }
         LONG mix;
         LONG backMix;
-        if (_xor)
+        if (_xorInt)
         {
                 mix = GpiQueryMix(hps);
                 backMix = GpiQueryBackMix(hps);
@@ -854,7 +854,7 @@ void UI_OS2_DISPLAY::Rectangle(ZIL_SCREENID screenID, int left, int top,
         }
 
         // Reset the xor combination and fill the inner rectangle.
-        if (_xor)
+        if (_xorInt)
         {
                 GpiSetMix(hps, mix);
                 GpiSetBackMix(hps, backMix);
@@ -962,7 +962,7 @@ void UI_OS2_DISPLAY::RegionMove(const UI_REGION &oldRegion, int newColumn,
 
 void UI_OS2_DISPLAY::Text(ZIL_SCREENID screenID, int left, int top,
         const ZIL_ICHAR *text, const UI_PALETTE *palette, int length, int fill,
-        int _xor, const UI_REGION *clip, ZIL_LOGICAL_FONT logicalFont)
+        int _xorInt, const UI_REGION *clip, ZIL_LOGICAL_FONT logicalFont)
 {
         // Make sure there is a valid string.
         if (!text || text[0] == '\0')
@@ -1014,7 +1014,7 @@ void UI_OS2_DISPLAY::Text(ZIL_SCREENID screenID, int left, int top,
                 GpiSetColor(hps, SYSCLR_OUTPUTTEXT);
         }
         LONG mix;
-        if (_xor)
+        if (_xorInt)
         {
                 mix = GpiQueryMix(hps);
                 GpiSetMix(hps, FM_XOR);
@@ -1044,7 +1044,7 @@ void UI_OS2_DISPLAY::Text(ZIL_SCREENID screenID, int left, int top,
         if (palette)
                 GpiSetBackColor(hps, colorBackground);
         GpiSetColor(hps, colorForeground);
-        if (_xor)
+        if (_xorInt)
                 GpiSetMix(hps, mix);
 
         // Un-virtualize the display.

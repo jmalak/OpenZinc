@@ -989,7 +989,7 @@ void UI_MSC_DISPLAY::SetFont(ZIL_LOGICAL_FONT logicalFont)
 
 void UI_MSC_DISPLAY::SetPattern(const UI_PALETTE *palette, int xorInt)
 {
-	static int _xor = -1;
+	static int _xorInt = -1;
 
 	if (palette)
 	{
@@ -997,10 +997,10 @@ void UI_MSC_DISPLAY::SetPattern(const UI_PALETTE *palette, int xorInt)
 		_backgroundColor = MapColor(palette, FALSE);
 		_foregroundColor = MapColor(palette, TRUE);
 	}
-	if (xorInt != _xor)
+	if (xorInt != _xorInt)
 	{
 		_setwritemode(xorInt ? _GXOR : _GPSET);
-		_xor = xorInt;
+		_xorInt = xorInt;
 	}
 }
 

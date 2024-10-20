@@ -55,7 +55,7 @@ UI_FG_DISPLAY::UI_FG_DISPLAY(int mode) :
 	_fillPattern = -1;
 	_backgroundColor = -1;
 	_foregroundColor = -1;
-	_xor = -1;
+	_xorInt = -1;
 
 	columns = fg.displaybox[FG_X2] + 1;
 	lines = fg.displaybox[FG_Y2] + 1;
@@ -80,11 +80,11 @@ UI_FG_DISPLAY::UI_FG_DISPLAY(int mode) :
 	SetPattern(backgroundPalette, FALSE);
 	if (_fillPattern != PTN_SOLID_FILL)
 	{
-		fg_fillbox(fg.color[_foregroundColor], _xor, ~0, fg.displaybox);
-		fg_fillboxpattern(fg.color[_backgroundColor], _xor, ~0, fg.displaybox, FG_FILL_USER_DEFINED);
+		fg_fillbox(fg.color[_foregroundColor], _xorInt, ~0, fg.displaybox);
+		fg_fillboxpattern(fg.color[_backgroundColor], _xorInt, ~0, fg.displaybox, FG_FILL_USER_DEFINED);
 	}
 	else
-		fg_fillbox(fg.color[_foregroundColor], _xor, ~0, fg.displaybox);
+		fg_fillbox(fg.color[_foregroundColor], _xorInt, ~0, fg.displaybox);
 	fg_flush();
 
 	// Define the screen display region.
@@ -185,7 +185,7 @@ void UI_FG_DISPLAY::Ellipse(ZIL_SCREENID screenID, int x, int y,
 				while (shrinkRadius > 0)
 				{
 					shrinkRadius--;
-					fg_drawellipse(fg.color[_backgroundColor], _xor, ~0, x, lines - y - 1,
+					fg_drawellipse(fg.color[_backgroundColor], _xorInt, ~0, x, lines - y - 1,
 						shrinkRadius, yRadius, startAngle * 10, endAngle * 10,
 						(fg_const_pbox_t)&clipBox);
 				}
@@ -196,12 +196,12 @@ void UI_FG_DISPLAY::Ellipse(ZIL_SCREENID screenID, int x, int y,
 				while (shrinkRadius > 0)
 				{
 					shrinkRadius--;
-					fg_drawellipse(fg.color[_backgroundColor], _xor, ~0, x, lines - y - 1,
+					fg_drawellipse(fg.color[_backgroundColor], _xorInt, ~0, x, lines - y - 1,
 						xRadius, shrinkRadius, startAngle * 10, endAngle * 10,
 						(fg_const_pbox_t)&clipBox);
 				}
 			}
-			fg_drawellipse(fg.color[_foregroundColor], _xor, ~0, x, lines - y - 1,
+			fg_drawellipse(fg.color[_foregroundColor], _xorInt, ~0, x, lines - y - 1,
 				xRadius, yRadius, startAngle * 10, endAngle * 10,
 				(fg_const_pbox_t)&clipBox);
 			if (screenID == ID_DIRECT)
@@ -352,7 +352,7 @@ void UI_FG_DISPLAY::Line(ZIL_SCREENID screenID, int x1, int y1,
 					line[FG_Y1] = lines - y1 - 1;
 					line[FG_Y2] = lines - y2 - 1;
 
-					fg_drawlineclip(fg.color[_foregroundColor], _xor, ~0, FG_LINE_SOLID,
+					fg_drawlineclip(fg.color[_foregroundColor], _xorInt, ~0, FG_LINE_SOLID,
 						(fg_const_pline_t)&line, (fg_const_pbox_t)&clipBox);
 				}
 				else
@@ -363,7 +363,7 @@ void UI_FG_DISPLAY::Line(ZIL_SCREENID screenID, int x1, int y1,
 					line[FG_Y1] = lines - y1 - 1 + i;
 					line[FG_Y2] = lines - y2 - 1 + i;
 
-					fg_drawlineclip(fg.color[_foregroundColor], _xor, ~0, FG_LINE_SOLID,
+					fg_drawlineclip(fg.color[_foregroundColor], _xorInt, ~0, FG_LINE_SOLID,
 						(fg_const_pline_t)&line, (fg_const_pbox_t)&clipBox);
 				}
 			if (screenID == ID_DIRECT)
@@ -432,16 +432,16 @@ void UI_FG_DISPLAY::Polygon(ZIL_SCREENID screenID, int numPoints,
 
 			if (fill && _fillPattern != PTN_SOLID_FILL)
 			{
-				fg_fillpolygon(fg.color[_foregroundColor], _xor, ~0, numPoints - 1,
+				fg_fillpolygon(fg.color[_foregroundColor], _xorInt, ~0, numPoints - 1,
 					tPolygon, clipBox);
-				fg_fillpolygonpattern(fg.color[_backgroundColor], _xor, ~0, numPoints - 1,
+				fg_fillpolygonpattern(fg.color[_backgroundColor], _xorInt, ~0, numPoints - 1,
 					tPolygon, clipBox, FG_FILL_USER_DEFINED);
 			}
 			else if (fill)
-				fg_fillpolygon(fg.color[_backgroundColor], _xor, ~0, numPoints - 1,
+				fg_fillpolygon(fg.color[_backgroundColor], _xorInt, ~0, numPoints - 1,
 					tPolygon, clipBox);
 			if (!fill || _backgroundColor != _foregroundColor)
-				fg_drawpolygon(fg.color[_foregroundColor], _xor, ~0, FG_LINE_SOLID,
+				fg_drawpolygon(fg.color[_foregroundColor], _xorInt, ~0, FG_LINE_SOLID,
 					numPoints - 1, tPolygon, clipBox);
 			if (screenID == ID_DIRECT)
 				break;
@@ -482,11 +482,11 @@ void UI_FG_DISPLAY::Rectangle(ZIL_SCREENID screenID, int left, int top,
 			clipBox[FG_Y2] = lines - tRegion.top - 1;
 			if (fill && _fillPattern != PTN_SOLID_FILL)
 			{
-				fg_fillbox(fg.color[_foregroundColor], _xor, ~0, (fg_const_pbox_t)&clipBox);
-				fg_fillboxpattern(fg.color[_backgroundColor], _xor, ~0, (fg_const_pbox_t)&clipBox, FG_FILL_USER_DEFINED);
+				fg_fillbox(fg.color[_foregroundColor], _xorInt, ~0, (fg_const_pbox_t)&clipBox);
+				fg_fillboxpattern(fg.color[_backgroundColor], _xorInt, ~0, (fg_const_pbox_t)&clipBox, FG_FILL_USER_DEFINED);
 			}
 			else if (fill)
-				fg_fillbox(fg.color[_backgroundColor], _xor, ~0, (fg_const_pbox_t)&clipBox);
+				fg_fillbox(fg.color[_backgroundColor], _xorInt, ~0, (fg_const_pbox_t)&clipBox);
 			if (!fill || _backgroundColor != _foregroundColor)
 			{
 				fg_box_t box;
@@ -496,7 +496,7 @@ void UI_FG_DISPLAY::Rectangle(ZIL_SCREENID screenID, int left, int top,
 				box[FG_Y2] = lines - top - 1;
 				for (int w = 0; w < width; w++)
 				{
-					fg_drawbox(fg.color[_foregroundColor], _xor, ~0, FG_LINE_SOLID,
+					fg_drawbox(fg.color[_foregroundColor], _xorInt, ~0, FG_LINE_SOLID,
 						(fg_const_pbox_t)&box, (fg_const_pbox_t)&clipBox);
 					box[FG_X1] += 1;
 					box[FG_X2] -= 1;
@@ -697,14 +697,14 @@ void UI_FG_DISPLAY::Text(ZIL_SCREENID screenID, int left,
 			clipBox[FG_Y2] = lines - tRegion.top - 1;
 			if (fill && _fillPattern != PTN_SOLID_FILL)
 			{
-				fg_fillbox(fg.color[_foregroundColor], _xor, ~0, (fg_const_pbox_t)&clipBox);
-				fg_fillboxpattern(fg.color[_backgroundColor], _xor, ~0, (fg_const_pbox_t)&clipBox, FG_FILL_USER_DEFINED);
+				fg_fillbox(fg.color[_foregroundColor], _xorInt, ~0, (fg_const_pbox_t)&clipBox);
+				fg_fillboxpattern(fg.color[_backgroundColor], _xorInt, ~0, (fg_const_pbox_t)&clipBox, FG_FILL_USER_DEFINED);
 			}
 			else if (fill)
-				fg_fillbox(fg.color[_backgroundColor], _xor, ~0, (fg_const_pbox_t)&clipBox);
+				fg_fillbox(fg.color[_backgroundColor], _xorInt, ~0, (fg_const_pbox_t)&clipBox);
 				
 				
-			fg_puts(fg.color[_foregroundColor], _xor, ~0, 
+			fg_puts(fg.color[_foregroundColor], _xorInt, ~0, 
 				FG_ROT0, left,
 				lines - bottom - 2, fillLine, (fg_const_pbox_t)&clipBox);
 			if (hotKey)
@@ -715,7 +715,7 @@ void UI_FG_DISPLAY::Text(ZIL_SCREENID screenID, int left,
 				line[FG_Y1] = lines - bottom - 1;
 				line[FG_Y2] = lines - bottom - 1;
 
-				fg_drawlineclip(fg.color[_foregroundColor], _xor, ~0, FG_LINE_SOLID,
+				fg_drawlineclip(fg.color[_foregroundColor], _xorInt, ~0, FG_LINE_SOLID,
 					(fg_const_pline_t)&line, (fg_const_pbox_t)&clipBox);
 			}
 			if (screenID == ID_DIRECT)
@@ -797,7 +797,7 @@ void UI_FG_DISPLAY::SetPattern(const UI_PALETTE *palette, int xorInt)
 	}
 	_backgroundColor = MapColor(palette, FALSE);
 	_foregroundColor = MapColor(palette, TRUE);
-	_xor = xorInt;
+	_xorInt = xorInt;
 }
 
 int UI_FG_DISPLAY::TextHeight(const char *string, ZIL_SCREENID, 

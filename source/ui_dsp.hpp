@@ -542,7 +542,7 @@ public:
 		ZIL_BITMAP_HANDLE *colorBitmap, ZIL_BITMAP_HANDLE *monoBitmap);
 	virtual void Ellipse(ZIL_SCREENID screenID, int column, int line,
 		int startAngle, int endAngle, int xRadius, int yRadius,
-		const UI_PALETTE *palette, int fill = FALSE, int _xor = FALSE,
+		const UI_PALETTE *palette, int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void IconArrayToHandle(ZIL_SCREENID screenID, int iconWidth,
 		int iconHeight, const ZIL_UINT8 *iconArray, const UI_PALETTE *palette,
@@ -551,21 +551,21 @@ public:
 		int *iconWidth, int *iconHeight, ZIL_UINT8 **iconArray);
 	virtual void DestroyIconHandle(ZIL_SCREENID screenID,  ZIL_ICON_HANDLE *icon);
 	virtual void Line(ZIL_SCREENID screenID, int column1, int line1, int column2,
-		int line2, const UI_PALETTE *palette, int width = 1, int _xor = FALSE,
+		int line2, const UI_PALETTE *palette, int width = 1, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual ZIL_COLOR MapColor(const UI_PALETTE *palette, int isForeground);
 	virtual void Polygon(ZIL_SCREENID screenID, int numPoints,
 		const int *polygonPoints, const UI_PALETTE *palette,
-		int fill = FALSE, int _xor = FALSE,
+		int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	void Rectangle(ZIL_SCREENID screenID, const UI_REGION &region,
 		const UI_PALETTE *palette, int width = 1, int fill = FALSE,
-		int _xor = FALSE, const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION))
+		int _xorInt = FALSE, const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION))
 		{ Rectangle(screenID, region.left, region.top, region.right,
-		  region.bottom, palette, width, fill, _xor, clipRegion); }
+		  region.bottom, palette, width, fill, _xorInt, clipRegion); }
 	virtual void Rectangle(ZIL_SCREENID screenID, int left, int top, int right,
 		int bottom, const UI_PALETTE *palette, int width = 1,
-		int fill = FALSE, int _xor = FALSE,
+		int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void RectangleXORDiff(const UI_REGION &oldRegion,
 		const UI_REGION &newRegion, ZIL_SCREENID screenID = ID_SCREEN,
@@ -577,7 +577,7 @@ public:
 		ZIL_SCREENID oldScreenID = ID_SCREEN, ZIL_SCREENID newScreenID = ID_SCREEN);
 	virtual void Text(ZIL_SCREENID screenID, int left, int top,
 		const ZIL_ICHAR *text, const UI_PALETTE *palette, int length = -1,
-		int fill = TRUE, int _xor = FALSE,
+		int fill = TRUE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION),
 		ZIL_LOGICAL_FONT font = FNT_DIALOG_FONT);
 	virtual int TextHeight(const ZIL_ICHAR *string,
@@ -653,7 +653,7 @@ public:
 		ZIL_BITMAP_HANDLE *colorBitmap, ZIL_BITMAP_HANDLE *monoBitmap);
 	virtual void Ellipse(ZIL_SCREENID screenID, int column, int line,
 		int startAngle, int endAngle, int xRadius, int yRadius,
-		const UI_PALETTE *palette, int fill = FALSE, int _xor = FALSE,
+		const UI_PALETTE *palette, int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void IconArrayToHandle(ZIL_SCREENID screenID, int iconWidth,
 		int iconHeight, const ZIL_UINT8 *iconArray, const UI_PALETTE *palette,
@@ -662,16 +662,16 @@ public:
 		int *iconWidth, int *iconHeight, ZIL_UINT8 **iconArray);
 	virtual void DestroyIconHandle(ZIL_SCREENID screenID,  ZIL_ICON_HANDLE *icon);
 	virtual void Line(ZIL_SCREENID screenID, int column1, int line1, int column2,
-		int line2, const UI_PALETTE *palette, int width = 1, int _xor = FALSE,
+		int line2, const UI_PALETTE *palette, int width = 1, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual ZIL_COLOR MapColor(const UI_PALETTE *palette, int isForeground);
 	virtual void Polygon(ZIL_SCREENID screenID, int numPoints,
 		const int *polygonPoints, const UI_PALETTE *palette,
-		int fill = FALSE, int _xor = FALSE,
+		int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void Rectangle(ZIL_SCREENID screenID, int left, int top, int right,
 		int bottom, const UI_PALETTE *palette, int width = 1,
-		int fill = FALSE, int _xor = FALSE,
+		int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void RectangleXORDiff(const UI_REGION &oldRegion,
 		const UI_REGION &newRegion, ZIL_SCREENID screenID = ID_SCREEN,
@@ -681,7 +681,7 @@ public:
 		ZIL_SCREENID oldScreenID = ID_SCREEN, ZIL_SCREENID newScreenID = ID_SCREEN);
 	virtual void Text(ZIL_SCREENID screenID, int left, int top,
 		const ZIL_ICHAR *text, const UI_PALETTE *palette, int length = -1,
-		int fill = TRUE, int _xor = FALSE,
+		int fill = TRUE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION),
 		ZIL_LOGICAL_FONT font = FNT_DIALOG_FONT);
 	virtual int TextHeight(const ZIL_ICHAR *string, ZIL_SCREENID
@@ -702,7 +702,7 @@ protected:
 	char _stopDevice;
 
 	void SetFont(ZIL_LOGICAL_FONT logicalFont);
-	void SetPattern(const UI_PALETTE *palette, int _xor);
+	void SetPattern(const UI_PALETTE *palette, int _xorInt);
 };
 #endif
 
@@ -755,7 +755,7 @@ public:
 		ZIL_BITMAP_HANDLE *colorBitmap, ZIL_BITMAP_HANDLE *monoBitmap);
 	virtual void Ellipse(ZIL_SCREENID screenID, int column, int line,
 		int startAngle, int endAngle, int xRadius, int yRadius,
-		const UI_PALETTE *palette, int fill = FALSE, int _xor = FALSE,
+		const UI_PALETTE *palette, int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void IconArrayToHandle(ZIL_SCREENID screenID, int iconWidth,
 		int iconHeight, const ZIL_UINT8 *iconArray, const UI_PALETTE *palette,
@@ -764,16 +764,16 @@ public:
 		int *iconWidth, int *iconHeight, ZIL_UINT8 **iconArray);
 	virtual void DestroyIconHandle(ZIL_SCREENID screenID,  ZIL_ICON_HANDLE *icon);
 	virtual void Line(ZIL_SCREENID screenID, int column1, int line1, int column2,
-		int line2, const UI_PALETTE *palette, int width = 1, int _xor = FALSE,
+		int line2, const UI_PALETTE *palette, int width = 1, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual ZIL_COLOR MapColor(const UI_PALETTE *palette, int isForeground);
 	virtual void Polygon(ZIL_SCREENID screenID, int numPoints,
 		const int *polygonPoints, const UI_PALETTE *palette,
-		int fill = FALSE, int _xor = FALSE,
+		int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void Rectangle(ZIL_SCREENID screenID, int left, int top, int right,
 		int bottom, const UI_PALETTE *palette, int width = 1,
-		int fill = FALSE, int _xor = FALSE,
+		int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void RectangleXORDiff(const UI_REGION &oldRegion,
 		const UI_REGION &newRegion, ZIL_SCREENID screenID = ID_SCREEN,
@@ -783,7 +783,7 @@ public:
 		ZIL_SCREENID oldScreenID = ID_SCREEN, ZIL_SCREENID newScreenID = ID_SCREEN);
 	virtual void Text(ZIL_SCREENID screenID, int left, int top,
 		const ZIL_ICHAR *text, const UI_PALETTE *palette, int length = -1,
-		int fill = TRUE, int _xor = FALSE,
+		int fill = TRUE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION),
 		ZIL_LOGICAL_FONT font = FNT_DIALOG_FONT);
 	virtual int TextHeight(const ZIL_ICHAR *string, ZIL_SCREENID
@@ -808,7 +808,7 @@ protected:
 	char _stopDevice;
 
 	void SetFont(ZIL_LOGICAL_FONT logicalFont);
-	void SetPattern(const UI_PALETTE *palette, int _xor);
+	void SetPattern(const UI_PALETTE *palette, int _xorInt);
 };
 #endif
 
@@ -850,7 +850,7 @@ public:
 		ZIL_BITMAP_HANDLE *colorBitmap, ZIL_BITMAP_HANDLE *monoBitmap);
 	virtual void Ellipse(ZIL_SCREENID screenID, int column, int line,
 		int startAngle, int endAngle, int xRadius, int yRadius,
-		const UI_PALETTE *palette, int fill = FALSE, int _xor = FALSE,
+		const UI_PALETTE *palette, int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void IconArrayToHandle(ZIL_SCREENID screenID, int iconWidth,
 		int iconHeight, const ZIL_UINT8 *iconArray, const UI_PALETTE *palette,
@@ -859,16 +859,16 @@ public:
 		int *iconWidth, int *iconHeight, ZIL_UINT8 **iconArray);
 	virtual void DestroyIconHandle(ZIL_SCREENID screenID,  ZIL_ICON_HANDLE *icon);
 	virtual void Line(ZIL_SCREENID screenID, int column1, int line1, int column2,
-		int line2, const UI_PALETTE *palette, int width = 1, int _xor = FALSE,
+		int line2, const UI_PALETTE *palette, int width = 1, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual ZIL_COLOR MapColor(const UI_PALETTE *palette, int isForeground);
 	virtual void Polygon(ZIL_SCREENID screenID, int numPoints,
 		const int *polygonPoints, const UI_PALETTE *palette,
-		int fill = FALSE, int _xor = FALSE,
+		int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void Rectangle(ZIL_SCREENID screenID, int left, int top, int right,
 		int bottom, const UI_PALETTE *palette, int width = 1,
-		int fill = FALSE, int _xor = FALSE,
+		int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void RectangleXORDiff(const UI_REGION &oldRegion,
 		const UI_REGION &newRegion, ZIL_SCREENID screenID = ID_SCREEN,
@@ -879,7 +879,7 @@ public:
 		ZIL_SCREENID newScreenID = ID_SCREEN);
 	virtual void Text(ZIL_SCREENID screenID, int left, int top,
 		const ZIL_ICHAR *text, const UI_PALETTE *palette, int length = -1,
-		int fill = TRUE, int _xor = FALSE,
+		int fill = TRUE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION),
 		ZIL_LOGICAL_FONT font = FNT_DIALOG_FONT);
 	virtual int TextHeight(const ZIL_ICHAR *string,
@@ -905,7 +905,7 @@ protected:
 	char _stopDevice;
 
 	void SetFont(ZIL_LOGICAL_FONT logicalFont);
-	void SetPattern(const UI_PALETTE *palette, int _xor);
+	void SetPattern(const UI_PALETTE *palette, int _xorInt);
 };
 #endif
 
@@ -957,7 +957,7 @@ public:
 		ZIL_BITMAP_HANDLE *colorBitmap, ZIL_BITMAP_HANDLE *monoBitmap);
 	virtual void Ellipse(ZIL_SCREENID screenID, int column, int line,
 		int startAngle, int endAngle, int xRadius, int yRadius,
-		const UI_PALETTE *palette, int fill = FALSE, int _xor = FALSE,
+		const UI_PALETTE *palette, int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void IconArrayToHandle(ZIL_SCREENID screenID, int iconWidth,
 		int iconHeight, const ZIL_UINT8 *iconArray, const UI_PALETTE *palette,
@@ -966,16 +966,16 @@ public:
 		int *iconWidth, int *iconHeight, ZIL_UINT8 **iconArray);
 	virtual void DestroyIconHandle(ZIL_SCREENID screenID,  ZIL_ICON_HANDLE *icon);
 	virtual void Line(ZIL_SCREENID screenID, int column1, int line1, int column2,
-		int line2, const UI_PALETTE *palette, int width = 1, int _xor = FALSE,
+		int line2, const UI_PALETTE *palette, int width = 1, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual ZIL_COLOR MapColor(const UI_PALETTE *palette, int isForeground);
 	virtual void Polygon(ZIL_SCREENID screenID, int numPoints,
 		const int *polygonPoints, const UI_PALETTE *palette,
-		int fill = FALSE, int _xor = FALSE,
+		int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void Rectangle(ZIL_SCREENID screenID, int left, int top, int right,
 		int bottom, const UI_PALETTE *palette, int width = 1,
-		int fill = FALSE, int _xor = FALSE,
+		int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void RectangleXORDiff(const UI_REGION &oldRegion,
 		const UI_REGION &newRegion, ZIL_SCREENID screenID = ID_SCREEN,
@@ -986,7 +986,7 @@ public:
 		ZIL_SCREENID newScreenID = ID_SCREEN);
 	virtual void Text(ZIL_SCREENID screenID, int left, int top,
 		const ZIL_ICHAR *text, const UI_PALETTE *palette, int length = -1,
-		int fill = TRUE, int _xor = FALSE,
+		int fill = TRUE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION),
 		ZIL_LOGICAL_FONT font = FNT_DIALOG_FONT);
 	virtual int TextHeight(const ZIL_ICHAR *string,
@@ -1035,7 +1035,7 @@ public:
 		ZIL_BITMAP_HANDLE *colorBitmap, ZIL_BITMAP_HANDLE *monoBitmap);
 	virtual void Ellipse(ZIL_SCREENID screenID, int column, int line,
 		int startAngle, int endAngle, int xRadius, int yRadius,
-		const UI_PALETTE *palette, int fill = FALSE, int _xor = FALSE,
+		const UI_PALETTE *palette, int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void IconArrayToHandle(ZIL_SCREENID screenID, int iconWidth,
 		int iconHeight, const ZIL_UINT8 *iconArray, const UI_PALETTE *palette,
@@ -1045,15 +1045,15 @@ public:
 	virtual void DestroyIconHandle(ZIL_SCREENID screenID,  ZIL_ICON_HANDLE *icon);
 	virtual void Line(ZIL_SCREENID screenID, int column1, int line1, int column2,
 		int line2, const UI_PALETTE *palette, int width = 1,
-		int _xor = FALSE, const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
+		int _xorInt = FALSE, const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual ZIL_COLOR MapColor(const UI_PALETTE *palette, int isForeground);
 	virtual void Polygon(ZIL_SCREENID screenID, int numPoints,
 		const int *polygonPoints, const UI_PALETTE *palette,
-		int fill = FALSE, int _xor = FALSE,
+		int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void Rectangle(ZIL_SCREENID screenID, int left, int top, int right,
 		int bottom, const UI_PALETTE *palette, int width = 1,
-		int fill = FALSE, int _xor = FALSE,
+		int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void RectangleXORDiff(const UI_REGION &oldRegion,
 		const UI_REGION &newRegion, ZIL_SCREENID screenID = ID_SCREEN,
@@ -1063,7 +1063,7 @@ public:
 		ZIL_SCREENID oldScreenID = ID_SCREEN, ZIL_SCREENID newScreenID = ID_SCREEN);
 	virtual void Text(ZIL_SCREENID screenID, int left, int top,
 		const ZIL_ICHAR *text, const UI_PALETTE *palette, int length = -1,
-		int fill = TRUE, int _xor = FALSE,
+		int fill = TRUE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION),
 		ZIL_LOGICAL_FONT font = FNT_DIALOG_FONT);
 	virtual int TextHeight(const ZIL_ICHAR *string,
@@ -1087,7 +1087,7 @@ protected:
 	int _foregroundColor;
 
 	void SetFont(ZIL_LOGICAL_FONT logicalFont);
-	void SetPattern(const UI_PALETTE *palette, int _xor);
+	void SetPattern(const UI_PALETTE *palette, int _xorInt);
 };
 #endif
 
@@ -1122,7 +1122,7 @@ public:
 		ZIL_BITMAP_HANDLE *colorBitmap, ZIL_BITMAP_HANDLE *monoBitmap);
 	virtual void Ellipse(ZIL_SCREENID screenID, int column, int line,
 		int startAngle, int endAngle, int xRadius, int yRadius,
-		const UI_PALETTE *palette, int fill = FALSE, int _xor = FALSE,
+		const UI_PALETTE *palette, int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void IconArrayToHandle(ZIL_SCREENID screenID, int iconWidth,
 		int iconHeight, const ZIL_UINT8 *iconArray, const UI_PALETTE *palette,
@@ -1131,15 +1131,15 @@ public:
 		int *iconWidth, int *iconHeight, ZIL_UINT8 **iconArray);
 	virtual void DestroyIconHandle(ZIL_SCREENID screenID,  ZIL_ICON_HANDLE *icon);
 	virtual void Line(ZIL_SCREENID screenID, int column1, int line1, int column2,
-		int line2, const UI_PALETTE *palette, int width = 1, int _xor = FALSE,
+		int line2, const UI_PALETTE *palette, int width = 1, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual ZIL_COLOR MapColor(const UI_PALETTE *palette, int isForeground);
 	virtual void Polygon(ZIL_SCREENID screenID, int numPoints, const int *polygonPoints,
-		const UI_PALETTE *palette, int fill = FALSE, int _xor = FALSE,
+		const UI_PALETTE *palette, int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void Rectangle(ZIL_SCREENID screenID, int left, int top, int right,
 		int bottom, const UI_PALETTE *palette, int width = 1,
-		int fill = FALSE, int _xor = FALSE,
+		int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void RectangleXORDiff(const UI_REGION &oldRegion,
 		const UI_REGION &newRegion, ZIL_SCREENID screenID = ID_SCREEN,
@@ -1149,7 +1149,7 @@ public:
 		ZIL_SCREENID newScreenID = ID_SCREEN);
 	virtual void Text(ZIL_SCREENID screenID, int left, int top,
 		const ZIL_ICHAR *text, const UI_PALETTE *palette, int length = -1,
-		int fill = TRUE, int _xor = FALSE,
+		int fill = TRUE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION),
 		ZIL_LOGICAL_FONT font = FNT_DIALOG_FONT);
 	virtual int TextHeight(const ZIL_ICHAR *string,
@@ -1193,7 +1193,7 @@ public:
 		ZIL_BITMAP_HANDLE *colorBitmap, ZIL_BITMAP_HANDLE *monoBitmap);
 	virtual void Ellipse(ZIL_SCREENID screenID, int column, int line,
 		int startAngle, int endAngle, int xRadius, int yRadius,
-		const UI_PALETTE *palette, int fill = FALSE, int _xor = FALSE,
+		const UI_PALETTE *palette, int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void IconArrayToHandle(ZIL_SCREENID screenID, int iconWidth,
 		int iconHeight, const ZIL_UINT8 *iconArray, const UI_PALETTE *palette,
@@ -1202,16 +1202,16 @@ public:
 		int *iconWidth, int *iconHeight, ZIL_UINT8 **iconArray);
 	virtual void DestroyIconHandle(ZIL_SCREENID screenID,  ZIL_ICON_HANDLE *icon);
 	virtual void Line(ZIL_SCREENID screenID, int column1, int line1, int column2,
-		int line2, const UI_PALETTE *palette, int width = 1, int _xor = FALSE,
+		int line2, const UI_PALETTE *palette, int width = 1, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual ZIL_COLOR MapColor(const UI_PALETTE *palette, int isForeground);
 	virtual void Polygon(ZIL_SCREENID screenID, int numPoints,
 		const int *polygonPoints, const UI_PALETTE *palette,
-		int fill = FALSE, int _xor = FALSE,
+		int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void Rectangle(ZIL_SCREENID screenID, int left, int top, int right,
 		int bottom, const UI_PALETTE *palette, int width = 1,
-		int fill = FALSE, int _xor = FALSE,
+		int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void RectangleXORDiff(const UI_REGION &oldRegion,
 		const UI_REGION &newRegion, ZIL_SCREENID screenID = ID_SCREEN,
@@ -1221,7 +1221,7 @@ public:
 		ZIL_SCREENID newScreenID = ID_SCREEN);
 	virtual void Text(ZIL_SCREENID screenID, int left, int top,
 		const ZIL_ICHAR *text, const UI_PALETTE *palette, int length = -1,
-		int fill = TRUE, int _xor = FALSE,
+		int fill = TRUE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION),
 		ZIL_LOGICAL_FONT font = FNT_DIALOG_FONT);
 	virtual int TextHeight(const ZIL_ICHAR *string,
@@ -1262,12 +1262,12 @@ public:
 	UI_TEXT_DISPLAY(TDM_MODE _mode = TDM_AUTO);
 	virtual ~UI_TEXT_DISPLAY(void);
 	virtual void Line(ZIL_SCREENID screenID, int column1, int line1, int column2,
-		int line2, const UI_PALETTE *palette, int width = 1, int _xor = FALSE,
+		int line2, const UI_PALETTE *palette, int width = 1, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual ZIL_COLOR MapColor(const UI_PALETTE *palette, int isForeground = 1);
 	virtual void Rectangle(ZIL_SCREENID screenID, int left, int top, int right,
 		int bottom, const UI_PALETTE *palette, int width = 1,
-		int fill = FALSE, int _xor = FALSE,
+		int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void RectangleXORDiff(const UI_REGION &oldRegion,
 		const UI_REGION &newRegion, ZIL_SCREENID screenID = ID_SCREEN,
@@ -1278,7 +1278,7 @@ public:
 		ZIL_SCREENID newScreenID = ID_SCREEN);
 	virtual void Text(ZIL_SCREENID screenID, int left, int top,
 		const ZIL_ICHAR *text, const UI_PALETTE *palette, int length = -1,
-		int fill = TRUE, int _xor = FALSE,
+		int fill = TRUE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION),
 		ZIL_LOGICAL_FONT font = FNT_DIALOG_FONT);
 	virtual int TextHeight(const ZIL_ICHAR *string,
@@ -1346,7 +1346,7 @@ public:
 		ZIL_BITMAP_HANDLE *colorBitmap, ZIL_BITMAP_HANDLE *monoBitmap);
 	virtual void Ellipse(ZIL_SCREENID screenID, int column, int line,
 		int startAngle, int endAngle, int xRadius, int yRadius,
-		const UI_PALETTE *palette, int fill = FALSE, int _xor = FALSE,
+		const UI_PALETTE *palette, int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void IconArrayToHandle(ZIL_SCREENID screenID, int iconWidth,
 		int iconHeight, const ZIL_UINT8 *iconArray, const UI_PALETTE *palette,
@@ -1355,16 +1355,16 @@ public:
 		int *iconWidth, int *iconHeight, ZIL_UINT8 **iconArray);
 	virtual void DestroyIconHandle(ZIL_SCREENID screenID,  ZIL_ICON_HANDLE *icon);
 	virtual void Line(ZIL_SCREENID screenID, int column1, int line1, int column2,
-		int line2, const UI_PALETTE *palette, int width = 1, int _xor = FALSE,
+		int line2, const UI_PALETTE *palette, int width = 1, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual ZIL_COLOR MapColor(const UI_PALETTE *palette, int isForeground);
 	virtual void Polygon(ZIL_SCREENID screenID, int numPoints,
 		const int *polygonPoints, const UI_PALETTE *palette,
-		int fill = FALSE, int _xor = FALSE,
+		int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void Rectangle(ZIL_SCREENID screenID, int left, int top, int right,
 		int bottom, const UI_PALETTE *palette, int width = 1,
-		int fill = FALSE, int _xor = FALSE,
+		int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void RectangleXORDiff(const UI_REGION &oldRegion,
 		const UI_REGION &newRegion, ZIL_SCREENID screenID = ID_SCREEN,
@@ -1374,7 +1374,7 @@ public:
 		ZIL_SCREENID oldScreenID = ID_SCREEN, ZIL_SCREENID newScreenID = ID_SCREEN);
 	virtual void Text(ZIL_SCREENID screenID, int left, int top,
 		const ZIL_ICHAR *text, const UI_PALETTE *palette, int length = -1,
-		int fill = TRUE, int _xor = FALSE,
+		int fill = TRUE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION),
 		ZIL_LOGICAL_FONT font = FNT_DIALOG_FONT);
 	virtual int TextHeight(const ZIL_ICHAR *string,
@@ -1398,7 +1398,7 @@ protected:
 	int _foregroundColor;
 
 	void SetFont(ZIL_LOGICAL_FONT logicalFont);
-	void SetPattern(const UI_PALETTE *palette, int _xor);
+	void SetPattern(const UI_PALETTE *palette, int _xorInt);
 };
 #endif
 
@@ -1452,7 +1452,7 @@ public:
 		ZIL_BITMAP_HANDLE *colorBitmap, ZIL_BITMAP_HANDLE *monoBitmap);
 	virtual void Ellipse(ZIL_SCREENID screenID, int column, int line,
 		int startAngle, int endAngle, int xRadius, int yRadius,
-		const UI_PALETTE *palette, int fill = FALSE, int _xor = FALSE,
+		const UI_PALETTE *palette, int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void IconArrayToHandle(ZIL_SCREENID screenID, int iconWidth,
 		int iconHeight, const ZIL_UINT8 *iconArray, const UI_PALETTE *palette,
@@ -1461,23 +1461,23 @@ public:
 		int *iconWidth, int *iconHeight, ZIL_UINT8 **iconArray);
 	virtual void DestroyIconHandle(ZIL_SCREENID screenID,  ZIL_ICON_HANDLE *icon);
 	virtual void Line(ZIL_SCREENID screenID, int column1, int line1, int column2,
-		int line2, const UI_PALETTE *palette, int width = 1, int _xor = FALSE,
+		int line2, const UI_PALETTE *palette, int width = 1, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual ZIL_COLOR MapColor(const UI_PALETTE *palette, int isForeground);
 	static RGBColor MapRGBColor(ZIL_COLOR fromColor);
 	virtual void Polygon(ZIL_SCREENID screenID, int numPoints, const int *polygonPoints,
-		const UI_PALETTE *palette, int fill = FALSE, int _xor = FALSE,
+		const UI_PALETTE *palette, int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void Rectangle(ZIL_SCREENID screenID, int left, int top, int right,
 		int bottom, const UI_PALETTE *palette, int width = 1, int fill = FALSE,
-		int _xor = FALSE, const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
+		int _xorInt = FALSE, const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void RectangleXORDiff(const UI_REGION &oldRegion, const UI_REGION &newRegion, ZIL_SCREENID screenID = ID_SCREEN,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void RegionMove(const UI_REGION &oldRegion, int newColumn, int newLine,
 		ZIL_SCREENID oldScreenID = ID_SCREEN, ZIL_SCREENID newScreenID = ID_SCREEN);
 	virtual void Text(ZIL_SCREENID screenID, int left, int top, const ZIL_ICHAR *text,
 		const UI_PALETTE *palette, int length = -1, int fill = TRUE,
-		int _xor = FALSE, const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION),
+		int _xorInt = FALSE, const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION),
 		ZIL_LOGICAL_FONT font = FNT_DIALOG_FONT);
 	virtual int TextHeight(const ZIL_ICHAR *string, ZIL_SCREENID screenID = ID_SCREEN,
 		ZIL_LOGICAL_FONT font = FNT_DIALOG_FONT);
@@ -1526,7 +1526,7 @@ public:
 		ZIL_BITMAP_HANDLE *colorBitmap, ZIL_BITMAP_HANDLE *monoBitmap);
 	virtual void Ellipse(ZIL_SCREENID screenID, int column, int line,
 		int startAngle, int endAngle, int xRadius, int yRadius,
-		const UI_PALETTE *palette, int fill = FALSE, int _xor = FALSE,
+		const UI_PALETTE *palette, int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void IconArrayToHandle(ZIL_SCREENID screenID, int iconWidth,
 		int iconHeight, const ZIL_UINT8 *iconArray, const UI_PALETTE *palette,
@@ -1535,16 +1535,16 @@ public:
 		int *iconWidth, int *iconHeight, ZIL_UINT8 **iconArray);
 	virtual void DestroyIconHandle(ZIL_SCREENID screenID,  ZIL_ICON_HANDLE *icon);
 	virtual void Line(ZIL_SCREENID screenID, int column1, int line1, int column2,
-		int line2, const UI_PALETTE *palette, int width = 1, int _xor = FALSE,
+		int line2, const UI_PALETTE *palette, int width = 1, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual ZIL_COLOR MapColor(const UI_PALETTE *palette, int isForeground);
 	virtual void MapNSColor(const UI_PALETTE *palette, int foreground, NXColor *nextColor);
 	virtual void Polygon(ZIL_SCREENID screenID, int numPoints, const int *polygonPoints,
-		const UI_PALETTE *palette, int fill = FALSE, int _xor = FALSE,
+		const UI_PALETTE *palette, int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void Rectangle(ZIL_SCREENID screenID, int left, int top, int right,
 		int bottom, const UI_PALETTE *palette, int width = 1, int fill = FALSE,
-		int _xor = FALSE, const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
+		int _xorInt = FALSE, const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void RectangleXORDiff(const UI_REGION &oldRegion,
 		const UI_REGION &newRegion, ZIL_SCREENID screenID = ID_SCREEN,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
@@ -1553,7 +1553,7 @@ public:
 virtual void RegionDefine(ZIL_SCREENID screenID, int left, int top, int right, int bottom);
 	virtual void Text(ZIL_SCREENID screenID, int left, int top, const ZIL_ICHAR *text,
 		const UI_PALETTE *palette, int length = -1, int fill = TRUE,
-		int _xor = FALSE, const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION),
+		int _xorInt = FALSE, const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION),
 		ZIL_LOGICAL_FONT font = FNT_DIALOG_FONT);
 	virtual int TextHeight(const ZIL_ICHAR *string, ZIL_SCREENID screenID = ID_SCREEN,
 		ZIL_LOGICAL_FONT font = FNT_DIALOG_FONT);
@@ -1642,28 +1642,28 @@ public:
 		ZIL_BITMAP_HANDLE *monoBitmap = ZIL_NULLP(ZIL_BITMAP_HANDLE));
 	virtual void Ellipse(ZIL_SCREENID screenID, int column, int line,
 		int startAngle, int endAngle, int xRadius, int yRadius,
-		const UI_PALETTE *palette, int fill = FALSE, int _xor = FALSE,
+		const UI_PALETTE *palette, int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void Line(ZIL_SCREENID screenID, int column1, int line1, int column2,
-		int line2, const UI_PALETTE *palette, int width = 1, int _xor = FALSE,
+		int line2, const UI_PALETTE *palette, int width = 1, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual ZIL_COLOR MapColor(const UI_PALETTE *palette, int isForeground);
 	virtual void Polygon(ZIL_SCREENID screenID, int numPoints,
 		const int *polygonPoints, const UI_PALETTE *palette,
-		int fill = FALSE, int _xor = FALSE,
+		int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	void Rectangle(ZIL_SCREENID screenID, const UI_REGION &region,
 		const UI_PALETTE *palette, int width = 1, int fill = FALSE,
-		int _xor = FALSE, const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION))
+		int _xorInt = FALSE, const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION))
 		{ Rectangle(screenID, region.left, region.top, region.right,
-		  region.bottom, palette, width, fill, _xor, clipRegion); }
+		  region.bottom, palette, width, fill, _xorInt, clipRegion); }
 	virtual void Rectangle(ZIL_SCREENID screenID, int left, int top, int right,
 		int bottom, const UI_PALETTE *palette, int width = 1,
-		int fill = FALSE, int _xor = FALSE,
+		int fill = FALSE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION));
 	virtual void Text(ZIL_SCREENID screenID, int left, int top,
 		const ZIL_ICHAR *text, const UI_PALETTE *palette, int length = -1,
-		int fill = TRUE, int _xor = FALSE,
+		int fill = TRUE, int _xorInt = FALSE,
 		const UI_REGION *clipRegion = ZIL_NULLP(UI_REGION),
 		ZIL_LOGICAL_FONT font = FNT_DIALOG_FONT);
 	virtual int TextHeight(const ZIL_ICHAR *string,
