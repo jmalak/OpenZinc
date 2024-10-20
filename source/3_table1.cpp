@@ -135,8 +135,10 @@ EVENT_TYPE UIW_TABLE_RECORD::Event(const UI_EVENT &event)
 		case S_SET_DATA:
 			recordNum = event.rawCode;
 			data = event.data;
-			if (userFunction)
-				(*userFunction)(this, UI_EVENT(event), ccode);
+			if (userFunction) {
+				UI_EVENT tEvent = event;
+				(*userFunction)(this, tEvent, ccode);
+			}
 			break;
 	
 		case L_BEGIN_SELECT:

@@ -77,8 +77,7 @@ EVENT_TYPE UIW_PULL_DOWN_ITEM::Event(const UI_EVENT &event)
 	case L_SELECT:
 		if (userFunction)
 		{
-			UI_EVENT uEvent;
-			uEvent = event;
+			UI_EVENT uEvent = event;
 			ccode = (*userFunction)(this, uEvent, L_SELECT);
 			break;
 		}
