@@ -852,7 +852,11 @@ ZIL_BIGNUM &ZIL_BIGNUM::operator*(const ZIL_BIGNUM &number)
 #define XTENDED	(2*LENGTHOF(num))
 #define RESULT	(2*XTENDED)
 	int i, j, carry;
-	ZIL_NUMBER ax[XTENDED], bx[XTENDED], rx[RESULT], *ap, *rp;
+	ZIL_NUMBER ax[XTENDED];
+	ZIL_NUMBER bx[XTENDED];
+	ZIL_NUMBER rx[RESULT];
+	ZIL_NUMBER *ap;
+	ZIL_NUMBER *rp;
 	const ZIL_NUMBER *bp;
 
 	INCSTACK(_bnumTimes, ENOMEM);

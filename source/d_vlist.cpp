@@ -468,7 +468,9 @@ EVENT_TYPE UIW_VT_LIST::Event(const UI_EVENT &event)
 		// Try to do first character recognition.
 		if (event.type == E_KEY && IsPrint(event.key.value) && Current())
 		{
-			ZIL_ICHAR buffer[2], *data;
+			ZIL_ICHAR buffer[2];
+			ZIL_ICHAR *data;
+
 			buffer[0] = event.key.value;
 			buffer[1] = 0;
 			for (object = Current()->Next(); object; object = object->Next())
