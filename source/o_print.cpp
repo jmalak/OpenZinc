@@ -162,9 +162,9 @@ void UI_PRINTER::Bitmap(ZIL_SCREENID, int x, int y,
                         for (int i = 0; i < maxColors; i++)
                         {
                                 ZIL_COLOR color = MapColor(&colorMap[i], TRUE);
-                                bitmapInfo->argbColor[i].bBlue = (color & 0x000000FF);
-                                bitmapInfo->argbColor[i].bGreen = (color & 0x0000FF00) >> 8;
-                                bitmapInfo->argbColor[i].bRed = (color & 0x00FF0000) >> 16;
+                                bitmapInfo->argbColor[i].bBlue = (BYTE)color;
+                                bitmapInfo->argbColor[i].bGreen = (BYTE)(color >> 8);
+                                bitmapInfo->argbColor[i].bRed = (BYTE)(color >> 16);
                         }
 
                         BITMAPINFOHEADER2 *bitmapHeaderInfo = ZIL_NULLP(BITMAPINFOHEADER2);
@@ -702,7 +702,7 @@ int UI_PRINTER::BeginPrintJob(ZIL_PRINTER_MODE printMode, char *fileName)
         else
         {
                 static char message[] = "Printing..";
-                DevEscape(hdc, DEVESC_STARTDOC, ::strlen(message), (char *)(PSZ)message, 0, 0);
+                DevEscape(hdc, DEVESC_STARTDOC, ::strlen(message), (PBYTE)message, 0, 0);
         }
         return TRUE;
 }
