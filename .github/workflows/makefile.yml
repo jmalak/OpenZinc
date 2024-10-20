@@ -1,0 +1,76 @@
+name: Makefile CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Open Watcom setup
+      uses: open-watcom/setup-watcom@v0
+      with:
+        version: "2.0"
+    - name: Open Zinc library
+      run: |
+        setlocal
+        @set INCLUDE=.;%WATCOM%\H;%OZINCPATH%
+        wmake -f ow20.mak -h dos32
+        @set INCLUDE=.;%WATCOM%\H;%WATCOM%\H\WIN;%OZINCPATH%
+        wmake -f ow20.mak -h windows
+        @set INCLUDE=.;%WATCOM%\H;%WATCOM%\H\NT;%OZINCPATH%
+        wmake -f ow20.mak -h winnt
+        @set INCLUDE=.;%WATCOM%\H;%WATCOM%\H\NT;%OZINCPATH%
+        wmake -f ow20.mak -h win32
+        @set INCLUDE=.;%WATCOM%\H;%WATCOM%\H\OS2;%OZINCPATH%
+        wmake -f ow20.mak -h os2
+        endlocal
+      shell: cmd
+      working-directory: source
+      env:
+        OZINCPATH: ${{ github.workspace }}\include
+        LIB: .;${{ github.workspace }}\lib\ow20
+    - name: Open Zinc Designer Libraries
+        setlocal
+        @set INCLUDE=.;%WATCOM%\H;%OZINCPATH%
+        wmake -f ow20.mak -h make_dos32_modules
+        @set INCLUDE=.;%WATCOM%\H;%WATCOM%\H\WIN;%OZINCPATH%
+        wmake -f ow20.mak -h make_windows_modules
+        @set INCLUDE=.;%WATCOM%\H;%WATCOM%\H\NT;%OZINCPATH%
+        wmake -f ow20.mak -h make_winnt_modules
+        @set INCLUDE=.;%WATCOM%\H;%WATCOM%\H\NT;%OZINCPATH%
+        wmake -f ow20.mak -h make_win32_modules
+        @set INCLUDE=.;%WATCOM%\H;%WATCOM%\H\OS2;%OZINCPATH%
+        wmake -f ow20.mak -h make_os2_modules
+        endlocal
+      shell: cmd
+      working-directory: design
+      env:
+        OZINCPATH: ${{ github.workspace }}\include
+        LIB: .;${{ github.workspace }}\lib\ow20
+    - name: Open Zinc Designer Executable
+      run: |
+        setlocal
+        @set INCLUDE=.;%WATCOM%\H;%OZINCPATH%
+        wmake -f ow20.mak -h dos32
+        @set INCLUDE=.;%WATCOM%\H;%WATCOM%\H\WIN;%OZINCPATH%
+        wmake -f ow20.mak -h windows
+        @set INCLUDE=.;%WATCOM%\H;%WATCOM%\H\NT;%OZINCPATH%
+        wmake -f ow20.mak -h winnt
+        @set INCLUDE=.;%WATCOM%\H;%WATCOM%\H\NT;%OZINCPATH%
+        wmake -f ow20.mak -h win32
+        @set INCLUDE=.;%WATCOM%\H;%WATCOM%\H\OS2;%OZINCPATH%
+        wmake -f ow20.mak -h os2
+        endlocal
+      shell: cmd
+      working-directory: design
+      env:
+        OZINCPATH: ${{ github.workspace }}\include
+        LIB: .;${{ github.workspace }}\lib\ow20
