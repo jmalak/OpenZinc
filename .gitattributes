@@ -1,0 +1,70 @@
+# Set default behaviour, in case users don't have core.autocrlf set.
+* text=auto
+
+# Explicitly declare text files we want to always be normalized and converted 
+# to native line endings on checkout.
+*.asm text
+*.bat text
+*.c   text
+*.cmd text
+*.cpp text
+*.def text
+*.h   text
+*.hpp text
+*.mac text
+*.mak text
+*.md  text
+*.rc  text
+*.txt text
+*.umt text
+*.yml text
+read.me text
+
+.gitattributes text
+.gitignore text
+
+# Declare files that will always have LF line endings on checkout.
+
+# Declare files that will always have CRLF line endings on checkout.
+
+# Denote all files that are truly binary and should not be modified.
+*.dll binary
+*.exe binary
+*.gif binary
+*.jpg binary
+*.lib binary
+*.obj binary
+*.o16 binary
+*.o32 binary
+*.ob9 binary
+*.obn binary
+*.obo binary
+*.obw binary
+*.ovl binary
+*.pcx binary
+*.png binary
+*.res binary
+*.re9 binary
+*.ren binary
+*.reo binary
+*.rew binary
+*.sym binary
+*.sys binary
+*.uni binary
+*.zip binary
+
+# Designer binary files
+*.bmp binary
+*.dat binary
+*.fnt binary
+*.fon binary
+*.chr binary
+*.ico binary
+*.znc binary
+*.z_t binary
+
+# locale files
+*.en binary
+*.es binary
+*.fr binary
+*.it binary
