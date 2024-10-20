@@ -35,11 +35,6 @@ extern ZIL_ICHAR *_parentDirectory;
         static DIR *_directory                          = ZIL_NULLP(DIR);
 #endif
 
-static NUMBERID DriveCharToId(char drive) { return (10100 + drive - 'a'); }
-static NUMBERID DriveIntToId(int drive) { return (10100 + drive); }
-static int DriveCharToInt(char drive) { return (tolower(drive) - 'a'); }
-static char DriveIntToChar(int drive) { return (drive + 'a'); }
-
 // --------------------------------------------------------------------------
 // ----- ZAF_DIRECTORY_ITEM -------------------------------------------------
 // --------------------------------------------------------------------------

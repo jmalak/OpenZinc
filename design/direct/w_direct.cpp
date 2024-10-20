@@ -15,9 +15,6 @@
 #	define TIME_DAY 				8640000L
 #endif
 
-static int DriveCharToInt(char drive) { return (tolower(drive) - 'a'); }
-static char DriveIntToChar(int drive) { return (drive + 'a'); }
-
 const int ZMSG_TITLES			= 6100 - 0;		// Titles start at 0.
 const int ZMSG_ERRORS			= 6100 - 100;	// Errors start at 100.
 

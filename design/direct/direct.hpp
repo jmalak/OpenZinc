@@ -181,6 +181,11 @@ private:
 	void DriveUpdate(void);
 	void FileUpdate(void);
 #	endif
+
+	static NUMBERID DriveCharToId(char drive) { return (10100 + drive - 'a'); }
+	static NUMBERID DriveIntToId(int drive) { return (10100 + drive); }
+	static int DriveCharToInt(char drive) { return (tolower(drive) - 'a'); }
+	static char DriveIntToChar(int drive) { return (drive + 'a'); }
 };
 
 #endif
