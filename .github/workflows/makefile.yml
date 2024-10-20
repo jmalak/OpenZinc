@@ -18,6 +18,11 @@ jobs:
       uses: open-watcom/setup-watcom@v0
       with:
         version: "2.0"
+    - name: Create build directories
+      run: |
+        mkdir bin
+        mkdir lib
+        mkdir include
     - name: Open Zinc library
       run: |
         setlocal
