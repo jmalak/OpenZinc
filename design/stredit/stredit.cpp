@@ -685,14 +685,7 @@ EVENT_TYPE UIW_FONT_WINDOW::Event(const UI_EVENT &event)
 
 void *UIW_FONT_WINDOW::Information(INFO_REQUEST request, void *data, ZIL_OBJECTID objectID)
 {
-	// Switch on the request.
-	switch (request)
-	{
-	default:
-		data = UI_WINDOW_OBJECT::Information(request, data, objectID);
-		break;
-	}
-
+	data = UI_WINDOW_OBJECT::Information(request, data, objectID);
 	// Return the information.
 	return (data);
 }
