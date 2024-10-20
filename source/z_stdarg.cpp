@@ -24,6 +24,8 @@ typedef struct
         int newPos, oldPos;
 } rdata;
 
+#if defined(ZIL_REARRANGEARGS)
+
 #if defined(__ZTC__) && (__ZTC__ >= 0x310) && !defined(ZIL_MACINTOSH)
         static int __CLIB rdatacmp(const void *a, const void *b)
 #elif defined(__ZTC__)
@@ -206,8 +208,12 @@ void ZIL_STDARG::RearrangeArgs(int isScanf, void *newBuffer,
                         abort();        /*raise(badformat)*/
 #endif
 #if defined(__WATCOMC__)
+#	if __WATCOMC__ < 1300
         va_list toVlist;
         toVlist[0] = (*newArgs)[0] = (char *)newBuffer;
+#	else
+        va_list toVlist = *newArgs = (va_list)newBuffer;
+#	endif
 #elif defined(__DECCXX)
         va_list toVlist;
         toVlist._a0 = (char **)((char *)newBuffer + sizeof(va_list));
@@ -235,7 +241,7 @@ void ZIL_STDARG::RearrangeArgs(int isScanf, void *newBuffer,
         for (i=0; i < last; i++)
         {
                 if (tbl[i].newPos < 0) continue;
-#if defined(__WATCOMC__)
+#if defined(__WATCOMC__) && __WATCOMC__ < 1300
                 va_list fromVlist;
                 fromVlist[0] = args[0];
 #else
@@ -309,3 +315,5 @@ void ZIL_STDARG::RearrangeArgs(int isScanf, void *newBuffer,
         }
         delete []tbl;
 }
+
+#endif
