@@ -71,7 +71,7 @@ UI_FG_DISPLAY::UI_FG_DISPLAY(int mode) :
 	z_fgdsp_dummy();
 
 	// Reset the font information.
-	SetFont(-1);
+	SetFont(FNT_NONE);
 
 	// Fill the screen according to the specified palette.
 	cellWidth = TextWidth("M", ID_SCREEN, FNT_DIALOG_FONT);
@@ -730,12 +730,12 @@ void UI_FG_DISPLAY::Text(ZIL_SCREENID screenID, int left,
 
 void UI_FG_DISPLAY::SetFont(ZIL_LOGICAL_FONT logicalFont)
 {
-	static int _logicalFont = -1;
+	static ZIL_LOGICAL_FONT _logicalFont = FNT_NONE;
 	static FGFONT _fontInfo;
 	FGFONT fontInfo;
 
 	// Check for invalid or new font set.
-	if (_logicalFont == -1 || logicalFont == -1)
+	if (_logicalFont == FNT_NONE || logicalFont == FNT_NONE)
 	{
 		logicalFont = FNT_DIALOG_FONT;
 		fontInfo = fontTable[FNT_DIALOG_FONT];

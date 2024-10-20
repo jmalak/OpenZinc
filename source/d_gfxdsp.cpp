@@ -164,7 +164,7 @@ UI_GRAPHICS_DISPLAY::UI_GRAPHICS_DISPLAY(int mode) :
 	}
 
 	// Reset the font information.
-	SetFont(-1);
+	SetFont(FNT_NONE);
 
 	// Determine the cell coordinates based on the dialog font.
 	cellWidth = TextWidth(_Mstr, ID_SCREEN, FNT_DIALOG_FONT); // Stroked font.
@@ -211,7 +211,7 @@ UI_GRAPHICS_DISPLAY::UI_GRAPHICS_DISPLAY(int mode) :
 	}
 	_loadFont = 0;
 	// Reset the font information.
-	SetFont(-1);
+	SetFont(FNT_NONE);
 
 	// Determine the cell coordinates based on the dialog font.
 	cellWidth = (fontTable[FNT_DIALOG_FONT].font == ROM_8x8) ?

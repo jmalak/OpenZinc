@@ -149,7 +149,7 @@ UI_WCC_DISPLAY::UI_WCC_DISPLAY(int mode):
         }
 
         // Reset the font information.
-        SetFont(-1);
+        SetFont(FNT_NONE);
 
         // Fill the screen according to the specified palette.
         cellWidth = TextWidth(_Mstr, ID_SCREEN, FNT_DIALOG_FONT) - 2;
@@ -950,13 +950,13 @@ void UI_WCC_DISPLAY::Text(ZIL_SCREENID screenID, int left, int top,
 
 void UI_WCC_DISPLAY::SetFont(ZIL_LOGICAL_FONT logicalFont)
 {
-        static int _logicalFont = -1;
+        static int _logicalFont = FNT_NONE;
         static WCCFONT _fontInfo;
         WCCFONT fontInfo;
         char fontString[32];
 
         // Check for invalid or new font set.
-        if (_logicalFont == -1 || logicalFont == -1)
+        if (_logicalFont == FNT_NONE || logicalFont == FNT_NONE)
         {
                 logicalFont = FNT_DIALOG_FONT;
                 fontInfo = fontTable[FNT_DIALOG_FONT];
@@ -1022,7 +1022,7 @@ int UI_WCC_DISPLAY::TextWidth(const ZIL_ICHAR *string, ZIL_SCREENID,
 
         int lineLen = strlen(string);
         for (int j=0; j < lineLen; j++)
-                if (!FlagSet(logicalFont, FNT_IGNORE_UNDERSCORE) &&     (string[j] == ZIL_HOTMARK || string[j] == '~'))
+                if (!FlagSet(logicalFont, FNT_IGNORE_UNDERSCORE) && (string[j] == ZIL_HOTMARK || string[j] == '~'))
                 {
                         char hotKeyBuf[2];
                         hotKeyBuf[0] = string[j];

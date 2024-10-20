@@ -144,7 +144,7 @@ UI_MSC_DISPLAY::UI_MSC_DISPLAY(int mode):
 	}
 
 	// Reset the font information.
-	SetFont(-1);
+	SetFont(FNT_NONE);
 
 	// Fill the screen according to the specified palette.
 	cellWidth = TextWidth(_Mstr, ID_SCREEN, FNT_DIALOG_FONT) - 2;
@@ -953,13 +953,13 @@ void UI_MSC_DISPLAY::Text(ZIL_SCREENID screenID, int left, int top,
 
 void UI_MSC_DISPLAY::SetFont(ZIL_LOGICAL_FONT logicalFont)
 {
-	static int _logicalFont = -1;
+	static int _logicalFont = FNT_NONE;
 	static MSCFONT _fontInfo;
 	MSCFONT fontInfo;
 	char fontString[32];
 
 	// Check for invalid or new font set.
-	if (_logicalFont == -1 || logicalFont == -1)
+	if (_logicalFont == FNT_NONE || logicalFont == FNT_NONE)
 	{
 		logicalFont = FNT_DIALOG_FONT;
 		fontInfo = fontTable[FNT_DIALOG_FONT];

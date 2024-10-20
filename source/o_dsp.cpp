@@ -962,15 +962,15 @@ void UI_OS2_DISPLAY::RegionMove(const UI_REGION &oldRegion, int newColumn,
 
 void UI_OS2_DISPLAY::Text(ZIL_SCREENID screenID, int left, int top,
         const ZIL_ICHAR *text, const UI_PALETTE *palette, int length, int fill,
-        int _xor, const UI_REGION *clip, ZIL_LOGICAL_FONT font)
+        int _xor, const UI_REGION *clip, ZIL_LOGICAL_FONT logicalFont)
 {
         // Make sure there is a valid string.
         if (!text || text[0] == '\0')
                 return;
 
         // Virtualize the display. (This call set up UI_OS2_DISPLAY::hps.)
-        int right = left + TextWidth(text, screenID, font) - 1;
-        int bottom = top + TextHeight(text, screenID, font) - 1;
+        int right = left + TextWidth(text, screenID, logicalFont) - 1;
+        int bottom = top + TextHeight(text, screenID, logicalFont) - 1;
         VirtualGet(screenID, left, top, right, bottom);
         HRGN hRegion = 0;
         if (clip)
@@ -993,11 +993,11 @@ void UI_OS2_DISPLAY::Text(ZIL_SCREENID screenID, int left, int top,
         os2Region.yTop = _virtualRegion.bottom - top;
 
         // Set the font, color and xor combinations.
-        ULONG underscore = FlagSet(font, FNT_IGNORE_UNDERSCORE) ? 0 : DT_MNEMONIC;
-        font &= 0x0FFF;
+        ULONG underscore = FlagSet(logicalFont, FNT_IGNORE_UNDERSCORE) ? 0 : DT_MNEMONIC;
+        logicalFont &= 0x0FFF;
 
         LONG oldFont = GpiQueryCharSet(hps);
-        SetFont(font);
+        SetFont(logicalFont);
         ZIL_COLOR colorForeground, colorBackground;
         if (palette)
         {
@@ -1039,7 +1039,7 @@ void UI_OS2_DISPLAY::Text(ZIL_SCREENID screenID, int left, int top,
         WinDrawText(hps, length, (PSZ)TEXT_, &os2Region, 0, 0, drawFlags);
 
         // Reset the font, color and xor combinations.
-        if (font < ZIL_MAXFONTS && fontTable[font].lMatch)
+        if (logicalFont < ZIL_MAXFONTS && fontTable[logicalFont].lMatch)
                 GpiSetCharSet(hps, oldFont);
         if (palette)
                 GpiSetBackColor(hps, colorBackground);
@@ -1057,7 +1057,7 @@ void UI_OS2_DISPLAY::Text(ZIL_SCREENID screenID, int left, int top,
 }
 
 int UI_OS2_DISPLAY::TextHeight(const ZIL_ICHAR *string, ZIL_SCREENID screenID,
-        ZIL_LOGICAL_FONT font)
+        ZIL_LOGICAL_FONT logicalFont)
 {
         // Make sure there is a valid string.
         if (!string || !string[0] || (!screenID && !hps))
@@ -1066,7 +1066,7 @@ int UI_OS2_DISPLAY::TextHeight(const ZIL_ICHAR *string, ZIL_SCREENID screenID,
         VirtualGet(screenID, 0, 0, lines - 1, columns - 1);
 
         // Set the font.
-        SetFont(font & 0x0FFF);
+        SetFont(logicalFont & 0x0FFF);
 
         RECTL os2Region;
         os2Region.xLeft = _virtualRegion.left;
@@ -1085,7 +1085,7 @@ int UI_OS2_DISPLAY::TextHeight(const ZIL_ICHAR *string, ZIL_SCREENID screenID,
 }
 
 int UI_OS2_DISPLAY::TextWidth(const ZIL_ICHAR *string, ZIL_SCREENID screenID,
-        ZIL_LOGICAL_FONT font)
+        ZIL_LOGICAL_FONT logicalFont)
 {
         // Make sure there is a valid string.
         if (!string || !string[0] || (!screenID && !hps))
@@ -1094,7 +1094,7 @@ int UI_OS2_DISPLAY::TextWidth(const ZIL_ICHAR *string, ZIL_SCREENID screenID,
         HPS _hps = hps ? hps : WinGetPS(screenID);
 
         // Set the font.
-        SetFont(font & 0x0FFF);
+        SetFont(logicalFont & 0x0FFF);
 
         RECTL os2Region;
         os2Region.xLeft = 0;
@@ -1114,27 +1114,27 @@ int UI_OS2_DISPLAY::TextWidth(const ZIL_ICHAR *string, ZIL_SCREENID screenID,
         return (os2Region.xRight - os2Region.xLeft + 1);
 }
 
-void UI_OS2_DISPLAY::SetFont(ZIL_LOGICAL_FONT font)
+void UI_OS2_DISPLAY::SetFont(ZIL_LOGICAL_FONT logicalFont)
 {
-        if (GpiQueryCharSet(hps) != font + 1)
+        if (GpiQueryCharSet(hps) != logicalFont + 1)
         {
-                if (font < ZIL_MAXFONTS && fontTable[font].lMatch)
+                if (logicalFont < ZIL_MAXFONTS && fontTable[logicalFont].lMatch)
                 {
-                        if (!GpiSetCharSet(hps, font + 1))
+                        if (!GpiSetCharSet(hps, logicalFont + 1))
                         {
                                 FATTRS drawFont;
                                 drawFont.usRecordLength = sizeof(FATTRS);
-                                drawFont.fsSelection = fontTable[font].fsSelection;
-                                drawFont.lMatch = fontTable[font].lMatch;
-                                ::strcpy(drawFont.szFacename, fontTable[font].szFacename);
-                                drawFont.idRegistry = fontTable[font].idRegistry;
-                                drawFont.usCodePage = fontTable[font].usCodePage;
-                                drawFont.lMaxBaselineExt = fontTable[font].lMaxBaselineExt;
-                                drawFont.lAveCharWidth = fontTable[font].lAveCharWidth;
+                                drawFont.fsSelection = fontTable[logicalFont].fsSelection;
+                                drawFont.lMatch = fontTable[logicalFont].lMatch;
+                                ::strcpy(drawFont.szFacename, fontTable[logicalFont].szFacename);
+                                drawFont.idRegistry = fontTable[logicalFont].idRegistry;
+                                drawFont.usCodePage = fontTable[logicalFont].usCodePage;
+                                drawFont.lMaxBaselineExt = fontTable[logicalFont].lMaxBaselineExt;
+                                drawFont.lAveCharWidth = fontTable[logicalFont].lAveCharWidth;
                                 drawFont.fsType = 0;
                                 drawFont.fsFontUse = FATTR_FONTUSE_NOMIX;
-                                GpiCreateLogFont(hps, ZIL_NULLP(STR8), font + 1, &drawFont);
-                                GpiSetCharSet(hps, font + 1);
+                                GpiCreateLogFont(hps, ZIL_NULLP(STR8), logicalFont + 1, &drawFont);
+                                GpiSetCharSet(hps, logicalFont + 1);
                         }
                 }
                 else
