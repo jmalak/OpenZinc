@@ -40,6 +40,13 @@ EVENT_TYPE ZAF_EDIT_GROUP::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 		PTN_INTERLEAVE_FILL, LIGHTGRAY, WHITE, BW_WHITE, BW_BLACK, GS_GRAY, GS_BLACK
 	};
 
+#if !defined(ZIL_MSDOS)
+	/* unused parameters */ (void)event;
+#endif
+#if !defined(ZIL_MACINTOSH)
+	/* unused parameters */ (void)ccode;
+#endif
+
 	// Draw the edit area as a shaded region.
 	display->VirtualGet(screenID, trueRegion);
 #if defined(ZIL_MSDOS)

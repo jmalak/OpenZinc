@@ -237,7 +237,8 @@ EVENT_TYPE ZAF_MESSAGE_EDITOR::OSImport(ZIL_STORAGE *editFile, const UI_EVENT &e
 		return (S_ERROR);
 
 	// Import the message table(s).
-	ZIL_ICHAR line[MAX_LINE_LENGTH], *token[MAX_TOKENS];
+	ZIL_ICHAR line[MAX_LINE_LENGTH];
+	ZIL_ICHAR *token[MAX_TOKENS];
 
 	ZIL_TEXT_FILE txtFile(pathName);
 	txtFile.ImportTXT(editFile, ZIL_NULLP(ZIL_LANGUAGE), line, token, 0);

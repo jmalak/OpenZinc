@@ -238,7 +238,8 @@ EVENT_TYPE ZAF_WINDOW_EDITOR::OSImport(ZIL_STORAGE *editFile, const UI_EVENT &ev
 		return (S_ERROR);
 
 	// Find the matching window entry.
-	ZIL_ICHAR line[MAX_LINE_LENGTH], *token[MAX_TOKENS];
+	ZIL_ICHAR line[MAX_LINE_LENGTH];
+	ZIL_ICHAR *token[MAX_TOKENS];
 
 	ZIL_TXT_FILE txtFile(pathName);
 	txtFile.ImportTXT(editFile, ZIL_NULLP(UI_WINDOW_OBJECT),

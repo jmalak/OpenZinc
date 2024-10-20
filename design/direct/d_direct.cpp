@@ -238,6 +238,8 @@ void CriticalErrorHandler(unsigned, unsigned, unsigned far *)
 #       elif defined(__WATCOMC__)
 int CriticalErrorHandler(unsigned deverr, unsigned errcode, unsigned far *)
 {
+	/* unused parameters */ (void)deverr; (void)errcode;
+
         _hardresume(_HARDERR_FAIL);
         return 2; // ABORT
 }
