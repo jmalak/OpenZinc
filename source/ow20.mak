@@ -303,8 +303,8 @@ init: ../lib/$(VERSION) .SYMBOLIC
 	%copy ui_win.hpp ../include
 	%copy z_comctl.h ../include
 #	%copy z_clean.bat ../bin
-#	%copy gfx/source/gfx.h ../include
-#	%copy gfx/source/gfx_pro.h ../include
+	%copy gfx/source/gfx.h ../include
+	%copy gfx/source/gfx_pro.h ../include
 
 ../lib/$(VERSION):
 !ifdef __UNIX__
@@ -318,7 +318,7 @@ dos32: init $(exename).exe .SYMBOLIC
 
 #$(exename).exe: $(exename).o32 d32_gfx.lib d32_wcc.lib wc_32gfx.lib
 $(exename).exe: $(exename).o32 d32_wcc.lib d32_zil.lib
-	$(LINK) $(D32_LINK_OPTS) N $@ F {$(exename).o32 $(D32_OBJS)} L $(D32_LIBS)
+	$(LINK) $(D32_LINK_OPTS) N $@ F {$(exename).o32 $(D32_OBJS)} L {$(D32_LIBS)}
 
 #d32_zil.lib : d32_gfx.lib wc_32gfx.lib $(d32_lib_objs)
 d32_zil.lib : $(d32_lib_objs)
@@ -344,7 +344,7 @@ wc_32gfx.lib : .SYMBOLIC
 windows: init w$(exename).exe .SYMBOLIC
 
 w$(exename).exe: $(exename).obw win_zil.lib
-	$(LINK) $(WIN_LINK_OPTS) N w$(exename) F {$(exename).obw $(WIN_OBJS)} L $(WIN_LIBS)
+	$(LINK) $(WIN_LINK_OPTS) N w$(exename) F {$(exename).obw $(WIN_OBJS)} L {$(WIN_LIBS)}
 
 win_zil.lib : $(win_lib_objs)
 	$(LIBRARIAN) $(LIB_OPTS) $@ $<
@@ -354,7 +354,7 @@ win_zil.lib : $(win_lib_objs)
 winnt: init n$(exename).exe .SYMBOLIC
 
 n$(exename).exe: $(exename).obn wnt_zil.lib
-	$(LINK) $(WNT_LINK_OPTS) N n$(exename) F {$(exename).obn $(WNT_OBJS)} L $(WNT_LIBS)
+	$(LINK) $(WNT_LINK_OPTS) N n$(exename) F {$(exename).obn $(WNT_OBJS)} L {$(WNT_LIBS)}
 
 wnt_zil.lib : $(wnt_lib_objs)
 	$(LIBRARIAN) $(LIB_OPTS) $@ $<
@@ -364,7 +364,7 @@ wnt_zil.lib : $(wnt_lib_objs)
 win32: init 9$(exename).exe .SYMBOLIC
 
 9$(exename).exe: $(exename).ob9 w32_zil.lib
-	$(LINK) $(W32_LINK_OPTS) N 9$(exename) F {$(exename).ob9 $(W32_OBJS)} L $(W32_LIBS)
+	$(LINK) $(W32_LINK_OPTS) N 9$(exename) F {$(exename).ob9 $(W32_OBJS)} L {$(W32_LIBS)}
 
 w32_zil.lib : $(w32_lib_objs)
 	$(LIBRARIAN) $(LIB_OPTS) $@ $<
@@ -374,7 +374,7 @@ w32_zil.lib : $(w32_lib_objs)
 os2: init o$(exename).exe .SYMBOLIC
 
 o$(exename).exe: $(exename).obo os2_zil.lib
-	$(LINK) $(OS2_LINK_OPTS) N o$(exename).exe F {$(exename).obo $(OS2_OBJS)} L $(OS2_LIBS)
+	$(LINK) $(OS2_LINK_OPTS) N o$(exename).exe F {$(exename).obo $(OS2_OBJS)} L {$(OS2_LIBS)}
 
 os2_zil.lib : $(os2_lib_objs)
 	$(LIBRARIAN) $(LIB_OPTS) $@ $<
