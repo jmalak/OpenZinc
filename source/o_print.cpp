@@ -138,7 +138,7 @@ void UI_PRINTER::Bitmap(ZIL_SCREENID, int x, int y,
         }
         else
         {
-                ZIL_BITMAP_HANDLE colorBitmap = 0, monoBitmap = 0;
+                ZIL_BITMAP_HANDLE colorBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE), monoBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
                 if (_colorBitmap)
                         colorBitmap = *_colorBitmap;
                 if (_monoBitmap)

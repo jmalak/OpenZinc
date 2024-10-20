@@ -209,7 +209,7 @@ void UI_MSWINDOWS_DISPLAY::Bitmap(ZIL_SCREENID screenID, int left, int top,
 	ZIL_BITMAP_HANDLE *_colorBitmap, ZIL_BITMAP_HANDLE *_monoBitmap)
 {
 	// Make sure there is a valid bitmap.
-	ZIL_BITMAP_HANDLE colorBitmap = 0, monoBitmap = 0;
+	ZIL_BITMAP_HANDLE colorBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE), monoBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
 	if (_colorBitmap)
 		colorBitmap = *_colorBitmap;
 	if (_monoBitmap)
@@ -608,7 +608,7 @@ void UI_MSWINDOWS_DISPLAY::IconArrayToHandle(ZIL_SCREENID screenID, int iconWidt
 	int iconHeight, const ZIL_UINT8 *iconArray, const UI_PALETTE *palette,
 	ZIL_ICON_HANDLE *icon)
 {
-	ZIL_BITMAP_HANDLE colorBitmap = 0, monoBitmap = 0;
+	ZIL_BITMAP_HANDLE colorBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE), monoBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
 	BitmapArrayToHandle(screenID, iconWidth, iconHeight, iconArray,
 		palette, &colorBitmap, &monoBitmap);
 	extern void WindowsBitmapToIcon(UI_DISPLAY *display,
@@ -621,7 +621,7 @@ void UI_MSWINDOWS_DISPLAY::IconArrayToHandle(ZIL_SCREENID screenID, int iconWidt
 void UI_MSWINDOWS_DISPLAY::IconHandleToArray(ZIL_SCREENID screenID, ZIL_ICON_HANDLE icon,
 	int *iconWidth, int *iconHeight, ZIL_UINT8 **iconArray)
 {
-	ZIL_BITMAP_HANDLE colorBitmap = 0, monoBitmap = 0;
+	ZIL_BITMAP_HANDLE colorBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE), monoBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
 	extern void WindowsIconToBitmap(UI_DISPLAY *display, ZIL_ICON_HANDLE icon,
 		ZIL_BITMAP_HANDLE *colorBitmap, ZIL_BITMAP_HANDLE *monoBitmap);
 	WindowsIconToBitmap(this, icon, &colorBitmap, &monoBitmap);
@@ -1260,8 +1260,8 @@ void WindowsIconToBitmap(UI_DISPLAY *, ZIL_ICON_HANDLE icon,
 	if (monoBitmap)
 	{
 		// Select a bitmap of icon size into the memory DC.
-		hBitmap = CreateBitmap(iconWidth, iconHeight, 1, 1, 0);
-		hANDBitmap = CreateBitmap(iconWidth, iconHeight, 1, 1, 0);
+		hBitmap = CreateBitmap(iconWidth, iconHeight, 1, 1, ZIL_NULLP(void));
+		hANDBitmap = CreateBitmap(iconWidth, iconHeight, 1, 1, ZIL_NULLP(void));
 		hOldBitmap = (HBITMAP)SelectObject(hMemDC, hBitmap);
 		hOldANDBitmap = (HBITMAP)SelectObject(hANDMemDC, hANDBitmap);
 

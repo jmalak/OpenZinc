@@ -523,7 +523,7 @@ void UI_XT_DISPLAY::Bitmap(ZIL_SCREENID screenID, int column, int line,
 	const UI_PALETTE *palette, const UI_REGION *clipRegion,
 	ZIL_BITMAP_HANDLE *colorBitmap, ZIL_BITMAP_HANDLE *monoBitmap)
 {
-colorBitmap = colorBitmap; monoBitmap = monoBitmap;
+	(void)colorBitmap; (void)monoBitmap;
 	VirtualGet(screenID, column, line, column + bitmapWidth,
 		line + bitmapHeight);
 
@@ -641,12 +641,12 @@ void UI_XT_DISPLAY::DestroyBitmapHandle(ZIL_SCREENID, ZIL_BITMAP_HANDLE *colorBi
 	if (colorBitmap && *colorBitmap)
 	{
 		XFreePixmap(xDisplay, *colorBitmap);
-		*colorBitmap = 0;
+		*colorBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
 	}
 	if (monoBitmap && *monoBitmap)
 	{
 		XFreePixmap(xDisplay, *monoBitmap);
-		*monoBitmap = 0;
+		*monoBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
 	}
 }
 

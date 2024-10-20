@@ -1120,12 +1120,12 @@ void UI_MSC_DISPLAY::DestroyBitmapHandle(ZIL_SCREENID, ZIL_BITMAP_HANDLE *colorB
 	if (colorBitmap && *colorBitmap)
 	{
 		delete *colorBitmap;
-		*colorBitmap = ZIL_NULLP(void);
+		*colorBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
 	}
 	if (monoBitmap && *monoBitmap)
 	{
 		delete *monoBitmap;
-		*monoBitmap = ZIL_NULLP(void);
+		*monoBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
 	}
 }
 
@@ -1145,12 +1145,12 @@ void UI_MSC_DISPLAY::DestroyIconHandle(ZIL_SCREENID, ZIL_ICON_HANDLE *icon)
 	if (icon && icon->colorBitmap)
 	{
 		delete icon->colorBitmap;
-		icon->colorBitmap = ZIL_NULLP(void);
+		icon->colorBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
 	}
 	if (icon && icon->monoBitmap)
 	{
 		delete icon->monoBitmap;
-		icon->monoBitmap = ZIL_NULLP(void);
+		icon->monoBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
 	}
 }
 

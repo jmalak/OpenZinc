@@ -52,7 +52,7 @@ EVENT_TYPE ZAF_IMAGE::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 	point[3].y = bitmapHeight;
 
 	// Draw the bitmap.
-	ZIL_BITMAP_HANDLE colorBitmap = 0;
+	ZIL_BITMAP_HANDLE colorBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
 	display->BitmapArrayToHandle(screenID, bitmapWidth,
 		bitmapHeight, bitmapArray, ZIL_NULLP(UI_PALETTE),
 		&colorBitmap, 0);

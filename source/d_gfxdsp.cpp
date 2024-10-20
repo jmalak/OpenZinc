@@ -268,7 +268,7 @@ void UI_GRAPHICS_DISPLAY::Bitmap(ZIL_SCREENID screenID, int column, int line,
 	ZIL_BITMAP_HANDLE *_monoBitmap)
 {
 	// Make sure there is a valid image
-	ZIL_BITMAP_HANDLE colorBitmap = 0, monoBitmap = 0;
+	ZIL_BITMAP_HANDLE colorBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE), monoBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
 	if (_colorBitmap)
 		colorBitmap = *_colorBitmap;
 	if (_monoBitmap)
@@ -333,8 +333,8 @@ void UI_GRAPHICS_DISPLAY::BitmapArrayToHandle(ZIL_SCREENID, int, int,
 	// This routine was broken by recent GFX update.
 	if (colorBitmap)
 	{
-		*colorBitmap = ZIL_NULLP(ZIL_UINT8);
-		*monoBitmap = ZIL_NULLP(ZIL_UINT8);
+		*colorBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
+		*monoBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
 	}
 }
 
@@ -351,12 +351,12 @@ void UI_GRAPHICS_DISPLAY::DestroyBitmapHandle(ZIL_SCREENID, ZIL_BITMAP_HANDLE *c
 	if (colorBitmap && *colorBitmap)
 	{
 		delete *colorBitmap;
-		*colorBitmap = ZIL_NULLP(void);
+		*colorBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
 	}
 	if (monoBitmap && *monoBitmap)
 	{
 		delete *monoBitmap;
-		*monoBitmap = ZIL_NULLP(void);
+		*monoBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
 	}
 }
 
@@ -588,12 +588,12 @@ void UI_GRAPHICS_DISPLAY::DestroyIconHandle(ZIL_SCREENID, ZIL_ICON_HANDLE *icon)
 	if (icon && icon->colorBitmap)
 	{
 		delete icon->colorBitmap;
-		icon->colorBitmap = ZIL_NULLP(void);
+		icon->colorBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
 	}
 	if (icon && icon->monoBitmap)
 	{
 		delete icon->monoBitmap;
-		icon->monoBitmap = ZIL_NULLP(void);
+		icon->monoBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
 	}
 }
 

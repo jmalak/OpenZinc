@@ -125,7 +125,7 @@ void UI_OS2_DISPLAY::Bitmap(ZIL_SCREENID screenID, int left, int top,
         ZIL_BITMAP_HANDLE *_monoBitmap)
 {
         // Make sure there is a valid bitmap.
-        ZIL_BITMAP_HANDLE colorBitmap = 0, monoBitmap = 0;
+        ZIL_BITMAP_HANDLE colorBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE), monoBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
         if (_colorBitmap)
                 colorBitmap = *_colorBitmap;
         if (_monoBitmap)
@@ -230,9 +230,9 @@ void UI_OS2_DISPLAY::BitmapArrayToHandle(ZIL_SCREENID screenID, int bitmapWidth,
                 for (int i = 0; i < maxColors; i++)
                 {
                         ZIL_COLOR color = MapColor(&colorMap[i], TRUE);
-                        _bitmapInfo->argbColor[i].bBlue = (color & 0x000000FF);
-                        _bitmapInfo->argbColor[i].bGreen = (color & 0x0000FF00) >> 8;
-                        _bitmapInfo->argbColor[i].bRed = (color & 0x00FF0000) >> 16;
+                        _bitmapInfo->argbColor[i].bBlue = (BYTE)color;
+                        _bitmapInfo->argbColor[i].bGreen = (BYTE)(color >> 8);
+                        _bitmapInfo->argbColor[i].bRed = (BYTE)(color >> 16);
                 }
 
                 _bitmapHeaderInfo = new BITMAPINFOHEADER2;
@@ -341,12 +341,12 @@ void UI_OS2_DISPLAY::DestroyBitmapHandle(ZIL_SCREENID, ZIL_BITMAP_HANDLE *colorB
         if (colorBitmap && *colorBitmap)
         {
                 GpiDeleteBitmap(*colorBitmap);
-                *colorBitmap = 0;
+                *colorBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
         }
         if (monoBitmap && *monoBitmap)
         {
                 GpiDeleteBitmap(*monoBitmap);
-                *monoBitmap = 0;
+                *monoBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
         }
 }
 
@@ -559,7 +559,7 @@ void UI_OS2_DISPLAY::IconArrayToHandle(ZIL_SCREENID screenID, int iconWidth,
         ZIL_BITMAP_HANDLE pointerBitmap = GpiCreateBitmap(hps, _monoBitmapHeaderInfo, CBM_INIT, (PBYTE)bitmap, _monoBitmapInfo);
         delete bitmap;
 
-        ZIL_BITMAP_HANDLE colorBitmap = 0;
+        ZIL_BITMAP_HANDLE colorBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
         BitmapArrayToHandle(screenID, iconWidth, iconHeight, iconArray,
                 palette, &colorBitmap, ZIL_NULLP(ZIL_BITMAP_HANDLE));
 

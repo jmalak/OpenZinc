@@ -85,7 +85,7 @@ EVENT_TYPE UIW_MAXIMIZE_BUTTON::Event(const UI_EVENT &event)
 				delete colorBitmap;
 			if (monoBitmap)
 				delete monoBitmap;
-			colorBitmap = monoBitmap = ZIL_NULLP(void);
+			colorBitmap = monoBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
 #endif
 		}
 		break;

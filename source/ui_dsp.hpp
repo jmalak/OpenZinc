@@ -33,7 +33,7 @@
 
 #if defined(ZIL_MSDOS)
 	typedef ZIL_INT32 ZIL_SCREENID;
-	typedef void *ZIL_BITMAP_HANDLE;
+	typedef char *ZIL_BITMAP_HANDLE;
 	typedef ZIL_BITMAP_HANDLE ZIL_IMAGE_HANDLE;
 	typedef ZIL_UINT16 ZIL_SCREEN_CELL;
 	struct ZIL_ICON_HANDLE

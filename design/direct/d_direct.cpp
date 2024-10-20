@@ -135,7 +135,7 @@ ZAF_DIRECTORY_ITEM::ZAF_DIRECTORY_ITEM(int indentation, ZIL_ICHAR *pathName, ZIL
 
 ZAF_DIRECTORY_ITEM::~ZAF_DIRECTORY_ITEM(void)
 {
-        colorBitmap = monoBitmap = 0;
+        colorBitmap = monoBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
 }
 
 EVENT_TYPE ZAF_DIRECTORY_ITEM::DirectoryCallback(UI_WINDOW_OBJECT *object, UI_EVENT &event, EVENT_TYPE ccode)

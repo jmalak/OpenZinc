@@ -49,7 +49,7 @@ EVENT_TYPE ZAF_IMAGE::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 			*temp = (ZIL_UINT8)screenColor;
 	
 	// convert the image
-	ZIL_BITMAP_HANDLE colorBitmap = 0;
+	ZIL_BITMAP_HANDLE colorBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
 	display->BitmapArrayToHandle(screenID, bitmapWidth,
 		bitmapHeight, bitmapArray, ZIL_NULLP(UI_PALETTE),
 		&colorBitmap, ZIL_NULLP(ZIL_BITMAP_HANDLE));

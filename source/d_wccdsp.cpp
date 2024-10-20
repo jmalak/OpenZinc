@@ -1144,12 +1144,14 @@ void UI_WCC_DISPLAY::DestroyIconHandle(ZIL_SCREENID, ZIL_ICON_HANDLE *icon)
         if (icon && icon->colorBitmap)
         {
                 delete icon->colorBitmap;
-                icon->colorBitmap = ZIL_NULLP(void);
+                icon->colorBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
+
         }
         if (icon && icon->monoBitmap)
         {
                 delete icon->monoBitmap;
-                icon->monoBitmap = ZIL_NULLP(void);
+                icon->monoBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
+
         }
 }
 

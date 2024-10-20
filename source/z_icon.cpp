@@ -31,8 +31,8 @@ UIW_ICON::UIW_ICON(int left, int top, ZIL_ICHAR *_iconName, ZIL_ICHAR *_title,
 	iconArray(ZIL_NULLP(ZIL_UINT8)), title(ZIL_NULLP(ZIL_ICHAR))
 {
 #if defined(ZIL_MSDOS) || defined(ZIL_CURSES)
-	icon.colorBitmap = ZIL_NULLP(void);
-	icon.monoBitmap = ZIL_NULLP(void);
+	icon.colorBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
+	icon.monoBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
 #elif defined(ZIL_MACINTOSH)
 	icon.iconHandle = ZIL_NULLH(Handle);
 	icon.monoBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
@@ -241,8 +241,8 @@ UIW_ICON::UIW_ICON(const ZIL_ICHAR *name, ZIL_STORAGE_READ_ONLY *directory,
 	iconWidth(32), iconHeight(32), iconArray(ZIL_NULLP(ZIL_UINT8))
 {
 #if defined(ZIL_MSDOS) || defined(ZIL_CURSES)
-	icon.colorBitmap = ZIL_NULLP(void);
-	icon.monoBitmap = ZIL_NULLP(void);
+	icon.colorBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
+	icon.monoBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
 #elif defined(ZIL_MACINTOSH)
 	icon.iconHandle = ZIL_NULLH(Handle);
 	icon.monoBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);

@@ -33,7 +33,7 @@ EVENT_TYPE ZAF_IMAGE::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 		DrawBorder(screenID, region, FALSE, ccode);
 	if (pixelWidth == 1 && pixelHeight == 1)
 	{
-		ZIL_BITMAP_HANDLE colorBitmap = 0, monoBitmap = 0;
+		ZIL_BITMAP_HANDLE colorBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE), monoBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
 		for (int line = region.top; line <= region.bottom; line += bitmapHeight)
 		{
 			for (int column = region.left; column <= region.right; column += bitmapWidth)
