@@ -22,6 +22,8 @@
 
 EVENT_TYPE UIW_NOTEBOOK::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
+	/* unused parameters */ (void)event;
+
 	// Check for non-current messages.
 	if (ccode == S_NON_CURRENT)
 		return (TRUE);

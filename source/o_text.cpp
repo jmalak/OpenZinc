@@ -46,8 +46,10 @@ static MRESULT EXPENTRY EditCallback(HWND hwnd, ULONG msg, MPARAM mp1, MPARAM mp
 }
 #endif
 
-EVENT_TYPE UIW_TEXT::DrawItem(const UI_EVENT &, EVENT_TYPE )
+EVENT_TYPE UIW_TEXT::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
+	/* unused parameters */ (void)event; (void)ccode;
+
 	// OS/2 automatically displays text when return is FALSE.
 	return (FALSE);
 }

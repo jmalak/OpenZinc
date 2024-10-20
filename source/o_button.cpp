@@ -31,7 +31,7 @@
 
 // ----- UIW_BUTTON ---------------------------------------------------------
 
-EVENT_TYPE UIW_BUTTON::DrawItem(const UI_EVENT &, EVENT_TYPE ccode)
+EVENT_TYPE UIW_BUTTON::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
 #if defined(ZIL_OPTIMIZE)
 	ZIL_SCREENID screenID = this->screenID;
@@ -40,6 +40,8 @@ EVENT_TYPE UIW_BUTTON::DrawItem(const UI_EVENT &, EVENT_TYPE ccode)
 	const int BUTTON_OFFSET = 4;
 	UI_REGION region = trueRegion;
 	int listItem = parent->Inherited(ID_LIST);
+
+	/* unused parameters */ (void)event;
 
 	// Virtualize the display.
 	display->VirtualGet(screenID, trueRegion);

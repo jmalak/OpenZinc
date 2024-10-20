@@ -23,10 +23,12 @@
 
 // ----- UIW_PROMPT ---------------------------------------------------------
 
-EVENT_TYPE UIW_PROMPT::DrawItem(const UI_EVENT &, EVENT_TYPE ccode)
+EVENT_TYPE UIW_PROMPT::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
 	// Virtualize the display.
 	display->VirtualGet(screenID, trueRegion);
+
+	/* unused parameters */ (void)event;
 
 	// Draw the prompt information.
 	UI_REGION region = trueRegion;

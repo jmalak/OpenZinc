@@ -30,12 +30,15 @@ extern "C" LRESULT CALLBACK BtnWndProc3d(HWND hWnd, UINT message, WPARAM wParam,
 
 static WNDPROC _buttonCallback = ZIL_NULLF(WNDPROC);
 
-EVENT_TYPE UIW_BUTTON::DrawItem(const UI_EVENT &, EVENT_TYPE ccode)
+EVENT_TYPE UIW_BUTTON::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
 #if defined(ZIL_OPTIMIZE)
 	ZIL_SCREENID screenID = this->screenID;
 	UI_DISPLAY *display = this->display;
 #endif
+
+	/* unused parameters */ (void)event;
+
 	const int BITMAP_OFFSET = 2;
 	const int BUTTON_OFFSET = Inherited(ID_LIST_ITEM) ? 4 :
 		(!FlagSet(btFlags, BTF_NO_3D) || FlagSet(woFlags, WOF_BORDER)) ? 2 : 0;

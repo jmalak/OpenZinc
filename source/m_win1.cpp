@@ -213,8 +213,10 @@ UI_WINDOW_OBJECT *UIW_WINDOW::Add(UI_WINDOW_OBJECT *object)
 }
 
 
-EVENT_TYPE UIW_WINDOW::DrawItem(const UI_EVENT &, EVENT_TYPE )
+EVENT_TYPE UIW_WINDOW::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
+	/* unused parameters */ (void)event; (void)ccode;
+
 	if (screenID && !Inherited(ID_COMBO_BOX))
 		XClearArea(display->xDisplay, XtWindow(screenID), 0, 0, 0, 0, FALSE);
 	return (FALSE);

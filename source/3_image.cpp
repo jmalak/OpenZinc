@@ -38,11 +38,13 @@ void UIW_IMAGE::DestroyImageHandle(void)
 	hPalette = 0;
 }
 
-EVENT_TYPE UIW_IMAGE::DrawItem(const UI_EVENT &, EVENT_TYPE ccode)
+EVENT_TYPE UIW_IMAGE::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
 	// Virtualize the display.
 	UI_REGION region = trueRegion;
 	display->VirtualGet(screenID, region);
+
+	/* unused parameters */ (void)event;
 
 	// Draw the border if necessary.
 	if (IsBordered())
@@ -136,7 +138,7 @@ int UIW_IMAGE::LoadImageFromApplication(void)
 			(colors * sizeof(RGBQUAD)),	bitmapInfo, DIB_RGB_COLORS );
 		ReleaseDC(NULL,hdc);
 
-		UnlockResource(hGlobal);
+		(void)UnlockResource(hGlobal);
 		FreeResource(hGlobal);
 	}
 

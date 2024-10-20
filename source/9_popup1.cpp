@@ -22,8 +22,10 @@
 
 // ----- UIW_POP_UP_ITEM ----------------------------------------------------
 
-EVENT_TYPE UIW_POP_UP_ITEM::DrawItem(const UI_EVENT &, EVENT_TYPE )
+EVENT_TYPE UIW_POP_UP_ITEM::DrawItem(const UI_EVENT &event, EVENT_TYPE )
 {
+	/* unused parameters */ (void)event;
+
 	// Windows automatically displays text.
 	return (FALSE);
 }

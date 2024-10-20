@@ -54,4 +54,5 @@ EVENT_TYPE UIW_MINIMIZE_BUTTON::Event(const UI_EVENT &event)
 
 void UIW_MINIMIZE_BUTTON::OSUpdateSettings(ZIL_OBJECTID objectID)
 {
+	/* unused parameters */ (void)objectID;
 }

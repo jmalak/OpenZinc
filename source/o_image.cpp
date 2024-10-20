@@ -35,11 +35,13 @@ void UIW_IMAGE::DestroyImageHandle(void)
 	image = 0;
 }
 
-EVENT_TYPE UIW_IMAGE::DrawItem(const UI_EVENT &, EVENT_TYPE ccode)
+EVENT_TYPE UIW_IMAGE::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
 	// Virtualize the display.
 	UI_REGION region = trueRegion;
 	display->VirtualGet(screenID, region);
+
+	/* unused parameters */ (void)event;
 
 	// Draw the border if necessary.
 	if (IsBordered())

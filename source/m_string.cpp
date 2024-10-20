@@ -36,11 +36,13 @@ const int STRING_OFFSET = 4;
 
 // ----- UIW_STRING ---------------------------------------------------------
 
-EVENT_TYPE UIW_STRING::DrawItem(const UI_EVENT &, EVENT_TYPE ccode)
+EVENT_TYPE UIW_STRING::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
 	// Draw the string item.
 	UI_REGION region = trueRegion;
 	region.right -= 4; region.bottom -= 4;
+
+	/* unused parameters */ (void)event;
 
 	// Handle case of parent also owner draw.
 	ZIL_SCREENID tScreenID = screenID;

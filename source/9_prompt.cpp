@@ -23,10 +23,12 @@
 
 static WNDPROC _promptCallback = ZIL_NULLF(WNDPROC);
 
-EVENT_TYPE UIW_PROMPT::DrawItem(const UI_EVENT &, EVENT_TYPE ccode)
+EVENT_TYPE UIW_PROMPT::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
 	RECT r;
 	GetWindowRect(screenID, &r);
+
+	/* unused parameters */ (void)event;
 
 	// Virtualize the display.
 	display->VirtualGet(screenID, trueRegion);

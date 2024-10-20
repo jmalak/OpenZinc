@@ -22,10 +22,13 @@
 
 // ----- UIW_PROMPT ---------------------------------------------------------
 
-EVENT_TYPE UIW_PROMPT::DrawItem(const UI_EVENT &, EVENT_TYPE ccode)
+EVENT_TYPE UIW_PROMPT::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
-	// Draw the prompt.
 	UI_REGION region = trueRegion;
+
+	/* unused parameters */ (void)event;
+
+	// Draw the prompt.
 	if (FlagSet(woFlags, WOF_BORDER))
 		DrawBorder(screenID, region, FALSE, ccode);
 

@@ -77,6 +77,8 @@ EVENT_TYPE UIW_SYSTEM_BUTTON::Event(const UI_EVENT &event)
 
 void UIW_SYSTEM_BUTTON::OSUpdateSettings(ZIL_OBJECTID objectID)
 {
+	/* unused parameters */ (void)objectID;
+
 	if (parent)
 		parent->Information(I_SET_DWSTYLE, &dwStyle);
 }

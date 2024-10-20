@@ -6,7 +6,7 @@
 
 // ----- UIW_ICON -----------------------------------------------------------
 
-EVENT_TYPE UIW_ICON::DrawItem(const UI_EVENT &, EVENT_TYPE ccode)
+EVENT_TYPE UIW_ICON::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
 #if defined(ZIL_OPTIMIZE)
         ZIL_SCREENID screenID = this->screenID;
@@ -15,6 +15,9 @@ EVENT_TYPE UIW_ICON::DrawItem(const UI_EVENT &, EVENT_TYPE ccode)
         UI_PALETTE *lastPalette = this->lastPalette;
 #endif
         UI_REGION region = trueRegion;
+
+        /* unused parameters */ (void)event;
+
         if (FlagSet(icFlags, ICF_MINIMIZE_OBJECT) && parent && parent->parent)
         {
                 UI_WINDOW_OBJECT *currentObject;

@@ -132,8 +132,10 @@ EVENT_TYPE UI_WINDOW_OBJECT::DrawFocus(ZIL_SCREENID screenID, UI_REGION &region,
         return (TRUE);
 }
 
-EVENT_TYPE UI_WINDOW_OBJECT::DrawItem(const UI_EVENT &, EVENT_TYPE )
+EVENT_TYPE UI_WINDOW_OBJECT::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
+	/* unused parameters */ (void)event; (void)ccode;
+
         // OS/2 automatically displays text when return is FALSE.
         return (FALSE);
 }
@@ -998,7 +1000,7 @@ EVENT_TYPE UI_WINDOW_OBJECT::Event(const UI_EVENT &event)
                         if (text)
                                 Information(I_SET_TEXT, text);
                         if (ccode == S_DROP_MOVE_OBJECT)
-                                windowManager->dragObject->Information(I_SET_TEXT, &_blankString);
+                                windowManager->dragObject->Information(I_SET_TEXT, _blankString);
                 }
                 }
                 break;

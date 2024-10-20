@@ -63,10 +63,12 @@ void ButtonRepeatCallback(XtPointer client_data, XtIntervalId *)
 		button->repeatRate, ButtonRepeatCallback, client_data);
 }
 
-EVENT_TYPE UIW_BUTTON::DrawItem(const UI_EVENT &, EVENT_TYPE ccode)
+EVENT_TYPE UIW_BUTTON::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
 	UI_REGION region = trueRegion;
 	region.right -= 4; region.bottom -= 4;
+
+	/* unused parameters */ (void)event;
 
 	// Handle case of parent also owner draw.
 	ZIL_SCREENID tScreenID = screenID;

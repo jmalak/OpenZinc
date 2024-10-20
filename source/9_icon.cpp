@@ -24,12 +24,14 @@
 
 static WNDPROC _iconCallback = ZIL_NULLF(WNDPROC);
 
-EVENT_TYPE UIW_ICON::DrawItem(const UI_EVENT &, EVENT_TYPE ccode)
+EVENT_TYPE UIW_ICON::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
 #if defined(ZIL_OPTIMIZE)
 	ZIL_SCREENID screenID = this->screenID;
 	UI_DISPLAY *display = this->display;
 #endif
+
+	/* unused parameters */ (void)event;
 
 	int iconOffset = parent->Inherited(ID_LIST) ? 4 : 0;
 

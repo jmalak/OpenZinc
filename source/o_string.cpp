@@ -24,13 +24,15 @@
 
 // ----- UIW_STRING ---------------------------------------------------------
 
-EVENT_TYPE UIW_STRING::DrawItem(const UI_EVENT &, EVENT_TYPE ccode)
+EVENT_TYPE UIW_STRING::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
 #if defined(ZIL_OPTIMIZE)
 	ZIL_SCREENID screenID = this->screenID;
 	UI_DISPLAY *display = this->display;
 #endif
 	const int STRING_OFFSET = 4;
+
+	/* unused parameters */ (void)event;
 
 	// Virtualize the display.
 	display->VirtualGet(screenID, trueRegion);

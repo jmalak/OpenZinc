@@ -29,7 +29,7 @@ static WNDPROC _stringCallback = ZIL_NULLF(WNDPROC);
 **	#endif
 END BLOCK COMMENT */
 
-EVENT_TYPE UIW_STRING::DrawItem(const UI_EVENT &, EVENT_TYPE ccode)
+EVENT_TYPE UIW_STRING::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
 #if defined(ZIL_OPTIMIZE)
 	ZIL_SCREENID screenID = this->screenID;
@@ -37,6 +37,8 @@ EVENT_TYPE UIW_STRING::DrawItem(const UI_EVENT &, EVENT_TYPE ccode)
 #endif
 	const int STRING_OFFSET = Inherited(ID_LIST_ITEM) ? 4 :
 		FlagSet(woFlags, WOF_BORDER) ? 2 : 0;
+
+	/* unused parameters */ (void)event;
 
 	// Virtualize the display.
 	display->VirtualGet(screenID, trueRegion);

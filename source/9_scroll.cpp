@@ -25,8 +25,10 @@
 static WNDPROC _scrollCallback = ZIL_NULLF(WNDPROC);
 static WNDPROC _sliderCallback = ZIL_NULLF(WNDPROC);
 
-EVENT_TYPE UIW_SCROLL_BAR::DrawItem(const UI_EVENT &, EVENT_TYPE )
+EVENT_TYPE UIW_SCROLL_BAR::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
+	/* unused parameters */ (void)event; (void)ccode;
+
 	return (FALSE);
 }
 

@@ -41,8 +41,10 @@ UI_WINDOW_OBJECT *UIW_NOTEBOOK::Add(UI_WINDOW_OBJECT *object)
 	return (UIW_WINDOW::Add(object));
 }
 
-EVENT_TYPE UIW_NOTEBOOK::DrawItem(const UI_EVENT &, EVENT_TYPE)
+EVENT_TYPE UIW_NOTEBOOK::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
+	/* unused parameters */ (void)event; (void)ccode;
+
 	return (TRUE);
 }
 

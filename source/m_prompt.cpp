@@ -29,9 +29,11 @@ extern "C"
 
 // ----- UIW_PROMPT ---------------------------------------------------------
 
-EVENT_TYPE UIW_PROMPT::DrawItem(const UI_EVENT &, EVENT_TYPE ccode)
+EVENT_TYPE UIW_PROMPT::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
 	UI_REGION region = trueRegion;
+
+	/* unused parameters */ (void)event;
 
 	// Handle case of parent also owner draw.
 	ZIL_SCREENID tScreenID = screenID;

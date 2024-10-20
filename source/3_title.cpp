@@ -50,6 +50,8 @@ void UIW_TITLE::OSDataSet(void)
 
 void UIW_TITLE::OSUpdateSettings(ZIL_OBJECTID objectID)
 {
+	/* unused parameters */ (void)objectID;
+
 	if (parent)
 	{
 		parent->Information(I_SET_TITLE, this);

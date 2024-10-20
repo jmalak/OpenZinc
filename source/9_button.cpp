@@ -25,7 +25,7 @@
 
 static WNDPROC _buttonCallback = ZIL_NULLF(WNDPROC);
 
-EVENT_TYPE UIW_BUTTON::DrawItem(const UI_EVENT &, EVENT_TYPE ccode)
+EVENT_TYPE UIW_BUTTON::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
 #if defined(ZIL_OPTIMIZE)
 	ZIL_SCREENID screenID = this->screenID;
@@ -33,6 +33,8 @@ EVENT_TYPE UIW_BUTTON::DrawItem(const UI_EVENT &, EVENT_TYPE ccode)
 #endif
 	const int BITMAP_OFFSET = 2;
 	UI_REGION region = trueRegion;
+
+	/* unused parameters */ (void)event;
 
 	// Find out if it needs focus rect.
 	UI_WINDOW_OBJECT *noFocus = NULL;

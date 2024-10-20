@@ -23,8 +23,10 @@
 
 // ----- UIW_PULL_DOWN_ITEM -------------------------------------------------
 
-EVENT_TYPE UIW_PULL_DOWN_ITEM::DrawItem(const UI_EVENT &, EVENT_TYPE )
+EVENT_TYPE UIW_PULL_DOWN_ITEM::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
+	/* unused parameters */ (void)event; (void)ccode;
+
 	// OS/2 automatically displays text when return is FALSE.
 	return (FALSE);
 }
@@ -133,6 +135,8 @@ EVENT_TYPE UIW_PULL_DOWN_ITEM::Event(const UI_EVENT &event)
 
 void UIW_PULL_DOWN_ITEM::OSUpdateSettings(ZIL_OBJECTID objectID)
 {
+	/* unused parameters */ (void)objectID;
+
 	if (screenID)
 	{
 		WinSendMsg(screenID, MM_SETITEMATTR, MPFROM2SHORT(numberID, FALSE),

@@ -13,7 +13,7 @@ UI_DISPLAY::UI_DISPLAY(int _isText, const ZIL_ICHAR *_operatingSystem,
         miniNumeratorY(1), miniDenominatorY(10)
 {
 #if !defined(__SC__)
-        void z_gen_dummy(void);
+        extern void z_gen_dummy(void);
         z_gen_dummy();
         extern void z_dsp_dummy(void);
         z_dsp_dummy();

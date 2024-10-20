@@ -22,9 +22,12 @@
 
 // ----- UIW_BORDER ---------------------------------------------------------
 
-EVENT_TYPE UIW_BORDER::DrawItem(const UI_EVENT &, EVENT_TYPE )
+EVENT_TYPE UIW_BORDER::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
 	// Windows automatically displays the border.
+
+	/* unused parameters */ (void)event; (void)ccode;
+
 	return (FALSE);
 }
 

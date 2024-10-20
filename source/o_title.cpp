@@ -71,4 +71,5 @@ void UIW_TITLE::OSDataSet(void)
 
 void UIW_TITLE::OSUpdateSettings(ZIL_OBJECTID objectID)
 {
+	/* unused parameters */ (void)objectID;
 }

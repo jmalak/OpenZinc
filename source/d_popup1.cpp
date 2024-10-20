@@ -26,7 +26,7 @@ extern ZIL_ICHAR _tabString[];
 
 // ----- UIW_POP_UP_ITEM ----------------------------------------------------
 
-EVENT_TYPE UIW_POP_UP_ITEM::DrawItem(const UI_EVENT &, EVENT_TYPE ccode)
+EVENT_TYPE UIW_POP_UP_ITEM::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
 #if defined(ZIL_OPTIMIZE)
 	ZIL_SCREENID screenID = this->screenID;
@@ -35,6 +35,8 @@ EVENT_TYPE UIW_POP_UP_ITEM::DrawItem(const UI_EVENT &, EVENT_TYPE ccode)
 	UI_REGION clip = this->clip;
 #endif
 	UI_REGION region = trueRegion;
+
+	/* unused parameters */ (void)event;
 
 	// Draw the pop-up item.
 	if (FlagSet(woFlags, WOF_BORDER))

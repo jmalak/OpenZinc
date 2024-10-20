@@ -169,13 +169,15 @@ UIW_SPIN_CONTROL::UIW_SPIN_BUTTON::~UIW_SPIN_BUTTON(void)
 	bitmapArray = ZIL_NULLP(ZIL_UINT8);
 }
 
-EVENT_TYPE UIW_SPIN_CONTROL::UIW_SPIN_BUTTON::DrawItem(const UI_EVENT &, EVENT_TYPE ccode)
+EVENT_TYPE UIW_SPIN_CONTROL::UIW_SPIN_BUTTON::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
 #if defined(ZIL_OPTIMIZE)
 	ZIL_SCREENID screenID = this->screenID;
 	UI_DISPLAY *display = this->display;
 #endif
 	UI_REGION region = trueRegion;
+
+	/* unused parameters */ (void)event;
 
 	// Virtualize the display.
 	display->VirtualGet(screenID, region);

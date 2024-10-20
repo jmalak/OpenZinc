@@ -20,10 +20,13 @@
 
 #include <ui_win.hpp>
 
-EVENT_TYPE UIW_TABLE_RECORD::DrawItem(const UI_EVENT &, EVENT_TYPE ccode)
+EVENT_TYPE UIW_TABLE_RECORD::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
 	UI_REGION region = trueRegion;
 	lastPalette = parent->LogicalPalette(ccode);
+
+	/* unused parameters */ (void)event;
+
 #if defined(ZIL_EDIT)
 	if (FlagSet(woStatus, WOS_EDIT_MODE))
 	{

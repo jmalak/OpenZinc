@@ -735,6 +735,7 @@ void UIW_COMBO_BOX::OSDestroy(void)
 
 void UIW_COMBO_BOX::OSResetSelection(UI_WINDOW_OBJECT *object)
 {
+	/* unused parameters */ (void)object;
 }
 
 void UIW_COMBO_BOX::OSMatchInput(void)

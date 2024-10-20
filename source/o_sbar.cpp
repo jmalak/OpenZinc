@@ -22,8 +22,10 @@
 
 const int STATUS_OFFSET = 2;
 
-EVENT_TYPE UIW_STATUS_BAR::DrawItem(const UI_EVENT &, EVENT_TYPE)
+EVENT_TYPE UIW_STATUS_BAR::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
+	/* unused parameters */ (void)event; (void)ccode;
+
 	display->VirtualGet(screenID, trueRegion);
 	display->Rectangle(screenID, trueRegion, lastPalette, 0, TRUE);
 	display->Line(screenID, trueRegion.left, trueRegion.top, trueRegion.right, trueRegion.top, lastPalette);

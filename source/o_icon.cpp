@@ -26,12 +26,14 @@
 
 // ----- UIW_ICON -----------------------------------------------------------
 
-EVENT_TYPE UIW_ICON::DrawItem(const UI_EVENT &, EVENT_TYPE ccode)
+EVENT_TYPE UIW_ICON::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
 #if defined(ZIL_OPTIMIZE)
 	ZIL_SCREENID screenID = this->screenID;
 	UI_DISPLAY *display = this->display;
 #endif
+
+	/* unused parameters */ (void)event;
 
 	// OS/2 automatically displays text only information.
 	if (!iconArray && !icon)

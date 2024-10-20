@@ -35,8 +35,10 @@ extern ZIL_ICHAR *_iconDirectory;
 
 // ----- UIW_ICON -----------------------------------------------------------
 
-EVENT_TYPE UIW_ICON::DrawItem(const UI_EVENT &, EVENT_TYPE ccode)
+EVENT_TYPE UIW_ICON::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
+	/* unused parameters */ (void)event;
+
 	// Return the control code.
 	return (ccode);
 }

@@ -62,8 +62,10 @@ LRESULT CALLBACK SizeGripCallback(HWND hWnd, UINT wMsg, WPARAM wParam, LPARAM lP
 	}
 }
 
-EVENT_TYPE UIW_STATUS_BAR::DrawItem(const UI_EVENT &, EVENT_TYPE ccode)
+EVENT_TYPE UIW_STATUS_BAR::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
+	/* unused parameters */ (void)event;
+
 	// Virtualize the display.
 	display->VirtualGet(screenID, trueRegion);
 	lastPalette = LogicalPalette(ccode, ID_STATUS_BAR);

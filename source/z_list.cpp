@@ -30,6 +30,7 @@ Zinc Software Incorporated.  Pleasant Grove, Utah  USA.";
 
 UI_ELEMENT::UI_ELEMENT(void) : previous(ZIL_NULLP(UI_ELEMENT)), next(ZIL_NULLP(UI_ELEMENT))
 {
+/* unused parameters */ (void)_copyright;
 }
 
 UI_ELEMENT::~UI_ELEMENT(void)

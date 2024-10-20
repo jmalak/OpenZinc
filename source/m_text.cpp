@@ -71,11 +71,13 @@ void UIW_TEXT::SetCursorPos(const UI_POSITION &position)
 	XmTextSetCursorPosition(screenID, textOffset);
 }
 
-EVENT_TYPE UIW_TEXT::DrawItem(const UI_EVENT &, EVENT_TYPE ccode)
+EVENT_TYPE UIW_TEXT::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
 	// Draw the string item.
 	UI_REGION region = trueRegion;
 	region.right -= 4; region.bottom -= 4;
+
+	/* unused parameters */ (void)event;
 
 	// Handle case of parent also owner draw.
 	ZIL_SCREENID tScreenID = screenID;

@@ -29,8 +29,10 @@ extern "C" LRESULT CALLBACK EditWndProc3d(HWND hWnd, UINT message, WPARAM wParam
 
 static WNDPROC _textCallback = ZIL_NULLF(WNDPROC);
 
-EVENT_TYPE UIW_TEXT::DrawItem(const UI_EVENT &, EVENT_TYPE ccode)
+EVENT_TYPE UIW_TEXT::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
+	/* unused parameters */ (void)event;
+
 	// Virtualize the display.
 	display->VirtualGet(screenID, trueRegion);
 	lastPalette = LogicalPalette(ccode);
