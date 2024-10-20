@@ -116,7 +116,7 @@ FMI_RESULT UIW_FORMATTED_STRING::Import(ZIL_ICHAR *source)
 	// Import the formatted string value.
 	ZIL_ICHAR *destination = compressedText;
 	ZIL_ICHAR *tdeleteText = deleteText;
-	for (ZIL_ICHAR *mask = editMask; *mask && *source; mask++ && tdeleteText++)
+	for (ZIL_ICHAR *mask = editMask; *mask && *source; mask++, tdeleteText++)
 		if (*mask != 'L')
 		{
 			for (int processed = FALSE; !processed && *source; source++)
