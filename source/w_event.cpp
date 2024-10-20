@@ -75,7 +75,7 @@ UI_EVENT::UI_EVENT(EVENT_TYPE _type, HWND hWnd, UINT wMsg, WPARAM wParam,
 		key.shiftState = 0;
 		rawCode = key.value = wParam;
 		static BYTE ZIL_FARDATA keyState[256];
-		GetKeyboardState((BYTE FAR *)&keyState);
+		GetKeyboardState(keyState);
 		if (keyState[VK_SHIFT] & 0x80)
 			key.shiftState |= S_SHIFT;
 		if (keyState[VK_CONTROL] & 0x80)
