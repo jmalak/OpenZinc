@@ -736,7 +736,8 @@ void UI_WINDOW_OBJECT::Load(const ZIL_ICHAR *, ZIL_STORAGE_READ_ONLY *,
 	struct ZIL_EXPORT_CLASS UI_SEARCH_INFO
 	{
 		// Fields described in UI_SEARCH_ELEMENT reference chapter.
-		ZIL_UINT16 type, numberID;
+		ZIL_UINT16 type;
+		ZIL_UINT16 numberID;
 		ZIL_INT8 stringID[32];
 		long offset;
 		ZIL_UINT16 size;

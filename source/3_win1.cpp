@@ -708,7 +708,6 @@ EVENT_TYPE UIW_WINDOW::Event(const UI_EVENT &event)
                         {
                         ZIL_NUMBERID tNumberID = LOWORD(wParam);
                         ZIL_SCREENID tScreenID = (ZIL_SCREENID)lParam;
-
                         if (tNumberID >= (ZIL_NUMBERID)0xF000)
                                 if (!parent && FlagSet(woAdvancedFlags, WOAF_MDI_OBJECT))
                                         processed = FALSE;

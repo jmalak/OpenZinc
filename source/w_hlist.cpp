@@ -56,7 +56,7 @@ EVENT_TYPE UIW_HZ_LIST::Event(const UI_EVENT &event)
 		case WM_COMMAND:
 			{
 			WORD command = HIWORD(lParam);
-			WORD wID = wParam;
+			ZIL_NUMBERID wID = LOWORD(wParam);
 			switch (command)
 			{
 			case LBN_SELCHANGE:

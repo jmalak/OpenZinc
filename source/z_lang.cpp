@@ -60,7 +60,7 @@ END BLOCK COMMENT */
 
 void ZIL_LANGUAGE_ELEMENT::SwapData(ZIL_LANGUAGE_ELEMENT &language)
 {
-	int _numberID = numberID;
+	ZIL_NUMBERID _numberID = numberID;
 	numberID = language.numberID;
 	language.numberID = _numberID;
 

@@ -71,7 +71,7 @@ EVENT_TYPE UIW_COMBO_BOX::Event(const UI_EVENT &event)
 		case WM_COMMAND:
 			{
 			WORD command = HIWORD(lParam);
-			WORD wID = wParam;
+			ZIL_NUMBERID wID = LOWORD(wParam);
 			switch (command)
 			{
 				case CBN_SELCHANGE:
