@@ -541,7 +541,7 @@ void UI_OS2_DISPLAY::IconArrayToHandle(ZIL_SCREENID screenID, int iconWidth,
                 {
                         int offset = (iconHeight - y - 1) * lineWidth + _and * size;
                         bitmap[offset] = 0x00;
-                        ZIL_UINT16 mask = 0x80;
+                        ZIL_UINT8 mask = 0x80;
                         for (int x = 0; x < iconWidth; x++)
                         {
                                 if (mask == 0x00)
@@ -557,7 +557,7 @@ void UI_OS2_DISPLAY::IconArrayToHandle(ZIL_SCREENID screenID, int iconWidth,
                 }
         }
         ZIL_BITMAP_HANDLE pointerBitmap = GpiCreateBitmap(hps, _monoBitmapHeaderInfo, CBM_INIT, (PBYTE)bitmap, _monoBitmapInfo);
-        delete bitmap;
+        delete [] bitmap;
 
         ZIL_BITMAP_HANDLE colorBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
         BitmapArrayToHandle(screenID, iconWidth, iconHeight, iconArray,
@@ -585,7 +585,8 @@ void UI_OS2_DISPLAY::IconArrayToHandle(ZIL_SCREENID screenID, int iconWidth,
 void UI_OS2_DISPLAY::IconHandleToArray(ZIL_SCREENID screenID, ZIL_ICON_HANDLE icon,
         int *iconWidth, int *iconHeight, ZIL_UINT8 **iconArray)
 {
-        /* unused parameters */ (void)screenID; (void)icon; (void)iconWidth; (void)iconHeight; (void)iconArray;
+		/* unused parameters */ (void)screenID; (void)icon; (void)iconWidth; 
+		(void)iconHeight; (void)iconArray;
 }
 
 void UI_OS2_DISPLAY::DestroyIconHandle(ZIL_SCREENID, ZIL_ICON_HANDLE *icon)

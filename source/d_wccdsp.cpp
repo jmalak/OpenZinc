@@ -950,7 +950,7 @@ void UI_WCC_DISPLAY::Text(ZIL_SCREENID screenID, int left, int top,
 
 void UI_WCC_DISPLAY::SetFont(ZIL_LOGICAL_FONT logicalFont)
 {
-        static int _logicalFont = FNT_NONE;
+        static ZIL_LOGICAL_FONT _logicalFont = FNT_NONE;
         static WCCFONT _fontInfo;
         WCCFONT fontInfo;
         char fontString[32];
@@ -1145,13 +1145,11 @@ void UI_WCC_DISPLAY::DestroyIconHandle(ZIL_SCREENID, ZIL_ICON_HANDLE *icon)
         {
                 delete icon->colorBitmap;
                 icon->colorBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
-
         }
         if (icon && icon->monoBitmap)
         {
                 delete icon->monoBitmap;
                 icon->monoBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
-
         }
 }
 

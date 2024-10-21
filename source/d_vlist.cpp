@@ -471,7 +471,7 @@ EVENT_TYPE UIW_VT_LIST::Event(const UI_EVENT &event)
 			ZIL_ICHAR buffer[2];
 			ZIL_ICHAR *data;
 
-			buffer[0] = event.key.value;
+			buffer[0] = (ZIL_ICHAR)event.key.value;
 			buffer[1] = 0;
 			for (object = Current()->Next(); object; object = object->Next())
 			{

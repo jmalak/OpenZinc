@@ -22,12 +22,14 @@
 
 // ----- UIW_PULL_DOWN_ITEM -------------------------------------------------
 
-EVENT_TYPE UIW_PULL_DOWN_ITEM::DrawItem(const UI_EVENT &, EVENT_TYPE ccode)
+EVENT_TYPE UIW_PULL_DOWN_ITEM::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
 	const int ITEM_OFFSET = 4;
+	UI_REGION region = trueRegion;
+
+	/* unused parameters */ (void)event;
 
 	// Draw the string.
-	UI_REGION region = trueRegion;
 	if (FlagSet(woFlags, WOF_BORDER))
 		DrawBorder(screenID, region, FALSE, ccode);
 #if defined(ZIL_MOTIF_STYLE)

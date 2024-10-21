@@ -163,8 +163,10 @@ UI_WINDOW_OBJECT *UIW_WINDOW::Add(UI_WINDOW_OBJECT *object)
 	return (object);
 }
 
-EVENT_TYPE UIW_WINDOW::DrawItem(const UI_EVENT &, EVENT_TYPE ccode)
+EVENT_TYPE UIW_WINDOW::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode)
 {
+	/* unused parameters */ (void)event;
+
 	if (!FlagSet(woStatus, WOS_OWNERDRAW) || Inherited(ID_LIST))
 		return (FALSE);
 

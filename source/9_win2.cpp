@@ -130,8 +130,10 @@ EVENT_TYPE UI_WINDOW_OBJECT::DrawFocus(ZIL_SCREENID screenID, UI_REGION &region,
         return (TRUE);
 }
 
-EVENT_TYPE UI_WINDOW_OBJECT::DrawItem(const UI_EVENT &, EVENT_TYPE )
+EVENT_TYPE UI_WINDOW_OBJECT::DrawItem(const UI_EVENT &event, EVENT_TYPE ccode )
 {
+        /* unused parameters */ (void)event; (void)ccode;
+
         return (FALSE);
 }
 

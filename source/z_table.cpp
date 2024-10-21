@@ -69,7 +69,7 @@ int UIW_TABLE::DataSet(void *_data, int _records, int _maxRecords)
 		if (!FlagSet(woFlags, WOF_NO_ALLOCATE_DATA) &&
 			_maxRecords > maxRecords)
 		{
-			void *newData = new ZIL_INT8[recordSize * _maxRecords];
+			ZIL_INT8 *newData = new ZIL_INT8[recordSize * _maxRecords];
 			memset(newData, 0, recordSize * _maxRecords);
 			if (data)
 			{
