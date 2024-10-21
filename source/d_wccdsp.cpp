@@ -1119,12 +1119,12 @@ void UI_WCC_DISPLAY::DestroyBitmapHandle(ZIL_SCREENID, ZIL_BITMAP_HANDLE *colorB
         if (colorBitmap && *colorBitmap)
         {
                 delete *colorBitmap;
-                *colorBitmap = ZIL_NULLP(void);
+                *colorBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
         }
         if (monoBitmap && *monoBitmap)
         {
                 delete *monoBitmap;
-                *monoBitmap = ZIL_NULLP(void);
+                *monoBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
         }
 }
 
