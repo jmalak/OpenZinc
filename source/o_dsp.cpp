@@ -585,6 +585,7 @@ void UI_OS2_DISPLAY::IconArrayToHandle(ZIL_SCREENID screenID, int iconWidth,
 void UI_OS2_DISPLAY::IconHandleToArray(ZIL_SCREENID screenID, ZIL_ICON_HANDLE icon,
         int *iconWidth, int *iconHeight, ZIL_UINT8 **iconArray)
 {
+        /* unused parameters */ (void)screenID; (void)icon; (void)iconWidth; (void)iconHeight; (void)iconArray;
 }
 
 void UI_OS2_DISPLAY::DestroyIconHandle(ZIL_SCREENID, ZIL_ICON_HANDLE *icon)

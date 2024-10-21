@@ -1300,6 +1300,10 @@ void UI_WINDOW_OBJECT::RegisterObject(char *name, char *baseName,
         int *offset, FARPROC *, FARPROC *,
         ZIL_ICHAR *title, HMENU menu)
 {
+#if !defined(ZIL_UNICODE) && !defined(ZIL_MSWINDOWS_CTL3D)
+        /* unused parameters */ (void)name;
+#endif
+
         // Make sure the field needs to be registered.
         if (screenID || FlagSet(woStatus, WOS_INTERNAL_ACTION))
                 return;

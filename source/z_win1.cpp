@@ -137,7 +137,7 @@ void *UIW_WINDOW::Information(ZIL_INFO_REQUEST request, void *data, ZIL_OBJECTID
 		{
 		void *match = UI_WINDOW_OBJECT::Information(request, data, objectID);
 		// Special support numbers should only go 1 level deep.
-		if (request == I_GET_NUMBERID_OBJECT && *(NUMBERID *)data >= 0xFF00)
+		if (request == I_GET_NUMBERID_OBJECT && *(ZIL_NUMBERID *)data >= (ZIL_NUMBERID)0xFF00)
 		{
 			for (object = (UI_WINDOW_OBJECT *)support.First(); object && !match; object = object->Next())
 				match = object->UI_WINDOW_OBJECT::Information(request, data, objectID);

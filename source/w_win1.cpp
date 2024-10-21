@@ -298,7 +298,7 @@ static FARPROC _mdiChildJumpInstance = (FARPROC)MDIChildJumpProcedure;
 
 static UI_WINDOW_OBJECT *_client;
 
-static int _offset = 0;
+//static int _offset = 0;
 #define DS_FIXUP _export
 
 LRESULT FAR PASCAL DS_FIXUP ClientJumpProcedure(HWND hWnd, UINT wMsg, WPARAM wParam, LPARAM lParam)

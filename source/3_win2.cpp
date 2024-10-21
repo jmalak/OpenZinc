@@ -32,7 +32,7 @@ static ZIL_ATOM_CLEANUP _atomCleanUp;
 // ----- UI_WINDOW_OBJECT ---------------------------------------------------
 #if defined (ZIL_WINNT)
 static WNDPROC _objectCallback = ZIL_NULLF(WNDPROC);
-static int _objectOffset = GWL_USERDATA;
+//static int _objectOffset = GWL_USERDATA;
 static int _offset = GWL_USERDATA;
 #       define ZIL_EXPORT_CLASSABLE
 #else
@@ -60,7 +60,7 @@ typedef WNDPROC DEFWINPROC;
 
 static FARPROC _objectCallback = (FARPROC)DefWindowProc;
 static int _offset = -1;
-static int _objectOffset = -1;
+//static int _objectOffset = -1;
 #       define ZIL_EXPORT_CLASSABLE _export
 #endif
 
@@ -1007,7 +1007,7 @@ EVENT_TYPE UI_WINDOW_OBJECT::Event(const UI_EVENT &event)
                                 if (text)
                                         Information(I_SET_TEXT, text);
                                 if (ccode == S_DROP_MOVE_OBJECT)
-                                        windowManager->dragObject->Information(I_SET_TEXT, &_blankString);
+                                        windowManager->dragObject->Information(I_SET_TEXT, _blankString);
                         }
                         }
                         break;
@@ -1258,6 +1258,9 @@ static char *Z_MDIWIN = "UIW_MDICHILD";
 void UI_WINDOW_OBJECT::RegisterObject(char *name, char *baseName,
         WNDPROC *, ZIL_ICHAR *title, HMENU menu)
 {
+#if !defined(ZIL_UNICODE) && !defined(ZIL_MSWINDOWS_CTL3D)
+        /* unused parameters */ (void)name;
+#endif
 
         // Make sure the field needs to be registered.
         if (screenID || FlagSet(woStatus, WOS_INTERNAL_ACTION))

@@ -285,7 +285,7 @@ void UI_PRINTER::Ellipse(ZIL_SCREENID, int x, int y,
                         endAngle %= 360;
 
                 // Set the color and xor combinations.
-                ZIL_COLOR colorForeground, colorBackground;
+//                ZIL_COLOR colorForeground, colorBackground;
                 if (palette)
                 {
                         GpiSetColor(hps, (palette->fillPattern == PTN_SYSTEM_COLOR) ?
@@ -293,7 +293,7 @@ void UI_PRINTER::Ellipse(ZIL_SCREENID, int x, int y,
                         GpiSetBackColor(hps, (palette->fillPattern == PTN_SYSTEM_COLOR) ?
                                 palette->colorBackground : MapColor(palette, FALSE));
                 }
-                LONG mix;
+//                LONG mix;
 
                 // Compute the arc points.
                 ARCPARAMS arc;
@@ -805,7 +805,7 @@ void UI_PRINTER::ScreenDump(ZIL_SCREENID screenID, UI_REGION &region,
                 int tWidth = width % 2 ? width + 1 : width;
                 fprintf(_outputFile, "%d %d %d %d Bitmap\n", x, y, tWidth, height);
 
-                ZIL_COLOR color;
+//                ZIL_COLOR color;
                 GpiCreateLogColorTable(windowPS, 0, LCOLF_RGB, 0, 0, ZIL_NULLP(LONG));
 
                 POINTL point;

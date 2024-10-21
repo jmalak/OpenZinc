@@ -40,7 +40,7 @@ EVENT_TYPE UIW_PULL_DOWN_MENU::Event(const UI_EVENT &event)
 		return (DefaultCallback(event));
 	}
 
-	UI_WINDOW_OBJECT *object;
+//	UI_WINDOW_OBJECT *object;
 
 	// Check for Zinc specific messages.
 	ccode = LogicalEvent(event, ID_PULL_DOWN_MENU);

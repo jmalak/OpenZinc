@@ -112,6 +112,8 @@ EVENT_TYPE UIW_PULL_DOWN_ITEM::Event(const UI_EVENT &event)
 
 void UIW_PULL_DOWN_ITEM::OSUpdateSettings(ZIL_OBJECTID objectID)
 {
+	/* unused parameters */ (void)objectID;
+
 	if (screenID && FlagSet(woFlags, WOF_NON_SELECTABLE) &&
 	    parent->Information(I_GET_CURRENT, ZIL_NULLP(void)) == this)
 	{
