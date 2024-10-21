@@ -248,12 +248,12 @@ void *UIW_SPIN_CONTROL::UIW_SPIN_BUTTON::Information(ZIL_INFO_REQUEST request, v
 				if (colorBitmap)
 				{
 					delete colorBitmap;
-					colorBitmap = ZIL_NULLP(ZIL_BITMAP_HANDLE);
+					colorBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
 				}
 				if (monoBitmap)
 				{
 					delete monoBitmap;
-					monoBitmap = ZIL_NULLP(ZIL_BITMAP_HANDLE);
+					monoBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
 				}
 #		endif
 #		if !defined(ZIL_MSWINDOWS)
@@ -268,12 +268,12 @@ void *UIW_SPIN_CONTROL::UIW_SPIN_BUTTON::Information(ZIL_INFO_REQUEST request, v
 				if (colorBitmap)
 				{
 					delete colorBitmap;
-					colorBitmap = ZIL_NULLP(ZIL_BITMAP_HANDLE);
+					colorBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
 				}
 				if (monoBitmap)
 				{
 					delete monoBitmap;
-					monoBitmap = ZIL_NULLP(ZIL_BITMAP_HANDLE);
+					monoBitmap = ZIL_NULLH(ZIL_BITMAP_HANDLE);
 				}
 #			endif
 				bitmapArray = myDecorations->GetBitmap(direction == L_UP ?
