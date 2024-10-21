@@ -617,7 +617,7 @@ public:
 	// --- Window object members ---
 	ZIL_LOGICAL_FONT Font(ZIL_LOGICAL_FONT font = FNT_NONE);
 	UI_WINDOW_OBJECT *Get(const ZIL_ICHAR *name) { return ((UI_WINDOW_OBJECT *)Information(I_GET_STRINGID_OBJECT, (void *)name, ID_DEFAULT)); }
-	UI_WINDOW_OBJECT *Get(ZIL_NUMBERID _numberID) { return ((UI_WINDOW_OBJECT *)Information(I_GET_NUMBERID_OBJECT, (void *)&_numberID, ID_DEFAULT)); }
+	UI_WINDOW_OBJECT *Get(ZIL_NUMBERID _numberID) { return ((UI_WINDOW_OBJECT *)Information(I_GET_NUMBERID_OBJECT, ZIL_VOIDP(&_numberID), ID_DEFAULT)); }
 	unsigned HotKey(unsigned hotKey = 0);
 	unsigned HotKey(ZIL_ICHAR *text);
 	int Inherited(ZIL_OBJECTID matchID);
@@ -824,7 +824,7 @@ public:
 	virtual EVENT_TYPE DrawItem(const UI_EVENT &event, EVENT_TYPE ccode);
 	virtual EVENT_TYPE Event(const UI_EVENT &event);
 	UI_WINDOW_OBJECT *Get(const ZIL_ICHAR *name) { return ((UI_WINDOW_OBJECT *)Information(I_GET_STRINGID_OBJECT, (void *)name, ID_DEFAULT)); }
-	UI_WINDOW_OBJECT *Get(ZIL_NUMBERID _numberID) { return ((UI_WINDOW_OBJECT *)Information(I_GET_NUMBERID_OBJECT, (void *)&_numberID, ID_DEFAULT)); }
+	UI_WINDOW_OBJECT *Get(ZIL_NUMBERID _numberID) { return ((UI_WINDOW_OBJECT *)Information(I_GET_NUMBERID_OBJECT, ZIL_VOIDP(&_numberID), ID_DEFAULT)); }
 	virtual void *Information(ZIL_INFO_REQUEST request, void *data, ZIL_OBJECTID objectID = ID_DEFAULT);
 	virtual void RegionMax(UI_WINDOW_OBJECT *object);
 	virtual EVENT_TYPE ScrollEvent(UI_EVENT &event);

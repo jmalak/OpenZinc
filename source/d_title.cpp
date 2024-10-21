@@ -105,10 +105,10 @@ EVENT_TYPE UIW_TITLE::Event(const UI_EVENT &event)
 #	elif defined(ZIL_MOTIF_STYLE)
 			// Motif clip region overlaps parent for shadowing.
 			NUMBERID maxID = NUMID_MAXIMIZE, minID = NUMID_MINIMIZE, sysID = NUMID_SYSTEM;
-			if (!parent->Information(I_GET_NUMBERID_OBJECT, &sysID))
+			if (!parent->Information(I_GET_NUMBERID_OBJECT, ZIL_VOIDP(&sysID)))
 				trueRegion.left--;
-			if (!parent->Information(I_GET_NUMBERID_OBJECT, &maxID) &&
-				!parent->Information(I_GET_NUMBERID_OBJECT, &minID))
+			if (!parent->Information(I_GET_NUMBERID_OBJECT, ZIL_VOIDP(&maxID)) &&
+				!parent->Information(I_GET_NUMBERID_OBJECT, ZIL_VOIDP(&minID)))
 				trueRegion.right++;
 			trueRegion.bottom = --trueRegion.top + (display->cellHeight - display->preSpace - display->postSpace);
 			clip = trueRegion;
@@ -160,7 +160,7 @@ EVENT_TYPE UIW_TITLE::Event(const UI_EVENT &event)
 			parent->Event(UI_EVENT(L_MOVE, 0x0001, event.position));
 		}
 		else if (currentTime.Difference(lastTime) < doubleClickRate &&
-			parent->Information(I_GET_NUMBERID_OBJECT, &maxNumberID))
+			parent->Information(I_GET_NUMBERID_OBJECT, ZIL_VOIDP(&maxNumberID)))
 		{
 			UI_EVENT event(value);
 			event.rawCode = 0;

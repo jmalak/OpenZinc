@@ -43,7 +43,7 @@ void *UI_CONSTRAINT::Information(ZIL_INFO_REQUEST request, void *data, ZIL_OBJEC
 		// Set the object according to numberID.
 		// Use Manager() to set the manager before sending I_INITIALIZE_CLASS.
 		if (numberID && manager && !object)
-			object = (UI_WINDOW_OBJECT *)manager->Information(I_GET_NUMBERID_OBJECT, (void *)&numberID);
+			object = (UI_WINDOW_OBJECT *)manager->Information(I_GET_NUMBERID_OBJECT, ZIL_VOIDP(&numberID));
 		searchID = ID_CONSTRAINT;
 		break;
 

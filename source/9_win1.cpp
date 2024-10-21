@@ -691,7 +691,7 @@ EVENT_TYPE UIW_WINDOW::Event(const UI_EVENT &event)
                         WORD command = wParam;
                         if (command < 0xF000)
                         {
-                                object = (UI_WINDOW_OBJECT *)Information(I_GET_NUMBERID_OBJECT, &command);
+                                object = (UI_WINDOW_OBJECT *)Information(I_GET_NUMBERID_OBJECT, ZIL_VOIDP(&command));
                                 if (object)
                                         ccode = object->Event(UI_EVENT(L_SELECT));
                         }

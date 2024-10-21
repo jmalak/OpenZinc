@@ -51,7 +51,7 @@ void *UI_ATTACHMENT::Information(ZIL_INFO_REQUEST request, void *data,  ZIL_OBJE
 		UI_CONSTRAINT::Information(I_INITIALIZE_CLASS, ZIL_NULLP(void));
 		searchID = ID_ATTACHMENT;
 		if (refNumberID && manager && !reference)
-			reference = (UI_WINDOW_OBJECT *)manager->Information(I_GET_NUMBERID_OBJECT, (void *)&refNumberID);
+			reference = (UI_WINDOW_OBJECT *)manager->Information(I_GET_NUMBERID_OBJECT, ZIL_VOIDP(&refNumberID));
 		break;
 
 	case I_GET_REFERENCE_OBJECT:

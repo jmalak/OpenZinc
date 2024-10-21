@@ -880,7 +880,7 @@ EVENT_TYPE UIW_WINDOW::FrameEvent(const UI_EVENT &event)
 		{
 		NUMBERID objectID = LOWORD(event.message.mp1);
 		if (objectID != numberID)
-			object = (UI_WINDOW_OBJECT *)Information(I_GET_NUMBERID_OBJECT, (void *)&objectID);
+			object = (UI_WINDOW_OBJECT *)Information(I_GET_NUMBERID_OBJECT, ZIL_VOIDP(&objectID));
 		if (object)
 			return (object->Event(event));
 		}
@@ -891,7 +891,7 @@ EVENT_TYPE UIW_WINDOW::FrameEvent(const UI_EVENT &event)
 		{
 		NUMBERID objectID = LOWORD(event.message.mp1);
 		if (objectID != numberID)
-			object = (UI_WINDOW_OBJECT *)Information(I_GET_NUMBERID_OBJECT, (void *)&objectID);
+			object = (UI_WINDOW_OBJECT *)Information(I_GET_NUMBERID_OBJECT, ZIL_VOIDP(&objectID));
 		if (object)
 			return (object->Event(event));
 		}
