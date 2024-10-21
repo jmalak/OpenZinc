@@ -160,7 +160,7 @@ END BLOCK COMMENT */
 		case WM_COMMAND:
 			{
 			WORD command = HIWORD(wParam);
-			WORD wID = LOWORD(wParam);
+			ZIL_NUMBERID wID = LOWORD(wParam);
 			switch (command)
 			{
 				case CBN_SELCHANGE:

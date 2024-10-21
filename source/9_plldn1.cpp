@@ -46,7 +46,7 @@ EVENT_TYPE UIW_PULL_DOWN_ITEM::Event(const UI_EVENT &event)
 		{
 		case WM_MENUSELECT:
 			{
-			WORD wIDItem = LOWORD(wParam);
+			ZIL_NUMBERID wIDItem = LOWORD(wParam);
 			WORD fwMenu = HIWORD(wParam);
 			HMENU hmenu = (HMENU)lParam;
 			HMENU mMenuID = GetSubMenu(hmenu, wIDItem);

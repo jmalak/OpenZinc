@@ -168,7 +168,7 @@ ZAF_MESSAGE_INFORMATION::ZAF_MESSAGE_INFORMATION(ZIL_LANGUAGE_ELEMENT *_message,
 	// Set the message information: number, stringID, text.
 	if (message)
 	{
-		int numberID = (int)message->numberID;
+		int numberID = message->numberID;
 		Get(FIELD_NUMBERID)->Information(I_SET_VALUE, &numberID);
 
 		ZIL_ICHAR *stringID = message->stringID;

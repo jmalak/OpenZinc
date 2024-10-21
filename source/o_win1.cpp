@@ -229,9 +229,9 @@ EVENT_TYPE UIW_WINDOW::Event(const UI_EVENT &event)
 		case WM_MENUEND:
 		case WM_MENUSELECT:
 			{
-			ZIL_NUMBERID objectID = LOWORD(event.message.mp1);
-			if (objectID != numberID)
-				object = Get(objectID);
+			ZIL_NUMBERID tNumberID = LOWORD(event.message.mp1);
+			if (tNumberID != numberID)
+				object = Get(tNumberID);
 			if (object)
 				return (object->Event(event));
 			}
@@ -878,9 +878,9 @@ EVENT_TYPE UIW_WINDOW::FrameEvent(const UI_EVENT &event)
 
 	case WM_CONTROL:
 		{
-		ZIL_NUMBERID objectID = LOWORD(event.message.mp1);
-		if (objectID != numberID)
-			object = (UI_WINDOW_OBJECT *)Information(I_GET_NUMBERID_OBJECT, ZIL_VOIDP(&objectID));
+		ZIL_NUMBERID tNumberID = LOWORD(event.message.mp1);
+		if (tNumberID != numberID)
+			object = (UI_WINDOW_OBJECT *)Information(I_GET_NUMBERID_OBJECT, ZIL_VOIDP(&tNumberID));
 		if (object)
 			return (object->Event(event));
 		}
@@ -889,9 +889,9 @@ EVENT_TYPE UIW_WINDOW::FrameEvent(const UI_EVENT &event)
 	case WM_DRAWITEM:
 	case WM_MEASUREITEM:
 		{
-		ZIL_NUMBERID objectID = LOWORD(event.message.mp1);
-		if (objectID != numberID)
-			object = (UI_WINDOW_OBJECT *)Information(I_GET_NUMBERID_OBJECT, ZIL_VOIDP(&objectID));
+		ZIL_NUMBERID tNumberID = LOWORD(event.message.mp1);
+		if (tNumberID != numberID)
+			object = (UI_WINDOW_OBJECT *)Information(I_GET_NUMBERID_OBJECT, ZIL_VOIDP(&tNumberID));
 		if (object)
 			return (object->Event(event));
 		}

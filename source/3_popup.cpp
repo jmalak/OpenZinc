@@ -52,7 +52,7 @@ EVENT_TYPE UIW_POP_UP_MENU::Event(const UI_EVENT &event)
 		{
 		case WM_MENUSELECT:
 			{
-			WORD wIDItem = LOWORD(wParam);
+			ZIL_NUMBERID wIDItem = LOWORD(wParam);
 			WORD fwMenu = HIWORD(wParam);
 			HMENU hmenu = (HMENU)lParam;
 			HMENU mMenuID = GetSubMenu(hmenu, wIDItem);

@@ -104,7 +104,9 @@ EVENT_TYPE UIW_TITLE::Event(const UI_EVENT &event)
 			trueRegion.bottom = trueRegion.top - 1 + (display->cellHeight - display->preSpace - display->postSpace);
 #	elif defined(ZIL_MOTIF_STYLE)
 			// Motif clip region overlaps parent for shadowing.
-			NUMBERID maxID = NUMID_MAXIMIZE, minID = NUMID_MINIMIZE, sysID = NUMID_SYSTEM;
+			ZIL_NUMBERID maxID = NUMID_MAXIMIZE;
+			ZIL_NUMBERID minID = NUMID_MINIMIZE;
+			ZIL_NUMBERID sysID = NUMID_SYSTEM;
 			if (!parent->Information(I_GET_NUMBERID_OBJECT, ZIL_VOIDP(&sysID)))
 				trueRegion.left--;
 			if (!parent->Information(I_GET_NUMBERID_OBJECT, ZIL_VOIDP(&maxID)) &&

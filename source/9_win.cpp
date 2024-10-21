@@ -258,7 +258,7 @@ EVENT_TYPE UI_WINDOW_MANAGER::Event(const UI_EVENT &event)
 
 			case WM_COMMAND:
 				{
-				WORD tNumberID = LOWORD(wParam);
+				ZIL_NUMBERID tNumberID = LOWORD(wParam);
 				if (first)
 				{
 					UI_WINDOW_OBJECT *object =

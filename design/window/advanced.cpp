@@ -163,7 +163,7 @@ int ZAF_OBJECT_EDITOR::OBJ_ADVANCED_DataStore(UI_WINDOW_OBJECT *object)
 	// Store the object data.
 	int changed = FALSE;
 	int value, i, j;
-	if (GetValue(FIELD_NUMBERID, &value) && value >= object->numberID)
+	if (GetValue(FIELD_NUMBERID, &value) && (ZIL_NUMBERID)value >= object->numberID)
 	{
 		changed |= TRUE;
 		object->numberID = (ZIL_NUMBERID)value;

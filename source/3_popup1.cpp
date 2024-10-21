@@ -52,13 +52,12 @@ EVENT_TYPE UIW_POP_UP_ITEM::Event(const UI_EVENT &event)
 
 		case WM_MENUSELECT:
 			{
+			ZIL_NUMBERID wIDItem = LOWORD(wParam);
 #if defined(ZIL_WINNT)
-			WORD wIDItem = LOWORD(wParam);
 			WORD fwMenu = HIWORD(wParam);
 			HMENU hmenu = (HMENU)lParam;
 			HMENU mMenuID = GetSubMenu(hmenu, wIDItem);
 #else
-			WORD wIDItem = wParam;
 			WORD fwMenu = LOWORD(lParam);
 			HMENU mMenuID = (HMENU)wParam;
 #endif
@@ -158,7 +157,7 @@ EVENT_TYPE UIW_POP_UP_ITEM::Event(const UI_EVENT &event)
 			}
 			else
 			{
-				WORD tNumberID = numberID;
+				ZIL_NUMBERID tNumberID = numberID;
 				if (FlagSet(mniFlags, MNIF_RESTORE))
 					tNumberID = SC_RESTORE;
 				else if (FlagSet(mniFlags, MNIF_MOVE))

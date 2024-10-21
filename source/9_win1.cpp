@@ -656,10 +656,10 @@ EVENT_TYPE UIW_WINDOW::Event(const UI_EVENT &event)
 
                 case WM_COMMAND:
                         {
-                        WORD tNumberID = LOWORD(wParam);
+                        ZIL_NUMBERID tNumberID = LOWORD(wParam);
                         ZIL_SCREENID tScreenID = (ZIL_SCREENID)lParam;
 
-                        if (tNumberID >= 0xF000)
+                        if (tNumberID >= (ZIL_NUMBERID)0xF000)
                                 if (!parent && FlagSet(woAdvancedFlags, WOAF_MDI_OBJECT))
                                         processed = FALSE;
                                 else
@@ -688,8 +688,8 @@ EVENT_TYPE UIW_WINDOW::Event(const UI_EVENT &event)
                 case WM_SYSCOMMAND:
                         {
                         processed = FALSE;
-                        WORD command = wParam;
-                        if (command < 0xF000)
+                        ZIL_NUMBERID command = LOWORD(wParam);
+                        if (command < (ZIL_NUMBERID)0xF000)
                         {
                                 object = (UI_WINDOW_OBJECT *)Information(I_GET_NUMBERID_OBJECT, ZIL_VOIDP(&command));
                                 if (object)

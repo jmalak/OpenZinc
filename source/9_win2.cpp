@@ -650,7 +650,7 @@ EVENT_TYPE UI_WINDOW_OBJECT::Event(const UI_EVENT &event)
                         break;
 
                 case WM_COMMAND:
-                        if ((HWND)lParam == screenID || LOWORD(event.message.wParam) == numberID)
+                        if ((HWND)lParam == screenID || (ZIL_NUMBERID)LOWORD(event.message.wParam) == numberID)
                                 return (0);
                         else
                                 ccode = CallWindowProc((WINDOWSPROC)defaultCallback, hwnd,
@@ -658,7 +658,7 @@ EVENT_TYPE UI_WINDOW_OBJECT::Event(const UI_EVENT &event)
                         break;
 
                 case WM_NOTIFY:
-                        if (((NMHDR *)lParam)->hwndFrom == screenID || (int)wParam == numberID)
+                        if (((NMHDR *)lParam)->hwndFrom == screenID || (ZIL_NUMBERID)LOWORD(wParam) == numberID)
                                 return (0);
                         else
                                 ccode = CallWindowProc((WINDOWSPROC)defaultCallback, hwnd,
