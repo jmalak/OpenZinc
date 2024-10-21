@@ -429,7 +429,7 @@ int UI_WCC_DISPLAY::DeviceMove(ZIL_IMAGE_TYPE imageType, int newColumn, int newL
                                                 *tScreen = BACKGROUND;
                                         }
                                         else
-                                                *backup = _getpixel(newX, newY);
+                                                *backup = (ZIL_UINT8)_getpixel(newX, newY);
                                         if (*image != BACKGROUND)
                                         {
                                                 _setcolor(*image);
@@ -1090,7 +1090,7 @@ int UI_WCC_DISPLAY::VirtualPut(ZIL_SCREENID)
                                         for (x = view->region.left; x <= view->region.right; x++, screen++, image++)
                                                 if (*image != BACKGROUND)
                                                 {
-                                                        *screen = _getpixel(x, y);
+                                                        *screen = (ZIL_UINT8)_getpixel(x, y);
                                                         _setcolor(*image);
                                                         _setpixel(x, y);
                                                 }

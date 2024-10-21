@@ -302,7 +302,7 @@ EVENT_TYPE UIW_COMBO_BOX::Event(const UI_EVENT &event)
 		list.lastPalette = UI_PALETTE_MAP::MapPalette(paletteMapTable, PM_ANY, ID_LIST_ITEM);
 		list.woStatus &=  ~WOS_SELECTED;
 		list.Event(UI_EVENT(S_CREATE));
-		(void *)&(*windowManager + &list);
+		*windowManager + &list;
 		ZIL_ICHAR *comboString, *currentString;
 		if (!FlagSet(wnFlags, WNF_BITMAP_CHILDREN) && !FlagSet(woFlags, WOF_VIEW_ONLY) &&
 			Current() && Current()->Inherited(ID_STRING))

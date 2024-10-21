@@ -65,6 +65,12 @@ extern "C"
 #endif
 #include "ui_gen.hpp"
 #if defined(ZIL_POSIX)
+#ifdef __WATCOMC__
+#	if !defined(__QNX__)
+#		include <sys/param.h>
+#	endif
+#	include <unistd.h>
+#else
 extern "C"
 {
 #	if defined(ZIL_NEXTSTEP)
@@ -76,6 +82,7 @@ extern "C"
 #	endif
 #	include <unistd.h>
 }
+#endif
 #endif
 #if defined(ZIL_MSDOS) || defined(ZIL_MSWINDOWS) || defined(ZIL_OS2) || defined(__DVX__)
 #	include <io.h>
@@ -280,7 +287,7 @@ void ZIL_STORAGE_READ_ONLY::MakeFullPath(ZIL_ICHAR *tmppath)
 		ZIL_ICHAR currentDrive[MAX_PATH];
 		GetCurrentDirectory(MAX_PATH, currentDrive);
 		drive = ToUpper(currentDrive[0]) - 'A' + 1;
-		tmppath[0] = drive - 1 + 'A';
+		tmppath[0] = (char)(drive - 1) + 'A';
 #elif defined(ZIL_OS2)
 		ULONG pDrive, lDrive;
 		DosQueryCurrentDisk(&pDrive, &lDrive);
@@ -288,7 +295,7 @@ void ZIL_STORAGE_READ_ONLY::MakeFullPath(ZIL_ICHAR *tmppath)
 #elif defined(ZIL_MSDOS) || defined(ZIL_MSWINDOWS) || defined(__DVX__)
 		unsigned drive;
 		_dos_getdrive(&drive);
-		tmppath[0] = drive - 1 + 'A';
+		tmppath[0] = (char)(drive - 1) + 'A';
 #else
 		????;   This is an error;
 #endif

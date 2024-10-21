@@ -162,8 +162,8 @@ void ZIL_DECORATION::ClassLoadData(ZIL_STORAGE_OBJECT_READ_ONLY *file)
 		file->Load(&width);
 		file->Load(&height);
 		bitmap[i].bitmap = new ZIL_UINT8[width*height+2];
-		bitmap[i].bitmap[0] = width;
-		bitmap[i].bitmap[1] = height;
+		bitmap[i].bitmap[0] = (ZIL_UINT8)width;
+		bitmap[i].bitmap[1] = (ZIL_UINT8)height;
 		file->Load(&bitmap[i].bitmap[2], sizeof(ZIL_UINT8), width*height);
 	}
 	error = file->objectError;
