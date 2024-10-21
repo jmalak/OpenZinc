@@ -75,14 +75,11 @@ UI_APPLICATION::UI_APPLICATION(int _argc, char **_argv) :
 	if (!display)
 		display = new UI_FG_DISPLAY;
 
-	// Create the event manager and input devices.
+	// Create the event manager
 	eventManager = new UI_EVENT_MANAGER(display);
-	(void *)&(*eventManager
-		+ new UID_KEYBOARD
-		+ new UID_MOUSE
-		+ new UID_CURSOR);
-
-	// Create the window manager.
+	// Create the input devices
+	*eventManager + new UID_KEYBOARD + new UID_MOUSE + new UID_CURSOR;
+	// Create the window manager
 	windowManager = new UI_WINDOW_MANAGER(display, eventManager);
 }
 

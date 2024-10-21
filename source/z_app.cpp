@@ -240,7 +240,7 @@ UI_APPLICATION::UI_APPLICATION(int _argc, char **_argv) :
 #	endif
 #endif
 
-	// Create the event manager with display device
+	// Create the event manager
 	eventManager = new UI_EVENT_MANAGER(display);
 	// Create the input devices
 #if defined(ZIL_PENDOS)
