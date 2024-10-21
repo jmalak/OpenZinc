@@ -49,7 +49,7 @@ UIW_TABLE::UIW_TABLE(int left, int top, int width, int height, int _columns,
 UIW_TABLE::~UIW_TABLE(void)
 {
 	if (!FlagSet(woFlags, WOF_NO_ALLOCATE_DATA))
-		delete data;
+		delete [] (ZIL_INT8 *)data;
 	if (virtualRecord)
 		delete virtualRecord;
 }
@@ -74,7 +74,7 @@ int UIW_TABLE::DataSet(void *_data, int _records, int _maxRecords)
 			if (data)
 			{
 				memcpy(newData, data, recordSize * maxRecords);
-				delete data;
+				delete [] (ZIL_INT8 *)data;
 			}
 			data = newData;
 		}

@@ -166,7 +166,7 @@ int ZAF_OBJECT_EDITOR::OBJ_ADVANCED_DataStore(UI_WINDOW_OBJECT *object)
 	if (GetValue(FIELD_NUMBERID, &value) && value >= object->numberID)
 	{
 		changed |= TRUE;
-		object->numberID = (NUMBERID)value;
+		object->numberID = (ZIL_NUMBERID)value;
 	}
 	changed |= GetText(FIELD_USER_OBJECT, &object->userObjectName);
 	if (GetValue(FIELD_USER_FLAGS, &value))

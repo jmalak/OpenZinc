@@ -152,7 +152,7 @@ EVENT_TYPE UIW_TITLE::Event(const UI_EVENT &event)
 	case L_BEGIN_SELECT:
 		{
 		currentTime.Import();
-		NUMBERID maxNumberID = NUMID_MAXIMIZE;
+		ZIL_NUMBERID maxNumberID = NUMID_MAXIMIZE;
 		if (currentTime.Difference(lastTime) > doubleClickRate &&
 			!FlagSet(parent->woAdvancedFlags, WOAF_NO_MOVE) &&
 			!FlagSet(parent->woStatus, WOS_MAXIMIZED))

@@ -361,7 +361,7 @@ EVENT_TYPE UIW_WINDOW::Event(const UI_EVENT &event)
 			relative.right = display->columns - 1;
 			relative.bottom = display->lines - 1;
 #	if defined(ZIL_SHADOW_BORDER) && !defined(ZIL_GRAPHICS_ONLY)
-			NUMBERID borderID = NUMID_BORDER;
+			ZIL_NUMBERID borderID = NUMID_BORDER;
 			if (display->isText && Information(I_GET_NUMBERID_OBJECT, ZIL_VOIDP(&borderID)))
 				relative.right++, relative.bottom++;
 #	endif
@@ -518,7 +518,7 @@ EVENT_TYPE UIW_WINDOW::Event(const UI_EVENT &event)
 #if (defined(ZIL_SHADOW_BORDER) || defined(ZIL_3D_BORDER)) && !defined(ZIL_GRAPHICS_ONLY)
 		if (display->isText)
 		{
-			NUMBERID borderID = NUMID_BORDER;
+			ZIL_NUMBERID borderID = NUMID_BORDER;
 			if (Information(I_GET_NUMBERID_OBJECT, ZIL_VOIDP(&borderID)) && !FlagSet(woStatus, WOS_MAXIMIZED))
 			{
 				region.right--;
@@ -724,7 +724,7 @@ EVENT_TYPE UIW_WINDOW::Event(const UI_EVENT &event)
 				relative.right = display->columns - 1;
 				relative.bottom = display->lines - 1;
 #if defined(ZIL_SHADOW_BORDER) && !defined(ZIL_GRAPHICS_ONLY)
-				NUMBERID borderID = NUMID_BORDER;
+				ZIL_NUMBERID borderID = NUMID_BORDER;
 				if (display->isText && Information(I_GET_NUMBERID_OBJECT, ZIL_VOIDP(&borderID)))
 					relative.right++, relative.bottom++;
 #endif

@@ -1040,7 +1040,7 @@ EVENT_TYPE UI_WINDOW_OBJECT::Event(const UI_EVENT &event)
                                 if (text)
                                         Information(I_SET_TEXT, text);
                                 if (ccode == S_DROP_MOVE_OBJECT)
-                                        windowManager->dragObject->Information(I_SET_TEXT, &_blankString);
+                                        windowManager->dragObject->Information(I_SET_TEXT, _blankString);
                         }
                         }
                         break;

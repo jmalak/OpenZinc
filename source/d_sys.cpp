@@ -204,7 +204,7 @@ EVENT_TYPE UIW_SYSTEM_BUTTON::Event(const UI_EVENT &event)
                                                 object->woFlags |= WOF_NON_SELECTABLE;
                                                 break;
                                         }
-                                        NUMBERID numID = object->NumberID() == NUMID_OPT_MINIMIZE ? NUMID_MINIMIZE : NUMID_MAXIMIZE;
+                                        ZIL_NUMBERID numID = object->NumberID() == NUMID_OPT_MINIMIZE ? NUMID_MINIMIZE : NUMID_MAXIMIZE;
                                         UI_WINDOW_OBJECT *pobject = parent->Get(numID);
                                         if (!pobject)
                                                 object->woFlags |= WOF_NON_SELECTABLE;

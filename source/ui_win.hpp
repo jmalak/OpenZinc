@@ -45,8 +45,6 @@ extern "C"
 #endif
 // ----- NUMBERID -----------------------------------------------------------
 
-typedef ZIL_NUMBERID NUMBERID;
-
 const ZIL_NUMBERID NUMID_BORDER				= 0xFFFF;
 const ZIL_NUMBERID NUMID_MAXIMIZE			= 0xFFFE;
 const ZIL_NUMBERID NUMID_MINIMIZE			= 0xFFFD;

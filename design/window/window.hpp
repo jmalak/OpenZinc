@@ -459,7 +459,7 @@ private:
 	int GetHelp(ZIL_NUMBERID fieldID, UI_HELP_CONTEXT *helpContext);
 	int GetImage(ZIL_NUMBERID fieldID, ZIL_ICHAR **name, ZIL_OBJECTID imageType);
 	int GetScroll(ZIL_NUMBERID fieldID, UIW_WINDOW *window, SBF_FLAGS sbFlags);
-	int GetSupport(ZIL_NUMBERID fieldID, UIW_WINDOW *window, NUMBERID numberID);
+	int GetSupport(ZIL_NUMBERID fieldID, UIW_WINDOW *window, ZIL_NUMBERID numberID);
 	int GetText(ZIL_NUMBERID fieldID, ZIL_ICHAR *text);
 	int GetText(ZIL_NUMBERID fieldID, ZIL_ICHAR **text);
 	int GetValue(ZIL_NUMBERID fieldID, ZIL_UINT16 *value);
@@ -474,7 +474,7 @@ private:
 	void SetHelp(ZIL_NUMBERID fieldID, UI_HELP_CONTEXT helpContext);
 	void SetImage(ZIL_NUMBERID fieldID, ZIL_ICHAR *name, ZIL_OBJECTID imageType);
 	void SetScroll(ZIL_NUMBERID fieldID, UIW_WINDOW *window, SBF_FLAGS sbFlags);
-	void SetSupport(ZIL_NUMBERID fieldID, UIW_WINDOW *window, NUMBERID numberID);
+	void SetSupport(ZIL_NUMBERID fieldID, UIW_WINDOW *window, ZIL_NUMBERID numberID);
 	void SetText(ZIL_NUMBERID fieldID, ZIL_ICHAR *text);
 	void SetValue(ZIL_NUMBERID fieldID, int value);
 	void SetValue(ZIL_NUMBERID fieldID, ZIL_UINT16 value);

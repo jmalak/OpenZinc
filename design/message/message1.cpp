@@ -201,7 +201,7 @@ EVENT_TYPE ZAF_MESSAGE_INFORMATION::Event(const UI_EVENT &event)
 			{
 				int numberID;
 				field->Information(I_GET_VALUE, &numberID);
-				message->numberID = (NUMBERID)numberID;
+				message->numberID = (ZIL_NUMBERID)numberID;
 			}
 			field = Get(FIELD_STRINGID);
 			if (FlagSet(field->woStatus, WOS_CHANGED))

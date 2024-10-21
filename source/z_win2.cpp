@@ -180,7 +180,7 @@ void *UI_WINDOW_OBJECT::Information(ZIL_INFO_REQUEST request, void *data, ZIL_OB
 		break;
 
 	case I_GET_NUMBERID_OBJECT:
-		data = (numberID == *(NUMBERID *)data) ? this : ZIL_NULLP(void);
+		data = (numberID == *(ZIL_NUMBERID *)data) ? this : ZIL_NULLP(void);
 		break;
 
 	case I_GET_STRINGID_OBJECT:
@@ -435,7 +435,7 @@ void UI_WINDOW_OBJECT::NormalizeString(ZIL_ICHAR *destination, const char *sourc
 #	endif
 }
 
-NUMBERID UI_WINDOW_OBJECT::NumberID(NUMBERID _numberID)
+ZIL_NUMBERID UI_WINDOW_OBJECT::NumberID(ZIL_NUMBERID _numberID)
 {
 	if (_numberID)
 		numberID = _numberID;

@@ -627,7 +627,7 @@ int ZAF_OBJECT_EDITOR::GetScroll(ZIL_NUMBERID fieldID, UIW_WINDOW *window, SBF_F
 	return (FALSE); // Object is ok.
 }
 
-int ZAF_OBJECT_EDITOR::GetSupport(ZIL_NUMBERID fieldID, UIW_WINDOW *window, NUMBERID numberID)
+int ZAF_OBJECT_EDITOR::GetSupport(ZIL_NUMBERID fieldID, UIW_WINDOW *window, ZIL_NUMBERID numberID)
 {
 	UI_WINDOW_OBJECT *field = notebook->Get(fieldID);
 	if (!field)
@@ -880,7 +880,7 @@ void ZAF_OBJECT_EDITOR::SetScroll(ZIL_NUMBERID fieldID, UIW_WINDOW *window, SBF_
 	}
 }
 
-void ZAF_OBJECT_EDITOR::SetSupport(ZIL_NUMBERID fieldID, UIW_WINDOW *window, NUMBERID numberID)
+void ZAF_OBJECT_EDITOR::SetSupport(ZIL_NUMBERID fieldID, UIW_WINDOW *window, ZIL_NUMBERID numberID)
 {
 	// Try to find the specified support object.
 	UI_WINDOW_OBJECT *field = notebook->Get(fieldID);

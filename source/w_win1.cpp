@@ -684,7 +684,7 @@ EVENT_TYPE UIW_WINDOW::Event(const UI_EVENT &event)
                                 }
                                 break;
                         }
-                        NUMBERID tNumberID =
+                        ZIL_NUMBERID tNumberID =
                                 GetWindowWord(scrollBar, GWW_ID);
                         UI_WINDOW_OBJECT *object =
                                 (UI_WINDOW_OBJECT *)Information(I_GET_NUMBERID_OBJECT, ZIL_VOIDP(&tNumberID));
