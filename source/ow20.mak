@@ -391,7 +391,7 @@ wnt_zil.lib : $(wnt_lib_objs)
 win32: init 9$(exename).exe .SYMBOLIC
 
 9$(exename).exe: $(exename).ob9 w32_zil.lib
-	$(LINK) $(W32_LINK_OPTS) N 9$(exename) F {$(exename).ob9 $(W32_OBJS)} L {$(W32_LIBS) w32_zil.lib)}
+	$(LINK) $(W32_LINK_OPTS) N 9$(exename) F {$(exename).ob9 $(W32_OBJS)} L {$(W32_LIBS) w32_zil.lib}
 
 w32_zil.lib : $(w32_lib_objs)
 	$(LIBRARIAN) $(LIB_OPTS) $@ $<
