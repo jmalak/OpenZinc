@@ -8,6 +8,8 @@
 #    wmake -f ow20.mak winnt
 #    wmake -f ow20.mak win32
 #    wmake -f ow20.mak os2
+#    wmake -f ow20.mak curses
+#    wmake -f ow20.mak motif
 #
 # ----- General Definitions -------------------------------------------------
 VERSION=ow20
@@ -163,6 +165,8 @@ win_extra_objs = z_app.obw w_dsp.obw w_print.obw z_notebk.obw
 wnt_extra_objs = z_app.obn 3_dsp.obn 3_print.obn z_notebk.obn
 w32_extra_objs = z_app.ob9 9_dsp.ob9 9_print.ob9 9_comctl.ob9 z_notebk.ob9
 os2_extra_objs = z_app.obo o_dsp.obo o_print.obo
+crs_extra_objs = z_app.oc d_dsp.oc d_print.oc z_notebk.oc
+mtf_extra_objs = z_app.om m_dsp.om m_print.om z_notebk.om
 
 prfx=d
 oext=.o32
@@ -184,6 +188,14 @@ prfx=o
 oext=.obo
 os2_lib_objs=$+$(template_lib_objs) $(template_spec_objs)$- $(os2_extra_objs)
 
+prfx=d
+oext=.oc
+crs_lib_objs=$+$(template_lib_objs) $(template_spec_objs)$- $(crs_extra_objs)
+
+prfx=m
+oext=.om
+mtf_lib_objs=$+$(template_lib_objs) $(template_spec_objs)$- $(mtf_extra_objs)
+
 d32_gfx_objs = &
 	d_gfxdsp.o32 &
 	d_gfxprn.o32 &
@@ -197,7 +209,7 @@ d32_gfx_objs = &
 	OEM_syst.o32
 
 .EXTENSIONS:
-.EXTENSIONS: .lib .rew .re9 .ren .reo .o32 .obw .obn .ob9 .obo .rc .cpp .c
+.EXTENSIONS: .lib .rew .re9 .ren .reo .o32 .obw .obn .ob9 .obo .oc .om .o .rc .cpp .c
 
 CXX16=wpp -zq
 CXX=wpp386 -zq
@@ -214,37 +226,44 @@ D32_CXX_OPTS=-bt=dos -dDOS386 -I"gfx/source"
 D32_LINK_OPTS=SYSTEM dos4g OP stack=20000 DISA 1124
 D32_OBJS=
 # --- Use the next line for UI_WCC_DISPLAY ---
-D32_LIBS=d32_zil.lib d32_wcc.lib
+D32_LIBS=d32_wcc.lib
 # --- Use the next line for UI_GRAPHICS_DISPLAY ---
-#D32_LIBS=d32_zil.lib d32_gfx.lib wc_32gfx.lib
+#D32_LIBS=d32_gfx.lib wc_32gfx.lib
 
 # ----- 16 bit Windows compiler options -------------------------------------
 WIN_CXX_OPTS=-zW -zc -ml -zt=100
 WIN_LINK_OPTS=SYSTEM windows OP heapsize=16k OP stack=24k
 WIN_RC_OPTS=-bt=windows
 WIN_OBJS=
-WIN_LIBS=win_zil.lib
+WIN_LIBS=
 
 # ----- Windows NT (and WIN32s) compiler options ----------------------------
 WNT_CXX_OPTS=-bt=nt
 WNT_LINK_OPTS=SYSTEM nt_win
 WNT_RC_OPTS=-bt=nt
 WNT_OBJS=
-WNT_LIBS=wnt_zil.lib
+WNT_LIBS=
 
 # ----- 32 bit Windows compiler options -------------------------------------
 W32_CXX_OPTS=-bt=nt -DZIL_WIN32
 W32_LINK_OPTS=SYSTEM nt_win
 W32_RC_OPTS=-bt=nt
 W32_OBJS=
-W32_LIBS=w32_zil.lib
+W32_LIBS=
 
 # ----- OS/2 2.x compiler options -------------------------------------------
 OS2_CXX_OPTS=-bt=os2
 OS2_LINK_OPTS=SYSTEM os2v2_pm OP ST=96000
 OS2_RC_OPTS=-bt=os2
 OS2_OBJS=
-OS2_LIBS=os2_zil.lib
+OS2_LIBS=
+
+# ----- 32 bit Linux compiler options -------------------------------------
+LNX_CXX_OPTS=-bt=linux
+LNX_LINK_OPTS=SYSTEM linux
+LNX_RC_OPTS=
+LNX_OBJS=
+LNX_LIBS=
 
 .cpp.o32:
 	$(CXX) $(CXX_OPTS) $(D32_CXX_OPTS) -fo=$@ $<
@@ -260,6 +279,12 @@ OS2_LIBS=os2_zil.lib
 
 .cpp.obo:
 	$(CXX) $(CXX_OPTS) $(OS2_CXX_OPTS) -fo=$@ $<
+
+.cpp.oc:
+	$(CXX) $(CXX_OPTS) $(LNX_CXX_OPTS) -DZIL_CURSES -fo=$@ $<
+
+.cpp.om:
+	$(CXX) $(CXX_OPTS) $(LNX_CXX_OPTS) -DZIL_MOTIF -fo=$@ $<
 
 .rc.rew:
 	$(RC) $(RC_OPTS) $(WIN_RC_OPTS) $< -fo=$@
@@ -283,6 +308,8 @@ usage: .SYMBOLIC
 	@echo wmake -f ow20.mak winnt
         @echo wmake -f ow20.mak win32
 	@echo wmake -f ow20.mak os2
+	@echo wmake -f ow20.mak curses
+	@echo wmake -f ow20.mak motif
 	@echo ...........
 	@echo ...........
 
@@ -290,7 +317,7 @@ usage: .SYMBOLIC
 clean: .SYMBOLIC
 	@rm -f foo *.bak *.bk? *.ob? *.rbj *.map *.exe *.tc tc*.* *.dsk *.dpr
 	@rm -f *.sav *.sv? *.cfg *.$$$$$$ *.lib *.fil *.re? *.sym *.err *.zip *.ovl
-	@rm -f *.o16 *.o32 *.p16 *.p32 __tmp.rsp
+	@rm -f *.o16 *.o32 *.oc *.om *.p16 *.p32 __tmp.rsp
 
 # ----- Copy files ----------------------------------------------------------
 init: ../lib/$(VERSION) .SYMBOLIC
@@ -318,7 +345,7 @@ dos32: init $(exename).exe .SYMBOLIC
 
 #$(exename).exe: $(exename).o32 d32_gfx.lib d32_wcc.lib wc_32gfx.lib
 $(exename).exe: $(exename).o32 d32_wcc.lib d32_zil.lib
-	$(LINK) $(D32_LINK_OPTS) N $@ F {$(exename).o32 $(D32_OBJS)} L {$(D32_LIBS)}
+	$(LINK) $(D32_LINK_OPTS) N $@ F {$(exename).o32 $(D32_OBJS)} L {$(D32_LIBS) d32_zil.lib}
 
 #d32_zil.lib : d32_gfx.lib wc_32gfx.lib $(d32_lib_objs)
 d32_zil.lib : $(d32_lib_objs)
@@ -344,7 +371,7 @@ wc_32gfx.lib : .SYMBOLIC
 windows: init w$(exename).exe .SYMBOLIC
 
 w$(exename).exe: $(exename).obw win_zil.lib
-	$(LINK) $(WIN_LINK_OPTS) N w$(exename) F {$(exename).obw $(WIN_OBJS)} L {$(WIN_LIBS)}
+	$(LINK) $(WIN_LINK_OPTS) N w$(exename) F {$(exename).obw $(WIN_OBJS)} L {$(WIN_LIBS) win_zil.lib}
 
 win_zil.lib : $(win_lib_objs)
 	$(LIBRARIAN) $(LIB_OPTS) $@ $<
@@ -354,7 +381,7 @@ win_zil.lib : $(win_lib_objs)
 winnt: init n$(exename).exe .SYMBOLIC
 
 n$(exename).exe: $(exename).obn wnt_zil.lib
-	$(LINK) $(WNT_LINK_OPTS) N n$(exename) F {$(exename).obn $(WNT_OBJS)} L {$(WNT_LIBS)}
+	$(LINK) $(WNT_LINK_OPTS) N n$(exename) F {$(exename).obn $(WNT_OBJS)} L {$(WNT_LIBS) wnt_zil.lib}
 
 wnt_zil.lib : $(wnt_lib_objs)
 	$(LIBRARIAN) $(LIB_OPTS) $@ $<
@@ -364,7 +391,7 @@ wnt_zil.lib : $(wnt_lib_objs)
 win32: init 9$(exename).exe .SYMBOLIC
 
 9$(exename).exe: $(exename).ob9 w32_zil.lib
-	$(LINK) $(W32_LINK_OPTS) N 9$(exename) F {$(exename).ob9 $(W32_OBJS)} L {$(W32_LIBS)}
+	$(LINK) $(W32_LINK_OPTS) N 9$(exename) F {$(exename).ob9 $(W32_OBJS)} L {$(W32_LIBS) w32_zil.lib)}
 
 w32_zil.lib : $(w32_lib_objs)
 	$(LIBRARIAN) $(LIB_OPTS) $@ $<
@@ -374,9 +401,29 @@ w32_zil.lib : $(w32_lib_objs)
 os2: init o$(exename).exe .SYMBOLIC
 
 o$(exename).exe: $(exename).obo os2_zil.lib
-	$(LINK) $(OS2_LINK_OPTS) N o$(exename).exe F {$(exename).obo $(OS2_OBJS)} L {$(OS2_LIBS)}
+	$(LINK) $(OS2_LINK_OPTS) N o$(exename).exe F {$(exename).obo $(OS2_OBJS)} L {$(OS2_LIBS) os2_zil.lib}
 
 os2_zil.lib : $(os2_lib_objs)
+	$(LIBRARIAN) $(LIB_OPTS) $@ $<
+	%copy $@ ../lib/$(VERSION)
+
+# ----- Linux Libraries and Programs (Curses) --------------------------------
+curses: init c$(exename).exe .SYMBOLIC
+
+c$(exename).exe: $(exename).oc crs_zil.lib
+	$(LINK) $(LNX_LINK_OPTS) N c$(exename).exe F {$(exename).oc $(LNX_OBJS)} L {$(LNX_LIBS) crs_zil.lib}
+
+crs_zil.lib : $(crs_lib_objs)
+	$(LIBRARIAN) $(LIB_OPTS) $@ $<
+	%copy $@ ../lib/$(VERSION)
+
+# ----- Linux Libraries and Programs (Motif) --------------------------------
+motif: init m$(exename).exe .SYMBOLIC
+
+m$(exename).exe: $(exename).om mtf_zil.lib
+	$(LINK) $(LNX_LINK_OPTS) N m$(exename).exe F {$(exename).om $(LNX_OBJS)} L {$(LNX_LIBS) mtf_zil.lib}
+
+mtf_zil.lib : $(mtf_lib_objs)
 	$(LIBRARIAN) $(LIB_OPTS) $@ $<
 	%copy $@ ../lib/$(VERSION)
 

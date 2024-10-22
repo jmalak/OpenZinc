@@ -11,6 +11,9 @@ wmake -f ow20.mak -h winnt
 wmake -f ow20.mak -h win32
 @set INCLUDE=.;%WATCOM%\H;%WATCOM%\H\OS2
 wmake -f ow20.mak -h os2
+rem @set INCLUDE=.;%WATCOM%\LH
+rem wmake -f ow20.mak -h curses
+rem wmake -f ow20.mak -h motif
 popd
 endlocal
 setlocal
@@ -29,6 +32,10 @@ wmake -f ow20.mak -h make_winnt_modules
 wmake -f ow20.mak -h make_win32_modules
 @set INCLUDE=.;%WATCOM%\H;%WATCOM%\H\OS2;%OZINCPATH%
 wmake -f ow20.mak -h make_os2_modules
+rem @set INCLUDE=.;%WATCOM%\LH;%OZINCPATH%
+rem wmake -f ow20.mak -h make_curses_modules
+rem wmake -f ow20.mak -h make_motif_modules
+rem
 @set INCLUDE=.;%WATCOM%\H;%OZINCPATH%
 wmake -f ow20.mak -h dos32
 @set INCLUDE=.;%WATCOM%\H;%WATCOM%\H\WIN;%OZINCPATH%
@@ -39,5 +46,8 @@ wmake -f ow20.mak -h winnt
 wmake -f ow20.mak -h win32
 @set INCLUDE=.;%WATCOM%\H;%WATCOM%\H\OS2;%OZINCPATH%
 wmake -f ow20.mak -h os2
+rem @set INCLUDE=.;%WATCOM%\LH;%OZINCPATH%
+rem wmake -f ow20.mak -h curses
+rem wmake -f ow20.mak -h motif
 popd
 endlocal
