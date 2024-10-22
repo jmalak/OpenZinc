@@ -1671,7 +1671,12 @@ int ZIL_STORAGE_OBJECT_READ_ONLY::Load(ZIL_ICHAR **string)
 }
 
 int ZIL_STORAGE_OBJECT_READ_ONLY::Store(void *, int, int)
-	{ abort(); return (0); }
+{
+	abort();
+#ifndef __WATCOMC__
+	return (0);
+#endif
+}
 
 // --- ZIL_STORAGE_OBJECT_READ_ONLY privates -----------------------------------
 
@@ -1985,7 +1990,12 @@ int ZIL_STORAGE_OBJECT_READ_ONLY::RWData(void *_buffer, unsigned N, int directio
 }
 
 int ZIL_STORAGE_OBJECT_READ_ONLY::Store(const directoryEntry *)
-	{ abort(); return (0); }
+{
+	abort();
+#ifndef __WATCOMC__
+	return (0);
+#endif
+}
 
 // ---- ZIL_STORAGE_DIRECTORY --------------------------------------------------
 
