@@ -1,17 +1,15 @@
 setlocal
-@set OZINCPATH=%CD%\INCLUDE
-@set LIB=.;%CD%\LIB\ow20
 pushd source
 wmake -f ow20.mak -h clean
-@set INCLUDE=.;%WATCOM%\H;%OZINCPATH%
+@set INCLUDE=.;%WATCOM%\H
 wmake -f ow20.mak -h dos32
-@set INCLUDE=.;%WATCOM%\H;%WATCOM%\H\WIN;%OZINCPATH%
+@set INCLUDE=.;%WATCOM%\H;%WATCOM%\H\WIN
 wmake -f ow20.mak -h windows
-@set INCLUDE=.;%WATCOM%\H;%WATCOM%\H\NT;%OZINCPATH%
+@set INCLUDE=.;%WATCOM%\H;%WATCOM%\H\NT
 wmake -f ow20.mak -h winnt
-@set INCLUDE=.;%WATCOM%\H;%WATCOM%\H\NT;%OZINCPATH%
+@set INCLUDE=.;%WATCOM%\H;%WATCOM%\H\NT
 wmake -f ow20.mak -h win32
-@set INCLUDE=.;%WATCOM%\H;%WATCOM%\H\OS2;%OZINCPATH%
+@set INCLUDE=.;%WATCOM%\H;%WATCOM%\H\OS2
 wmake -f ow20.mak -h os2
 popd
 endlocal
