@@ -87,9 +87,9 @@ EVENT_TYPE UIW_STRING::Event(const UI_EVENT &event)
 					tEvent.message.mp2 = (MPARAM)'_';
 				}
 				if (FlagSet(stFlags, STF_LOWER_CASE) && IsUpper(key))
-					tEvent.message.mp2 = (MPARAM)ToLower(key);
+					tEvent.message.mp2 = (MPARAM)ToLower((ZIL_ICHAR)key);
 				else if (FlagSet(stFlags, STF_UPPER_CASE) && IsLower(key))
-					tEvent.message.mp2 = (MPARAM)ToUpper(key);
+					tEvent.message.mp2 = (MPARAM)ToUpper((ZIL_ICHAR)key);
 				return (UI_WINDOW_OBJECT::Event(tEvent));
 			}
 			}
