@@ -823,8 +823,8 @@ extern "C"
 #endif
 
 #if defined(ZIL_OS2)
-#       define HIWORD(arg) (((ULONG)arg >> 16) & 0x0000FFFF)
-#       define LOWORD(arg) ((ULONG)arg & 0x0000FFFF)
+#       define HIWORD(arg) HIUSHORT(arg)
+#       define LOWORD(arg) LOUSHORT(arg)
         extern "C"
         {
 #       include <os2.h>
@@ -961,6 +961,12 @@ extern "C"
 #       else
 #               define ZIL_XT           4
 #       endif
+#endif
+
+#if defined(ZIL_X11)
+	typedef unsigned long ZIL_RAW_CODE;
+#else
+	typedef unsigned ZIL_RAW_CODE;
 #endif
 
 #define ZIL_HOTMARK                     '&'

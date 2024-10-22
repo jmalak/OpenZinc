@@ -36,12 +36,6 @@
 
 // ----- Compiler/Environment Dependencies ----------------------------------
 
-#if defined(ZIL_X11)
-	typedef unsigned long ZIL_RAW_CODE;
-#else
-	typedef unsigned ZIL_RAW_CODE;
-#endif
-
 // ----- Special hotkey values ----------------------------------------------
 
 const ZIL_UINT8 HOT_KEY_MAXIMIZE			= 252;

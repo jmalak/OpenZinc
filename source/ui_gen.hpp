@@ -596,11 +596,13 @@ public:
 	static int IsGraph(ZIL_ICHAR value);
 	static int IsLower(ZIL_ICHAR value);
 	static int IsPrint(ZIL_ICHAR value);
+	static int IsPrint(ZIL_RAW_CODE value);
 	static int IsPunct(ZIL_ICHAR value);
 	static int IsSpace(ZIL_ICHAR value);
 	static int IsUpper(ZIL_ICHAR value);
 	static int IsXDigit(ZIL_ICHAR value);
 	static ZIL_ICHAR ToLower(ZIL_ICHAR value);
+	static ZIL_ICHAR ToLower(ZIL_RAW_CODE value);
 	static ZIL_ICHAR ToUpper(ZIL_ICHAR value);
 
 	// Support for internationalized ANSI routines.

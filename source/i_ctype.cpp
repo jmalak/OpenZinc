@@ -61,6 +61,13 @@ int ZIL_INTERNATIONAL::IsPrint(ZIL_ICHAR c)
 		(c >= (ZIL_ICHAR)0xa0) && c <= (ZIL_ICHAR)0xff);
 }
 
+int ZIL_INTERNATIONAL::IsPrint(ZIL_RAW_CODE c)
+{
+	if( c > 0xff )
+		return 0;
+	return IsPrint((ZIL_ICHAR)(unsigned char)c);
+}
+
 int ZIL_INTERNATIONAL::IsSpace(ZIL_ICHAR c)
 {
 	return (c == ' ' || c == '\f' || c == '\n' || c == '\r' ||
@@ -97,6 +104,11 @@ ZIL_ICHAR ZIL_INTERNATIONAL::ToLower(ZIL_ICHAR c)
 	if (c >= (ZIL_ICHAR)0xd8 && c <= (ZIL_ICHAR)0xde)
 		return (c + 0x20);
 	return (c);
+}
+
+ZIL_ICHAR ZIL_INTERNATIONAL::ToLower(ZIL_RAW_CODE c)
+{
+	return ToLower((ZIL_ICHAR)(unsigned char)c);
 }
 
 ZIL_ICHAR ZIL_INTERNATIONAL::ToUpper(ZIL_ICHAR c)
