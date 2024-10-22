@@ -559,9 +559,21 @@ void ZIL_STORAGE_READ_ONLY::TempName(ZIL_ICHAR *tempname)
 
 // --- ZIL_STORAGE_READ_ONLY privates ------------------------------------------
 
-ZIL_DISK_ADDRESS ZIL_STORAGE_READ_ONLY::AllocData(void) { abort(); return (0); }
+ZIL_DISK_ADDRESS ZIL_STORAGE_READ_ONLY::AllocData(void)
+{
+	abort();
+#ifndef __WATCOMC__
+	return (0);
+#endif
+}
 
-ZIL_DISK_ADDRESS ZIL_STORAGE_READ_ONLY::AppendInode(ZIL_INODE_NUMBER) { abort(); return (0); }
+ZIL_DISK_ADDRESS ZIL_STORAGE_READ_ONLY::AppendInode(ZIL_INODE_NUMBER)
+{
+	abort();
+#ifndef __WATCOMC__
+	return (0);
+#endif
+}
 
 // Check to see if an inode (inum) is already in the open object list.
 int ZIL_STORAGE_READ_ONLY::CheckOpen(ZIL_INODE_NUMBER inum)
@@ -994,7 +1006,12 @@ ZIL_STORAGE_OBJECT_READ_ONLY *ZIL_STORAGE_READ_ONLY::WalkPath(const ZIL_ICHAR *n
 }
 
 int ZIL_STORAGE_READ_ONLY::WriteAt(long, void *, int)
-	{ abort(); return (0); }
+{
+	abort();
+#ifndef __WATCOMC__
+	return (0);
+#endif
+}
 
 void ZIL_STORAGE_READ_ONLY::WriteData(void *data, int modified)
 {
