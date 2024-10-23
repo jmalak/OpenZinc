@@ -93,6 +93,7 @@ jobs:
         mkdir bin
         mkdir lib
         mkdir include
+      shell: bash
     - name: Open Zinc library
       run: |
         @export INCLUDE=.:$WATCOM/h
@@ -105,11 +106,10 @@ jobs:
         wmake -f ow20.mak -h win32
         @export INCLUDE=.:$WATCOM/h:$WATCOM/h/os2
         wmake -f ow20.mak -h os2
-      shell: cmd
+      shell: bash
       working-directory: source
     - name: Open Zinc Designer Libraries
       run: |
-        setlocal
         @set INCLUDE=.:$WATCOM/h:$OZINCPATH
         wmake -f ow20.mak -h make_dos32_modules
         @set INCLUDE=.:$WATCOM/h:$WATCOM/h/win:$OZINCPATH
@@ -120,15 +120,13 @@ jobs:
         wmake -f ow20.mak -h make_win32_modules
         @set INCLUDE=.:$WATCOM/h:$WATCOM/h/os2:$OZINCPATH
         wmake -f ow20.mak -h make_os2_modules
-        endlocal
-      shell: cmd
+      shell: bash
       working-directory: design
       env:
         OZINCPATH: ${{ github.workspace }}/include
         LIB: .:${{ github.workspace }}/lib/ow20
     - name: Open Zinc Designer Executable
       run: |
-        setlocal
         @set INCLUDE=.:$WATCOM/h:$OZINCPATH
         wmake -f ow20.mak -h dos32
         @set INCLUDE=.:$WATCOM/h:$WATCOM/h/win:$OZINCPATH
@@ -139,8 +137,7 @@ jobs:
         wmake -f ow20.mak -h win32
         @set INCLUDE=.:$WATCOM/h:$WATCOM/h/os2:$OZINCPATH
         wmake -f ow20.mak -h os2
-        endlocal
-      shell: cmd
+      shell: bash
       working-directory: design
       env:
         OZINCPATH: ${{ github.workspace }}/include
