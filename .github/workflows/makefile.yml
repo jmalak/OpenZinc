@@ -96,29 +96,29 @@ jobs:
       shell: bash
     - name: Open Zinc library
       run: |
-        @export INCLUDE=.:$WATCOM/h
+        export INCLUDE=.:$WATCOM/h
         wmake -f ow20.mak -h dos32
-        @export INCLUDE=.:$WATCOM/h:$WATCOM/h/win
+        export INCLUDE=.:$WATCOM/h:$WATCOM/h/win
         wmake -f ow20.mak -h windows
-        @export INCLUDE=.:$WATCOM/h:$WATCOM/h/nt
+        export INCLUDE=.:$WATCOM/h:$WATCOM/h/nt
         wmake -f ow20.mak -h winnt
-        @export INCLUDE=.:$WATCOM/h:$WATCOM/h/nt
+        export INCLUDE=.:$WATCOM/h:$WATCOM/h/nt
         wmake -f ow20.mak -h win32
-        @export INCLUDE=.:$WATCOM/h:$WATCOM/h/os2
+        export INCLUDE=.:$WATCOM/h:$WATCOM/h/os2
         wmake -f ow20.mak -h os2
       shell: bash
       working-directory: source
     - name: Open Zinc Designer Libraries
       run: |
-        @set INCLUDE=.:$WATCOM/h:$OZINCPATH
+        export INCLUDE=.:$WATCOM/h:$OZINCPATH
         wmake -f ow20.mak -h make_dos32_modules
-        @set INCLUDE=.:$WATCOM/h:$WATCOM/h/win:$OZINCPATH
+        export INCLUDE=.:$WATCOM/h:$WATCOM/h/win:$OZINCPATH
         wmake -f ow20.mak -h make_windows_modules
-        @set INCLUDE=.:$WATCOM/h:$WATCOM/h/nt:$OZINCPATH
+        export INCLUDE=.:$WATCOM/h:$WATCOM/h/nt:$OZINCPATH
         wmake -f ow20.mak -h make_winnt_modules
-        @set INCLUDE=.:$WATCOM/h:$WATCOM/h/nt:$OZINCPATH
+        export INCLUDE=.:$WATCOM/h:$WATCOM/h/nt:$OZINCPATH
         wmake -f ow20.mak -h make_win32_modules
-        @set INCLUDE=.:$WATCOM/h:$WATCOM/h/os2:$OZINCPATH
+        export INCLUDE=.:$WATCOM/h:$WATCOM/h/os2:$OZINCPATH
         wmake -f ow20.mak -h make_os2_modules
       shell: bash
       working-directory: design
@@ -127,15 +127,15 @@ jobs:
         LIB: .:${{ github.workspace }}/lib/ow20
     - name: Open Zinc Designer Executable
       run: |
-        @set INCLUDE=.:$WATCOM/h:$OZINCPATH
+        export INCLUDE=.:$WATCOM/h:$OZINCPATH
         wmake -f ow20.mak -h dos32
-        @set INCLUDE=.:$WATCOM/h:$WATCOM/h/win:$OZINCPATH
+        export INCLUDE=.:$WATCOM/h:$WATCOM/h/win:$OZINCPATH
         wmake -f ow20.mak -h windows
-        @set INCLUDE=.:$WATCOM/h:$WATCOM/h/nt:$OZINCPATH
+        export INCLUDE=.:$WATCOM/h:$WATCOM/h/nt:$OZINCPATH
         wmake -f ow20.mak -h winnt
-        @set INCLUDE=.:$WATCOM/h:$WATCOM/h/nt:$OZINCPATH
+        export INCLUDE=.:$WATCOM/h:$WATCOM/h/nt:$OZINCPATH
         wmake -f ow20.mak -h win32
-        @set INCLUDE=.:$WATCOM/h:$WATCOM/h/os2:$OZINCPATH
+        export INCLUDE=.:$WATCOM/h:$WATCOM/h/os2:$OZINCPATH
         wmake -f ow20.mak -h os2
       shell: bash
       working-directory: design
