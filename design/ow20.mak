@@ -28,8 +28,14 @@ w32_dep_libs=$+$(template_dep_libs)$-
 prfx=o
 os2_dep_libs=$+$(template_dep_libs)$-
 
+prfx=c
+crs_dep_libs=$+$(template_dep_libs)$-
+
+prfx=m
+mtf_dep_libs=$+$(template_dep_libs)$-
+
 .EXTENSIONS:
-.EXTENSIONS: .lib .rew .ren .re9 .reo .o32 .obw .obn .ob9 .obo .rc .cpp .c
+.EXTENSIONS: .lib .rew .ren .re9 .reo .o32 .obw .obn .ob9 .obo .oc .om .rc .cpp .c
 
 # Compiler and linker: (Add -d2 to CPP_OPTS and DEBUG ALL to LINK_OPTS for debug.)
 
@@ -48,37 +54,43 @@ D32_CXX_OPTS=-bt=dos -dDOS386 -w4 -j -oaxt
 D32_LINK_OPTS=SYSTEM dos4g OP stack=48000 DISA 1124
 D32_OBJS=
 # --- Use the next line for UI_WCC_DISPLAY ---
-D32_LIBS=d32_zil.lib d32_wcc.lib
+D32_LIBS=d32_wcc.lib
 # --- Use the next line for UI_GRAPHICS_DISPLAY ---
-#D32_LIBS=d32_zil.lib d32_gfx.lib wc_32gfx.lib
+#D32_LIBS=d32_gfx.lib wc_32gfx.lib
 
 # ----- Windows compiler options --------------------------------------------
 WIN_CXX_OPTS=-zW -ml -zc -zt=100
 WIN_LINK_OPTS=SYS windows OP heapsize=16k OP stack=30k OP res=wdesign.rew
 WIN_RC_OPTS=-bt=windows
 WIN_OBJS=
-WIN_LIBS=win_zil.lib commdlg.lib
+WIN_LIBS=commdlg.lib
 
 # ----- Windows NT (and WIN32s) compiler options ----------------------------
 WNT_CXX_OPTS=-bt=nt
 WNT_LINK_OPTS=SYSTEM nt_win op res=wdesign.ren
 WNT_RC_OPTS=-bt=nt
 WNT_OBJS=
-WNT_LIBS=wnt_zil.lib
+WNT_LIBS=
 
 # ----- Windows 32 (and WIN32s) compiler options ----------------------------
 W32_CXX_OPTS=-bt=nt -DZIL_WIN32
 W32_LINK_OPTS=SYSTEM nt_win op res=wdesign.re9
 W32_RC_OPTS=-bt=nt
 W32_OBJS=
-W32_LIBS=w32_zil.lib
+W32_LIBS=
 
 # ----- OS/2 compiler options -----------------------------------------------
 OS2_CXX_OPTS=-bt=os2
 OS2_LINK_OPTS=SYSTEM os2v2_pm OP ST=96000 op res=odesign.reo
 OS2_RC_OPTS=-bt=os2
 OS2_OBJS=
-OS2_LIBS=os2_zil.lib
+OS2_LIBS=
+
+# ----- Linux compiler options -----------------------------------------------
+LNX_CXX_OPTS=-bt=linux
+LNX_LINK_OPTS=SYSTEM linux
+LNX_OBJS=
+LNX_LIBS=
 
 .cpp.o32:
 	$(CXX) $(CXX_OPTS) $(D32_CXX_OPTS) -fo=$@ $<
@@ -94,6 +106,12 @@ OS2_LIBS=os2_zil.lib
 
 .cpp.obo:
 	$(CXX) $(CXX_OPTS) $(OS2_CXX_OPTS) -fo=$@ $<
+
+.cpp.om:
+	$(CXX) $(CXX_OPTS) $(LNX_CXX_OPTS) -fo=$@ $<
+
+.cpp.oc:
+	$(CXX) $(CXX_OPTS) $(LNX_CXX_OPTS) -fo=$@ $<
 
 .rc.rew:
 	$(RC) $(RC_OPTS) $(WIN_RC_OPTS) $< -fo=$@
@@ -117,6 +135,8 @@ usage: .SYMBOLIC
 	@echo wmake -h -f ow20.mak winnt	(makes the Windows NT designer)
 	@echo wmake -h -f ow20.mak win32	(makes the Windows WIN32 designer)
 	@echo wmake -h -f ow20.mak os2		(makes the OS/2 designer)
+	@echo wmake -h -f ow20.mak curses	(makes the Linux Curses designer)
+	@echo wmake -h -f ow20.mak motif	(makes the Linux Motif designer)
 	@echo ...........
 	@echo ...........
 
@@ -140,7 +160,7 @@ dos32: .SYMBOLIC
 	%make $(pname).exe
 
 $(pname).exe: main.o32
-	$(LINK) $(D32_LINK_OPTS) N $@ F main.o32 L {$(d32_dep_libs) $(D32_LIBS)}
+	$(LINK) $(D32_LINK_OPTS) N $@ F main.o32 L {$(d32_dep_libs) d32_zil.lib $(D32_LIBS)}
 	%copy $@ ../bin
 
 make_dos32_modules: .SYMBOLIC
@@ -154,7 +174,7 @@ windows: .SYMBOLIC
 	%make w$(pname).exe
 
 w$(pname).exe: main.obw wdesign.rew
-	$(LINK) $(WIN_LINK_OPTS) N $@ F main.obw L {$(win_dep_libs) $(WIN_LIBS)}
+	$(LINK) $(WIN_LINK_OPTS) N $@ F main.obw L {$(win_dep_libs) win_zil.lib $(WIN_LIBS)}
 	%copy $@ ../bin
 
 make_windows_modules: .SYMBOLIC
@@ -168,7 +188,7 @@ winnt: .SYMBOLIC
 	%make n$(pname).exe
 
 n$(pname).exe: main.obn wdesign.ren
-	$(LINK) $(WNT_LINK_OPTS) N $@ F main.obn L {$(wnt_dep_libs) $(WNT_LIBS)}
+	$(LINK) $(WNT_LINK_OPTS) N $@ F main.obn L {$(wnt_dep_libs) wnt_zil.lib $(WNT_LIBS)}
 	%copy $@ ../bin
 
 make_winnt_modules: .SYMBOLIC
@@ -182,7 +202,7 @@ win32: .SYMBOLIC
 	%make 9$(pname).exe
 
 9$(pname).exe: main.ob9 wdesign.re9
-	$(LINK) $(W32_LINK_OPTS) N $@ F main.ob9 L {$(w32_dep_libs) $(W32_LIBS)}
+	$(LINK) $(W32_LINK_OPTS) N $@ F main.ob9 L {$(w32_dep_libs) w32_zil.lib $(W32_LIBS)}
 	%copy $@ ../bin
 
 make_win32_modules: .SYMBOLIC
@@ -196,10 +216,38 @@ os2: .SYMBOLIC
 	%make o$(pname).exe
 
 o$(pname).exe: main.obo odesign.reo
-	$(LINK) $(OS2_LINK_OPTS) N $@ F main.obo L {$(os2_dep_libs) $(OS2_LIBS)}
+	$(LINK) $(OS2_LINK_OPTS) N $@ F main.obo L {$(os2_dep_libs) os2_zil.lib $(OS2_LIBS)}
 	%copy $@ ../bin
 
 make_os2_modules: .SYMBOLIC
+        set MODULES_FUNC=$@
+	%make make_modules
+
+# ----- Linux Libraries and Programs (Curses) --------------------------------
+curses: .SYMBOLIC
+        set MODULES_FUNC=$@
+	%make make_modules
+	%make c$(pname).exe
+
+c$(pname).exe: main.oc
+	$(LINK) $(LNX_LINK_OPTS) N $@ F main.oc L {$(crs_dep_libs) crs_zil.lib $(LNX_LIBS)}
+	%copy $@ ../bin
+
+make_curses_modules: .SYMBOLIC
+        set MODULES_FUNC=$@
+	%make make_modules
+
+# ----- Linux Libraries and Programs (Motif) --------------------------------
+motif: .SYMBOLIC
+        set MODULES_FUNC=$@
+	%make make_modules
+	%make m$(pname).exe
+
+m$(pname).exe: main.om
+	$(LINK) $(LNX_LINK_OPTS) N $@ F main.om L {$(mtf_dep_libs) mtf_zil.lib $(LNX_LIBS)}
+	%copy $@ ../bin
+
+make_motif_modules: .SYMBOLIC
         set MODULES_FUNC=$@
 	%make make_modules
 
