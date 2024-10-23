@@ -9,6 +9,7 @@ on:
 
 jobs:
   build:
+    name: ${{ matrix.image }}
     strategy:
       matrix:
         include:
@@ -48,9 +49,9 @@ jobs:
       working-directory: source
       env:
         DOS_INCLUDE: ${{ env.WATCOM }}/h
-        WINDOWS_INCLUDE: ${{ env.WATCOM }}/h;${{ env.WATCOM }}/h/win
-        NT_INCLUDE: ${{ env.WATCOM }}/h;${{ env.WATCOM }}/h/nt
-        OS2_INCLUDE: ${{ env.WATCOM }}/h;${{ env.WATCOM }}/h/os2
+        WINDOWS_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/win
+        NT_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/nt
+        OS2_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/os2
     - name: Open Zinc Designer Libraries
       run: |
         echo "$INCLUDE"
@@ -68,9 +69,9 @@ jobs:
         OZINCPATH: ${{ github.workspace }}/include
         LIB: .${{ matrix.dirsep }}${{ github.workspace }}/lib/ow20
         DOS_INCLUDE: ${{ env.WATCOM }}/h
-        WINDOWS_INCLUDE: ${{ env.WATCOM }}/h;${{ env.WATCOM }}/h/win
-        NT_INCLUDE: ${{ env.WATCOM }}/h;${{ env.WATCOM }}/h/nt
-        OS2_INCLUDE: ${{ env.WATCOM }}/h;${{ env.WATCOM }}/h/os2
+        WINDOWS_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/win
+        NT_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/nt
+        OS2_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/os2
     - name: Open Zinc Designer Executable
       run: |
         echo "$INCLUDE"
@@ -88,6 +89,6 @@ jobs:
         OZINCPATH: ${{ github.workspace }}/include
         LIB: .${{ matrix.dirsep }}${{ github.workspace }}/lib/ow20
         DOS_INCLUDE: ${{ env.WATCOM }}/h
-        WINDOWS_INCLUDE: ${{ env.WATCOM }}/h;${{ env.WATCOM }}/h/win
-        NT_INCLUDE: ${{ env.WATCOM }}/h;${{ env.WATCOM }}/h/nt
-        OS2_INCLUDE: ${{ env.WATCOM }}/h;${{ env.WATCOM }}/h/os2
+        WINDOWS_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/win
+        NT_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/nt
+        OS2_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/os2
