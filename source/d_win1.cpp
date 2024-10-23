@@ -1306,7 +1306,7 @@ EVENT_TYPE UIW_WINDOW::Event(const UI_EVENT &event)
 				 !FlagSet(object->woFlags, WOF_VIEW_ONLY)))
 				return (object->Event(event));
 
-			ZIL_UINT8 tHotKey;
+			ZIL_RAW_CODE tHotKey;
 			if (FlagSet(woAdvancedFlags, WOAF_NORMAL_HOT_KEYS) &&
 				!FlagSet(event.key.shiftState, S_ALT))
 				tHotKey = event.key.value;

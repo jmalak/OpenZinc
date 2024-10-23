@@ -1270,7 +1270,7 @@ END BLOCK COMMENT */
 				SetSplit(&insertOffset);
 				if (!insertMode && editBuffer[insertOffset + splitSize])
 					Delete(&insertOffset);
-				Insert(&insertOffset, event.key.value);
+				Insert(&insertOffset, (ZIL_ICHAR)event.key.value);
 				woStatus |= WOS_CHANGED;
 				if (!FlagSet(wnFlags, WNF_NO_WRAP))
 					Wrap(insertOffset, event.key.value == ' ');

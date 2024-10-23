@@ -698,7 +698,7 @@ EVENT_TYPE UIW_STRING::Event(const UI_EVENT &event)
 		}
 		{
 		insertCount = 0;
-		ZIL_ICHAR key = CharacterConvert(event.key.value);
+		ZIL_ICHAR key = CharacterConvert((ZIL_ICHAR)event.key.value);
 		if (length < maxLength && (insertMode || tCursor == length ||
 			text[tCursor] == '\r' || text[tCursor] == '\n'))
 		{

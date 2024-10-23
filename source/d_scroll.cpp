@@ -398,7 +398,7 @@ END BLOCK COMMENT */
 		(ccode == S_VSCROLL || ccode == S_HSCROLL) && (delta || event.rawCode == L_END_SELECT))
 		{
 			UI_EVENT uEvent;
-			uEvent.type = event.rawCode;
+			uEvent.type = (EVENT_TYPE)event.rawCode;
 			uEvent.scroll = scroll;
 			userFunction(this, uEvent, L_SELECT);
 		}

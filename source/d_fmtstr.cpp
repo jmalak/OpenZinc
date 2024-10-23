@@ -161,7 +161,7 @@ EVENT_TYPE UIW_FORMATTED_STRING::Event(const UI_EVENT &event)
 			break;
 		
 		// See if char is legal.
-		ZIL_ICHAR tChar = event.key.value;
+		ZIL_ICHAR tChar = (ZIL_ICHAR)event.key.value;
 		if (LegalChar(tChar, cursor))
 		{
 			UI_EVENT tEvent = event;

@@ -63,7 +63,7 @@ EVENT_TYPE UIW_FORMATTED_STRING::Event(const UI_EVENT &event)
 			}
 			else
 				pos = beginMark;
-			ZIL_ICHAR textValue = wParam;
+			ZIL_ICHAR textValue = (ZIL_ICHAR)wParam;
 			if (LegalChar(textValue, pos))
 			{
 				// Don't just do a delete because shift key may be down.

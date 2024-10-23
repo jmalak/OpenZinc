@@ -88,8 +88,9 @@ void UID_KEYBOARD::Poll(void)
 	if (FlagSet(event.key.shiftState, S_CTRL))
 		event.modifiers |= S_CTRL;
 #if defined(ZIL_UNICODE) || defined(ZIL_ISO8859_1)
-	char tmp[2] = { ((event.key.value >> 8) & 0xff), (event.key.value & 0xff) };
-	if (tmp[0] == 0) tmp[0] = tmp[1];
+	char tmp[2] = { (char)(event.key.value >> 8), (char)event.key.value };
+	if (tmp[0] == 0)
+		tmp[0] = tmp[1];
 	event.key.value = UnMapChar(tmp);
 #endif
 #endif

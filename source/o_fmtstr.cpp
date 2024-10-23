@@ -42,7 +42,7 @@ EVENT_TYPE UIW_FORMATTED_STRING::Event(const UI_EVENT &event)
 			{
 				Reposition(L_RIGHT);
 				int pos = LOWORD(WinSendMsg(screenID, EM_QUERYSEL, 0, 0));
-				ZIL_ICHAR key = event.key.value;
+				ZIL_ICHAR key = (ZIL_ICHAR)event.key.value;
 				if (LegalChar(key, pos))
 				{
 					WinSendMsg(screenID, EM_SETSEL, MPFROM2SHORT(pos, pos+1), 0);
