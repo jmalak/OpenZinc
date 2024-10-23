@@ -60,17 +60,15 @@ EVENT_TYPE UIW_VT_LIST::Event(const UI_EVENT &event)
 		clipList.Destroy();
 		ccode = UI_WINDOW_OBJECT::Event(event);
 
-	// line below added by jdh to allow region to be available throughout
-	UI_REGION region;
-
+		// line below added by jdh to allow region to be available throughout
+		UI_REGION region;
 
 #if defined(ZIL_LINUX)
-
-//under linux UIW_VT_LIST needs to be enclosed in a frame and a form to 
-//function properly spacially
+		//under linux UIW_VT_LIST needs to be enclosed in a frame and a form to 
+		//function properly spacially
 	
-	if (!comboShell)
-	{	
+		if (!comboShell)
+		{	
 		//create frame
 		region = trueRegion;
 		nargs = 0;
@@ -88,7 +86,6 @@ EVENT_TYPE UIW_VT_LIST::Event(const UI_EVENT &event)
 			ccode, TRUE, TRUE, screenID);
 		trueRegion -=2;
 		}
-
 #endif
 
 		// Create the Window
