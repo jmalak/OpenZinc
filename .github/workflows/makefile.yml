@@ -14,8 +14,10 @@ jobs:
         include:
         - image:    'ubuntu-latest'
           host:     'linux'
+          dirsep:   ':'
         - image:    'windows-latest'
           host:     'windows'
+          dirsep:   ';'
 
     runs-on: ${{ matrix.image }}
 
@@ -34,57 +36,58 @@ jobs:
     - name: Open Zinc library
       run: |
         echo "$INCLUDE"
-        export INCLUDE=.:$WATCOM/h
+        export INCLUDE=.${{ matrix.dirsep }}$WATCOM/h
         echo "$INCLUDE"
         wmake -f ow20.mak -h dos32
-        export INCLUDE=.:$WATCOM/h:$WATCOM/h/win
+        export INCLUDE=.${{ matrix.dirsep }}$WATCOM/h${{ matrix.dirsep }}$WATCOM/h/win
         echo "$INCLUDE"
         wmake -f ow20.mak -h windows
-        export INCLUDE=.:$WATCOM/h:$WATCOM/h/nt
+        export INCLUDE=.${{ matrix.dirsep }}$WATCOM/h${{ matrix.dirsep }}$WATCOM/h/nt
         wmake -f ow20.mak -h winnt
-        export INCLUDE=.:$WATCOM/h:$WATCOM/h/nt
+        export INCLUDE=.${{ matrix.dirsep }}$WATCOM/h${{ matrix.dirsep }}$WATCOM/h/nt
         wmake -f ow20.mak -h win32
-        export INCLUDE=.:$WATCOM/h:$WATCOM/h/os2
+        export INCLUDE=.${{ matrix.dirsep }}$WATCOM/h${{ matrix.dirsep }}$WATCOM/h/os2
         wmake -f ow20.mak -h os2
       shell: bash
       working-directory: source
     - name: Open Zinc Designer Libraries
       run: |
         echo "$INCLUDE"
-        export INCLUDE=.:$WATCOM/h:$OZINCPATH
+        export INCLUDE=.${{ matrix.dirsep }}$WATCOM/h${{ matrix.dirsep }}$OZINCPATH
         echo "$INCLUDE"
         wmake -f ow20.mak -h make_dos32_modules
-        export INCLUDE=.:$WATCOM/h:$WATCOM/h/win:$OZINCPATH
+        export INCLUDE=.${{ matrix.dirsep }}$WATCOM/h${{ matrix.dirsep }}$WATCOM/h/win${{ matrix.dirsep }}$OZINCPATH
         echo "$INCLUDE"
         wmake -f ow20.mak -h make_windows_modules
-        export INCLUDE=.:$WATCOM/h:$WATCOM/h/nt:$OZINCPATH
+        export INCLUDE=.${{ matrix.dirsep }}$WATCOM/h${{ matrix.dirsep }}$WATCOM/h/nt${{ matrix.dirsep }}$OZINCPATH
         wmake -f ow20.mak -h make_winnt_modules
-        export INCLUDE=.:$WATCOM/h:$WATCOM/h/nt:$OZINCPATH
+        export INCLUDE=.${{ matrix.dirsep }}$WATCOM/h${{ matrix.dirsep }}$WATCOM/h/nt${{ matrix.dirsep }}$OZINCPATH
         wmake -f ow20.mak -h make_win32_modules
-        export INCLUDE=.:$WATCOM/h:$WATCOM/h/os2:$OZINCPATH
+        export INCLUDE=.${{ matrix.dirsep }}$WATCOM/h${{ matrix.dirsep }}$WATCOM/h/os2${{ matrix.dirsep }}$OZINCPATH
         wmake -f ow20.mak -h make_os2_modules
       shell: bash
       working-directory: design
       env:
         OZINCPATH: ${{ github.workspace }}/include
-        LIB: .:${{ github.workspace }}/lib/ow20
+        LIB: .${{ matrix.dirsep }}${{ github.workspace }}/lib/ow20
     - name: Open Zinc Designer Executable
       run: |
         echo "$INCLUDE"
-        export INCLUDE=.:$WATCOM/h:$OZINCPATH
+        export INCLUDE=.${{ matrix.dirsep }}$WATCOM/h:$OZINCPATH
         echo "$INCLUDE"
         wmake -f ow20.mak -h dos32
-        export INCLUDE=.:$WATCOM/h:$WATCOM/h/win:$OZINCPATH
+        export INCLUDE=.${{ matrix.dirsep }}$WATCOM/h${{ matrix.dirsep }}$WATCOM/h/win${{ matrix.dirsep }}$OZINCPATH
         echo "$INCLUDE"
         wmake -f ow20.mak -h windows
-        export INCLUDE=.:$WATCOM/h:$WATCOM/h/nt:$OZINCPATH
+        export INCLUDE=.${{ matrix.dirsep }}$WATCOM/h${{ matrix.dirsep }}$WATCOM/h/nt${{ matrix.dirsep }}$OZINCPATH
         wmake -f ow20.mak -h winnt
-        export INCLUDE=.:$WATCOM/h:$WATCOM/h/nt:$OZINCPATH
+        export INCLUDE=.${{ matrix.dirsep }}$WATCOM/h${{ matrix.dirsep }}$WATCOM/h/nt${{ matrix.dirsep }}$OZINCPATH
         wmake -f ow20.mak -h win32
-        export INCLUDE=.:$WATCOM/h:$WATCOM/h/os2:$OZINCPATH
+        export INCLUDE=.${{ matrix.dirsep }}$WATCOM/h${{ matrix.dirsep }}$WATCOM/h/os2${{ matrix.dirsep }}$OZINCPATH
         wmake -f ow20.mak -h os2
       shell: bash
       working-directory: design
       env:
         OZINCPATH: ${{ github.workspace }}/include
-        LIB: .:${{ github.workspace }}/lib/ow20
+        LIB: .${{ matrix.dirsep }}${{ github.workspace }}/lib/ow20
+        DIRSEP: ${{ matrix.dirsep }}
