@@ -33,9 +33,12 @@ jobs:
       shell: bash
     - name: Open Zinc library
       run: |
+        echo "$INCLUDE"
         export INCLUDE=.:$WATCOM/h
+        echo "$INCLUDE"
         wmake -f ow20.mak -h dos32
         export INCLUDE=.:$WATCOM/h:$WATCOM/h/win
+        echo "$INCLUDE"
         wmake -f ow20.mak -h windows
         export INCLUDE=.:$WATCOM/h:$WATCOM/h/nt
         wmake -f ow20.mak -h winnt
