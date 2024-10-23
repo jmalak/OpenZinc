@@ -39,31 +39,31 @@ jobs:
         export INCLUDE=$WATCOM/h
         echo "$INCLUDE"
         wmake -f ow20.mak -h dos32
-        export INCLUDE=$WATCOM/h${{ matrix.dirsep }}$WATCOM/h/win
+        export INCLUDE=$WATCOM/h:$WATCOM/h/win
         echo "$INCLUDE"
         wmake -f ow20.mak -h windows
-        export INCLUDE=$WATCOM/h${{ matrix.dirsep }}$WATCOM/h/nt
+        export INCLUDE=$WATCOM/h:$WATCOM/h/nt
         wmake -f ow20.mak -h winnt
-        export INCLUDE=$WATCOM/h${{ matrix.dirsep }}$WATCOM/h/nt
+        export INCLUDE=$WATCOM/h:$WATCOM/h/nt
         wmake -f ow20.mak -h win32
-        export INCLUDE=$WATCOM/h${{ matrix.dirsep }}$WATCOM/h/os2
+        export INCLUDE=$WATCOM/h:$WATCOM/h/os2
         wmake -f ow20.mak -h os2
       shell: bash
       working-directory: source
     - name: Open Zinc Designer Libraries
       run: |
         echo "$INCLUDE"
-        export INCLUDE=$WATCOM/h${{ matrix.dirsep }}$OZINCPATH
+        export INCLUDE=$WATCOM/h:$OZINCPATH
         echo "$INCLUDE"
         wmake -f ow20.mak -h make_dos32_modules
-        export INCLUDE=$WATCOM/h${{ matrix.dirsep }}$WATCOM/h/win${{ matrix.dirsep }}$OZINCPATH
+        export INCLUDE=$WATCOM/h:$WATCOM/h/win:$OZINCPATH
         echo "$INCLUDE"
         wmake -f ow20.mak -h make_windows_modules
-        export INCLUDE=$WATCOM/h${{ matrix.dirsep }}$WATCOM/h/nt${{ matrix.dirsep }}$OZINCPATH
+        export INCLUDE=$WATCOM/h:$WATCOM/h/nt:$OZINCPATH
         wmake -f ow20.mak -h make_winnt_modules
-        export INCLUDE=$WATCOM/h${{ matrix.dirsep }}$WATCOM/h/nt${{ matrix.dirsep }}$OZINCPATH
+        export INCLUDE=$WATCOM/h:$WATCOM/h/nt:$OZINCPATH
         wmake -f ow20.mak -h make_win32_modules
-        export INCLUDE=$WATCOM/h${{ matrix.dirsep }}$WATCOM/h/os2${{ matrix.dirsep }}$OZINCPATH
+        export INCLUDE=$WATCOM/h:$WATCOM/h/os2:$OZINCPATH
         wmake -f ow20.mak -h make_os2_modules
       shell: bash
       working-directory: design
@@ -76,18 +76,17 @@ jobs:
         export INCLUDE=$WATCOM/h:$OZINCPATH
         echo "$INCLUDE"
         wmake -f ow20.mak -h dos32
-        export INCLUDE=$WATCOM/h${{ matrix.dirsep }}$WATCOM/h/win${{ matrix.dirsep }}$OZINCPATH
+        export INCLUDE=$WATCOM/h:$WATCOM/h/win:$OZINCPATH
         echo "$INCLUDE"
         wmake -f ow20.mak -h windows
-        export INCLUDE=$WATCOM/h${{ matrix.dirsep }}$WATCOM/h/nt${{ matrix.dirsep }}$OZINCPATH
+        export INCLUDE=$WATCOM/h:$WATCOM/h/nt:$OZINCPATH
         wmake -f ow20.mak -h winnt
-        export INCLUDE=$WATCOM/h${{ matrix.dirsep }}$WATCOM/h/nt${{ matrix.dirsep }}$OZINCPATH
+        export INCLUDE=$WATCOM/h:$WATCOM/h/nt:$OZINCPATH
         wmake -f ow20.mak -h win32
-        export INCLUDE=$WATCOM/h${{ matrix.dirsep }}$WATCOM/h/os2${{ matrix.dirsep }}$OZINCPATH
+        export INCLUDE=$WATCOM/h:$WATCOM/h/os2:$OZINCPATH
         wmake -f ow20.mak -h os2
       shell: bash
       working-directory: design
       env:
         OZINCPATH: ${{ github.workspace }}/include
         LIB: .${{ matrix.dirsep }}${{ github.workspace }}/lib/ow20
-        DIRSEP: ${{ matrix.dirsep }}
