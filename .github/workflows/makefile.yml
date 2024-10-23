@@ -47,9 +47,12 @@ jobs:
       working-directory: source
     - name: Open Zinc Designer Libraries
       run: |
+        echo "$INCLUDE"
         export INCLUDE=.:$WATCOM/h:$OZINCPATH
+        echo "$INCLUDE"
         wmake -f ow20.mak -h make_dos32_modules
         export INCLUDE=.:$WATCOM/h:$WATCOM/h/win:$OZINCPATH
+        echo "$INCLUDE"
         wmake -f ow20.mak -h make_windows_modules
         export INCLUDE=.:$WATCOM/h:$WATCOM/h/nt:$OZINCPATH
         wmake -f ow20.mak -h make_winnt_modules
@@ -64,9 +67,12 @@ jobs:
         LIB: .:${{ github.workspace }}/lib/ow20
     - name: Open Zinc Designer Executable
       run: |
+        echo "$INCLUDE"
         export INCLUDE=.:$WATCOM/h:$OZINCPATH
+        echo "$INCLUDE"
         wmake -f ow20.mak -h dos32
         export INCLUDE=.:$WATCOM/h:$WATCOM/h/win:$OZINCPATH
+        echo "$INCLUDE"
         wmake -f ow20.mak -h windows
         export INCLUDE=.:$WATCOM/h:$WATCOM/h/nt:$OZINCPATH
         wmake -f ow20.mak -h winnt
