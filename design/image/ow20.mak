@@ -68,7 +68,7 @@ LINK=wlink op q,map
 LIBRARIAN=wlib -q
 RC=wrc -q -r
 
-CXX_OPTS=-w4 -j -oaxt
+CXX_OPTS=-w4 -j -oaxt -I.
 LIB_OPTS=-pa -n
 
 # ----- DOS extender compiler options ---------------------------------------

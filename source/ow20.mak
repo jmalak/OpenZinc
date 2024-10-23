@@ -217,7 +217,7 @@ LINK=wlink op q,map
 LIBRARIAN=wlib -q
 RC=wrc -q
 
-CXX_OPTS=-oaxt -w4 -j
+CXX_OPTS=-oaxt -w4 -j -I.
 LIB_OPTS=-pa -n
 RC_OPTS=-r
 
