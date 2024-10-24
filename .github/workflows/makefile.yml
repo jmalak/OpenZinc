@@ -76,13 +76,13 @@ jobs:
         NT_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/nt
         OS2_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/os2
     - name: Zip files
-      shell: pwsh
-        run: |
+      run: |
           if ($env:RUNNER_OS -eq "Windows") {
             7z a openzinc.zip bin lib include
           } else {
             zip -r openzinc.zip bin lib include
           }
+      shell: pwsh
     - name: Upload build artifact
       uses: actions/upload-artifact@v4
       with:
@@ -93,8 +93,8 @@ jobs:
     runs-on: 'ubuntu-latest'
     steps:
     - if: github.event_name == 'push' && contains(github.ref, 'refs/tags/v*')
-      uses: actions/download-artifact@v4
       name: Download build artifact
+      uses: actions/download-artifact@v4
       with:
         name:    'ubuntu-latest-snapshot'
       name: Create release
