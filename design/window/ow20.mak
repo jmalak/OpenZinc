@@ -152,18 +152,18 @@ clean: .SYMBOLIC
 	rm -f foo *.bak *.bk? *.ob? *.rbj *.map *.exe *.tc tc*.* *.dsk *.dpr
 	rm -f *.sav *.sv? *.cfg *.$$$$$$ *.lib *.fil *.res *.sym *.err *.zip *.ovl
 	rm -f *.o16 *.o32 *.p16 *.p32 __tmp.rsp
-	rm -f ../../bin/winedit.exe
-	rm -f ../../bin/wwinedit.exe
-	rm -f ../../bin/nwinedit.exe
-	rm -f ../../bin/9winedit.exe
-	rm -f ../../bin/owinedit.exe
-	rm -f ../../lib/$(VERSION)/window.lib
-	rm -f ../../lib/$(VERSION)/wwindow.lib
-	rm -f ../../lib/$(VERSION)/nwindow.lib
-	rm -f ../../lib/$(VERSION)/9window.lib
-	rm -f ../../lib/$(VERSION)/owindow.lib
-	rm -f ../../include/window.hpp
+	rm -f ../lib/$(VERSION)/$(pname).lib
+	rm -f ../lib/$(VERSION)/w$(pname).lib
+	rm -f ../lib/$(VERSION)/n$(pname).lib
+	rm -f ../lib/$(VERSION)/9$(pname).lib
+	rm -f ../lib/$(VERSION)/o$(pname).lib
+	rm -f ../include/window.hpp
 	rm -f ../../bin/$(datname).znc
+	rm -f ../../bin/$(exename).exe
+	rm -f ../../bin/w$(exename).exe
+	rm -f ../../bin/n$(exename).exe
+	rm -f ../../bin/9$(exename).exe
+	rm -f ../../bin/o$(exename).exe
 
 copy_out: .PROCEDURE .EXPLICIT
 	%copy $@ ../lib/$(VERSION)
