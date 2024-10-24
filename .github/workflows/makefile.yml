@@ -90,14 +90,14 @@ jobs:
         path:    openzinc.zip
         overwrite: true
   release:
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/v*')
     runs-on: 'ubuntu-latest'
     steps:
-    - if: github.event_name == 'push' && contains(github.ref, 'refs/tags/v*')
-      name: Download build artifact
+    - name: Download build artifact
       uses: actions/download-artifact@v4
       with:
         name:    'ubuntu-latest-snapshot'
-      name: Create release
+    - name: Create release
       run: |
         gh release create "$tag" \
             --repo="$GITHUB_REPOSITORY" \
