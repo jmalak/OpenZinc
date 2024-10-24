@@ -94,7 +94,6 @@ jobs:
     needs: build
     runs-on: 'ubuntu-latest'
     steps:
-    - run: echo "${{ github.event_name }} ; ${{ github.ref }}"
     - name: Download build artifact
       uses: actions/download-artifact@v4
       with:
