@@ -1,4 +1,5 @@
 # DESIGN makefile
+VERSION=ow20
 pname=design
 
 template_dep_libs= &
@@ -45,7 +46,8 @@ LINK=wlink op q,map
 LIBRARIAN=wlib -q
 RC=wrc -q
 
-CXX_OPTS=-w4 -j -oaxt -I.
+CXX_OPTS=-w4 -j -oaxt -I. -I"include" -I"../include"
+LINK_OPTS=libpath lib/ow20;../lib/ow20
 LIB_OPTS=-pa -n
 RC_OPTS=-r
 
@@ -153,6 +155,15 @@ clean: .SYMBOLIC
 	rm -f ../bin/9$(pname).exe
 	rm -f ../bin/o$(pname).exe
 
+include: 
+        mkdir $@
+
+lib: 
+        mkdir $@
+        mkdir $@/$(VERSION)
+
+init: include lib .SYMBOLIC
+
 # ----- DOS extender --------------------------------------------------------
 dos32: .SYMBOLIC
         set MODULES_FUNC=$@
@@ -160,10 +171,10 @@ dos32: .SYMBOLIC
 	%make $(pname).exe
 
 $(pname).exe: main.o32
-	$(LINK) $(D32_LINK_OPTS) N $@ F main.o32 L {$(d32_dep_libs) d32_zil.lib $(D32_LIBS)}
+	$(LINK) $(LINK_OPTS) $(D32_LINK_OPTS) N $@ F main.o32 L {$(d32_dep_libs) d32_zil.lib $(D32_LIBS)}
 	%copy $@ ../bin
 
-make_dos32_modules: .SYMBOLIC
+make_dos32_modules: init .SYMBOLIC
         set MODULES_FUNC=$@
 	%make make_modules
 
@@ -174,10 +185,10 @@ windows: .SYMBOLIC
 	%make w$(pname).exe
 
 w$(pname).exe: main.obw wdesign.rew
-	$(LINK) $(WIN_LINK_OPTS) N $@ F main.obw L {$(win_dep_libs) win_zil.lib $(WIN_LIBS)}
+	$(LINK) $(LINK_OPTS) $(WIN_LINK_OPTS) N $@ F main.obw L {$(win_dep_libs) win_zil.lib $(WIN_LIBS)}
 	%copy $@ ../bin
 
-make_windows_modules: .SYMBOLIC
+make_windows_modules: init .SYMBOLIC
         set MODULES_FUNC=$@
 	%make make_modules
 
@@ -188,10 +199,10 @@ winnt: .SYMBOLIC
 	%make n$(pname).exe
 
 n$(pname).exe: main.obn wdesign.ren
-	$(LINK) $(WNT_LINK_OPTS) N $@ F main.obn L {$(wnt_dep_libs) wnt_zil.lib $(WNT_LIBS)}
+	$(LINK) $(LINK_OPTS) $(WNT_LINK_OPTS) N $@ F main.obn L {$(wnt_dep_libs) wnt_zil.lib $(WNT_LIBS)}
 	%copy $@ ../bin
 
-make_winnt_modules: .SYMBOLIC
+make_winnt_modules: init .SYMBOLIC
         set MODULES_FUNC=$@
 	%make make_modules
 
@@ -202,10 +213,10 @@ win32: .SYMBOLIC
 	%make 9$(pname).exe
 
 9$(pname).exe: main.ob9 wdesign.re9
-	$(LINK) $(W32_LINK_OPTS) N $@ F main.ob9 L {$(w32_dep_libs) w32_zil.lib $(W32_LIBS)}
+	$(LINK) $(LINK_OPTS) $(W32_LINK_OPTS) N $@ F main.ob9 L {$(w32_dep_libs) w32_zil.lib $(W32_LIBS)}
 	%copy $@ ../bin
 
-make_win32_modules: .SYMBOLIC
+make_win32_modules: init .SYMBOLIC
         set MODULES_FUNC=$@
 	%make make_modules
 
@@ -216,10 +227,10 @@ os2: .SYMBOLIC
 	%make o$(pname).exe
 
 o$(pname).exe: main.obo odesign.reo
-	$(LINK) $(OS2_LINK_OPTS) N $@ F main.obo L {$(os2_dep_libs) os2_zil.lib $(OS2_LIBS)}
+	$(LINK) $(LINK_OPTS) $(OS2_LINK_OPTS) N $@ F main.obo L {$(os2_dep_libs) os2_zil.lib $(OS2_LIBS)}
 	%copy $@ ../bin
 
-make_os2_modules: .SYMBOLIC
+make_os2_modules: init .SYMBOLIC
         set MODULES_FUNC=$@
 	%make make_modules
 
@@ -230,10 +241,10 @@ curses: .SYMBOLIC
 	%make c$(pname).exe
 
 c$(pname).exe: main.oc
-	$(LINK) $(LNX_LINK_OPTS) N $@ F main.oc L {$(crs_dep_libs) crs_zil.lib $(LNX_LIBS)}
+	$(LINK) $(LINK_OPTS) $(LNX_LINK_OPTS) N $@ F main.oc L {$(crs_dep_libs) crs_zil.lib $(LNX_LIBS)}
 	%copy $@ ../bin
 
-make_curses_modules: .SYMBOLIC
+make_curses_modules: init .SYMBOLIC
         set MODULES_FUNC=$@
 	%make make_modules
 
@@ -244,10 +255,10 @@ motif: .SYMBOLIC
 	%make m$(pname).exe
 
 m$(pname).exe: main.om
-	$(LINK) $(LNX_LINK_OPTS) N $@ F main.om L {$(mtf_dep_libs) mtf_zil.lib $(LNX_LIBS)}
+	$(LINK) $(LINK_OPTS) $(LNX_LINK_OPTS) N $@ F main.om L {$(mtf_dep_libs) mtf_zil.lib $(LNX_LIBS)}
 	%copy $@ ../bin
 
-make_motif_modules: .SYMBOLIC
+make_motif_modules: init .SYMBOLIC
         set MODULES_FUNC=$@
 	%make make_modules
 

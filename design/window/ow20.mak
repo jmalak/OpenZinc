@@ -91,7 +91,8 @@ LINK=wlink op q,map
 LIBRARIAN=wlib -q
 RC=wrc -q -r
 
-CXX_OPTS=-w4 -j -oaxt -I.
+CXX_OPTS=-w4 -j -oaxt -I. -I"../include" -I"../../include"
+LINK_OPTS=libpath ../lib/ow20;../../lib/ow20
 LIB_OPTS=-pa -n
 
 # ----- DOS extender compiler options ---------------------------------------
@@ -148,32 +149,32 @@ OS2_LIBS=os2_zil.lib
 
 # ----- Clean ---------------------------------------------------------------
 clean: .SYMBOLIC
-	@rm -f foo *.bak *.bk? *.ob? *.rbj *.map *.exe *.tc tc*.* *.dsk *.dpr
-	@rm -f *.sav *.sv? *.cfg *.$$$$$$ *.lib *.fil *.res *.sym *.err *.zip *.ovl
-	@rm -f *.o16 *.o32 *.p16 *.p32 __tmp.rsp
-	@rm -f ../../bin/winedit.exe
-	@rm -f ../../bin/wwinedit.exe
-	@rm -f ../../bin/nwinedit.exe
-	@rm -f ../../bin/9winedit.exe
-	@rm -f ../../bin/owinedit.exe
-	@rm -f ../../lib/$(VERSION)/window.lib
-	@rm -f ../../lib/$(VERSION)/wwindow.lib
-	@rm -f ../../lib/$(VERSION)/nwindow.lib
-	@rm -f ../../lib/$(VERSION)/9window.lib
-	@rm -f ../../lib/$(VERSION)/owindow.lib
-	@rm -f ../../include/window.hpp
-	@rm -f ../../bin/$(datname).znc
+	rm -f foo *.bak *.bk? *.ob? *.rbj *.map *.exe *.tc tc*.* *.dsk *.dpr
+	rm -f *.sav *.sv? *.cfg *.$$$$$$ *.lib *.fil *.res *.sym *.err *.zip *.ovl
+	rm -f *.o16 *.o32 *.p16 *.p32 __tmp.rsp
+	rm -f ../../bin/winedit.exe
+	rm -f ../../bin/wwinedit.exe
+	rm -f ../../bin/nwinedit.exe
+	rm -f ../../bin/9winedit.exe
+	rm -f ../../bin/owinedit.exe
+	rm -f ../../lib/$(VERSION)/window.lib
+	rm -f ../../lib/$(VERSION)/wwindow.lib
+	rm -f ../../lib/$(VERSION)/nwindow.lib
+	rm -f ../../lib/$(VERSION)/9window.lib
+	rm -f ../../lib/$(VERSION)/owindow.lib
+	rm -f ../../include/window.hpp
+	rm -f ../../bin/$(datname).znc
 
 copy_out: .PROCEDURE .EXPLICIT
-	%copy $@ ../../lib/$(VERSION)
-	%copy $(pname).hpp ../../include
+	%copy $@ ../lib/$(VERSION)
+	%copy $(pname).hpp ../include
 	%copy $(datname).dat ../../bin/$(datname).znc
 
 # ----- DOS extender --------------------------------------------------------
 dos32: $(exename).exe .SYMBOLIC
 
 $(exename).exe: main.o32 $(pname).lib
-	$(LINK) $(D32_LINK_OPTS) N $@ F main.o32 L {$(d32_dep_libs) $(D32_LIBS)}
+	$(LINK) $(LINK_OPTS) $(D32_LINK_OPTS) N $@ F main.o32 L {$(d32_dep_libs) $(D32_LIBS)}
 	%copy $@ ../../bin
 
 make_dos32_modules: $(pname).lib .SYMBOLIC
@@ -186,7 +187,7 @@ $(pname).lib : $(d32_lib_objs)
 windows: w$(exename).exe .SYMBOLIC
 
 w$(exename).exe: main.obw w$(pname).lib
-	$(LINK) $(WIN_LINK_OPTS) N $@ F main.obw L {$(win_dep_libs) $(WIN_LIBS)}
+	$(LINK) $(LINK_OPTS) $(WIN_LINK_OPTS) N $@ F main.obw L {$(win_dep_libs) $(WIN_LIBS)}
 	%copy $@ ../../bin
 
 make_windows_modules: w$(pname).lib .SYMBOLIC
@@ -199,7 +200,7 @@ w$(pname).lib : $(win_lib_objs)
 winnt: n$(exename).exe .SYMBOLIC
 
 n$(exename).exe: main.obn n$(pname).lib
-	$(LINK) $(WNT_LINK_OPTS) N $@ F main.obn L {$(wnt_dep_libs) $(WNT_LIBS)}
+	$(LINK) $(LINK_OPTS) $(WNT_LINK_OPTS) N $@ F main.obn L {$(wnt_dep_libs) $(WNT_LIBS)}
 	%copy $@ ../../bin
 
 make_winnt_modules: n$(pname).lib .SYMBOLIC
@@ -212,7 +213,7 @@ n$(pname).lib : $(wnt_lib_objs)
 win32: 9$(exename).exe .SYMBOLIC
 
 9$(exename).exe: main.ob9 9$(pname).lib
-	$(LINK) $(W32_LINK_OPTS) N $@ F main.ob9 L {$(w32_dep_libs) $(W32_LIBS)}
+	$(LINK) $(LINK_OPTS) $(W32_LINK_OPTS) N $@ F main.ob9 L {$(w32_dep_libs) $(W32_LIBS)}
 	%copy $@ ../../bin
 
 make_win32_modules: 9$(pname).lib .SYMBOLIC
@@ -225,7 +226,7 @@ make_win32_modules: 9$(pname).lib .SYMBOLIC
 os2: o$(exename).exe .SYMBOLIC
 
 o$(exename).exe: main.obo o$(pname).lib
-	$(LINK) $(OS2_LINK_OPTS) N $@ F main.obo L {$(os2_dep_libs) $(OS2_LIBS)}
+	$(LINK) $(LINK_OPTS) $(OS2_LINK_OPTS) N $@ F main.obo L {$(os2_dep_libs) $(OS2_LIBS)}
 	%copy $@ ../../bin
 
 make_os2_modules: o$(pname).lib .SYMBOLIC

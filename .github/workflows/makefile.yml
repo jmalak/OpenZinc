@@ -14,10 +14,8 @@ jobs:
       matrix:
         include:
         - image:    'ubuntu-latest'
-          host:     'linux'
           dirsep:   ':'
         - image:    'windows-latest'
-          host:     'windows'
           dirsep:   ';'
 
     runs-on: ${{ matrix.image }}
@@ -36,11 +34,7 @@ jobs:
       shell: bash
     - name: Open Zinc library
       run: |
-        echo "$INCLUDE"
-        export INCLUDE=
-        echo "$INCLUDE"
         wmake -f ow20.mak -h dos32
-        echo "$INCLUDE"
         wmake -f ow20.mak -h windows
         wmake -f ow20.mak -h winnt
         wmake -f ow20.mak -h win32
@@ -54,11 +48,7 @@ jobs:
         OS2_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/os2
     - name: Open Zinc Designer Libraries
       run: |
-        echo "$INCLUDE"
-        export INCLUDE=$OZINCPATH
-        echo "$INCLUDE"
         wmake -f ow20.mak -h make_dos32_modules
-        echo "$INCLUDE"
         wmake -f ow20.mak -h make_windows_modules
         wmake -f ow20.mak -h make_winnt_modules
         wmake -f ow20.mak -h make_win32_modules
@@ -66,19 +56,13 @@ jobs:
       shell: bash
       working-directory: design
       env:
-        OZINCPATH: ${{ github.workspace }}/include
-        LIB: .${{ matrix.dirsep }}${{ github.workspace }}/lib/ow20
         DOS_INCLUDE: ${{ env.WATCOM }}/h
         WINDOWS_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/win
         NT_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/nt
         OS2_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/os2
     - name: Open Zinc Designer Executable
       run: |
-        echo "$INCLUDE"
-        export INCLUDE=$OZINCPATH
-        echo "$INCLUDE"
         wmake -f ow20.mak -h dos32
-        echo "$INCLUDE"
         wmake -f ow20.mak -h windows
         wmake -f ow20.mak -h winnt
         wmake -f ow20.mak -h win32
@@ -86,8 +70,6 @@ jobs:
       shell: bash
       working-directory: design
       env:
-        OZINCPATH: ${{ github.workspace }}/include
-        LIB: .${{ matrix.dirsep }}${{ github.workspace }}/lib/ow20
         DOS_INCLUDE: ${{ env.WATCOM }}/h
         WINDOWS_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/win
         NT_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/nt
