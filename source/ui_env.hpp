@@ -337,13 +337,13 @@
 #       elif defined(__WINDOWS__) ||  defined(__NT__) || defined(WIN32)  // last or added by jdh
 #               define ZIL_MSWINDOWS    WINVER
 #               undef ZIL_MSWINDOWS_CTL3D
-#               if defined (__NT__) || defined(WIN32)    // added by jdh
-#                   if defined(__NT__)                   // added by jdh
+#               if defined(WIN32)
+#                       define ZIL_WINNT        WIN32
+#               elif defined (__NT__)
 #                       define ZIL_WINNT        __NT__
-#                   endif                                // added by jdh
-#                   if defined(WIN32)                    // added by jdh
-#                       define ZIL_WINNT       WIN32     // added by jdh
-#                   endif                                // added by jdh
+#               else
+#                       define ZIL_FARDATA      far
+#                       define ZIL_WORD_SIZE    16
 #               endif
 #               ifdef __DLL__
 #                       undef ZIL_EXPORT_CLASS
@@ -365,17 +365,13 @@
 #       elif defined(__LINUX__)
 #               define ZIL_LINUX
 #               define ZIL_POSIX
-#       	    if defined(ZIL_CURSES)
-#               	    include <curses.h>
-#       	    else
-#               	    define ZIL_LOAD_MOTIF   // Use ZIL_MOTIF not ZIL_LOAD_MOTIF in programs.
-#       	    endif
+#               if defined(ZIL_CURSES)
+#                       include <curses.h>
+#               else
+#                       define ZIL_LOAD_MOTIF   // Use ZIL_MOTIF not ZIL_LOAD_MOTIF in programs.
+#               endif
 #       else
 #               define ZIL_MSDOS        20
-#       endif
-#       if defined(_M_I86)
-#               define ZIL_FARDATA      far
-#               define ZIL_WORD_SIZE    16
 #       endif
 #endif
 
