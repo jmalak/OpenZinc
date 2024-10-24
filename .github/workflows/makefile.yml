@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    name: ${{ matrix.image }}
+    name: ${{ matrix.title }}
     strategy:
       matrix:
         include:
@@ -21,7 +21,7 @@ jobs:
           title:    'Windows host build (cross-compile)'
           dirsep:   ';'
 
-    runs-on: ${{ matrix.title }}
+    runs-on: ${{ matrix.image }}
 
     steps:
     - uses: actions/checkout@v4
