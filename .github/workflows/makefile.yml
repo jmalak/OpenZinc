@@ -75,25 +75,36 @@ jobs:
         WINDOWS_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/win
         NT_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/nt
         OS2_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/os2
-      name: Upload Pull Request owsnapshot
+    - name: Zip files
+      shell: pwsh
+        run: |
+          if ($env:RUNNER_OS -eq "Windows") {
+            7z a openzinc.zip bin lib include
+          } else {
+            zip -r openzinc.zip bin lib include
+          }
+    - name: Upload build artifact
       uses: actions/upload-artifact@v4
       with:
-        name:           '${{ matrix.image }}-snapshot'
-        path:           |
-          bin/
-          include/
-          lib/
-        overwrite:      true
-
+        name:    '${{ matrix.image }}-snapshot'
+        path:    openzinc.zip
+        overwrite: true
   release:
+    runs-on: 'ubuntu-latest'
     steps:
-      if: github.event_name == 'push' && contains(github.ref, 'refs/tags/v*')
-      - name: Create release
+    - if: github.event_name == 'push' && contains(github.ref, 'refs/tags/v*')
+      uses: actions/download-artifact@v4
+      name: Download build artifact
+      with:
+        name:    'ubuntu-latest-snapshot'
+      name: Create release
+      run: |
+        gh release create "$tag" \
+            --repo="$GITHUB_REPOSITORY" \
+            --title="${tag#v}" \
+            --generate-notes \
+            openzinc.zip
+      with:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref_name }}
-        run: |
-          gh release create "$tag" \
-              --repo="$GITHUB_REPOSITORY" \
-              --title="${tag#v}" \
-              --generate-notes
