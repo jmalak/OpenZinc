@@ -90,7 +90,7 @@ jobs:
         path:    openzinc.zip
         overwrite: true
   release:
-    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/v*')
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/v')
     needs: build
     runs-on: 'ubuntu-latest'
     steps:
