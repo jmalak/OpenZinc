@@ -104,7 +104,6 @@ jobs:
             --title="${tag#v}" \
             --generate-notes \
             openzinc.zip
-      with:
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ github.ref_name }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        tag: ${{ github.ref_name }}
