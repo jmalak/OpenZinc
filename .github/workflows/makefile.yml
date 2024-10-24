@@ -86,8 +86,8 @@ jobs:
         overwrite:      true
 
   release:
-  if: github.event_name == 'push' && contains(github.ref, 'refs/tags/v*')
     steps:
+      if: github.event_name == 'push' && contains(github.ref, 'refs/tags/v*')
       - name: Create release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
