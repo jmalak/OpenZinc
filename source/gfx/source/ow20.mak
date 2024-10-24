@@ -13,7 +13,8 @@ LIBRARIAN=wlib -zq
 LIB_OPTS=-pa -n
 
 D32_CXX_OPTS=-bt=dos -3r -s -DDOSX16=2 -DPM=32 $(TRANS)
-D32_LINK_OPTS=SYSTEM dos4g OP stack=20000
+#D32_LINK_OPTS=SYSTEM dos4g OP stack=20000
+D32_LINK_OPTS=SYSTEM causeway OP stack=20000
 
 .c.o32:
 	$(CXX) $(CXX_OPTS) $(D32_CXX_OPTS) -fo=$@ $<
