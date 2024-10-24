@@ -138,10 +138,20 @@ clean: .SYMBOLIC
 	rm -f ../lib/$(VERSION)/m$(pname).lib
 	rm -f ../include/$(pname).hpp
 	rm -f ../../bin/$(datname).znc
+	rm -f ../../lib/$(VERSION)/$(pname).lib
+	rm -f ../../lib/$(VERSION)/w$(pname).lib
+	rm -f ../../lib/$(VERSION)/n$(pname).lib
+	rm -f ../../lib/$(VERSION)/9$(pname).lib
+	rm -f ../../lib/$(VERSION)/o$(pname).lib
+	rm -f ../../lib/$(VERSION)/c$(pname).lib
+	rm -f ../../lib/$(VERSION)/m$(pname).lib
+	rm -f ../../include/$(pname).hpp
 
 copy_out: .PROCEDURE .EXPLICIT
 	%copy $@ ../lib/$(VERSION)
+	%copy $@ ../../lib/$(VERSION)
 	%copy $(pname).hpp ../include
+	%copy $(pname).hpp ../../include
 	%copy $(datname).dat ../../bin/$(datname).znc
 
 # ----- DOS extender --------------------------------------------------------
