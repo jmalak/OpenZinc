@@ -104,12 +104,6 @@ clean: .SYMBOLIC
 	rm -f foo *.bak *.bk? *.ob? *.rbj *.map *.exe *.tc tc*.* *.dsk *.dpr
 	rm -f *.sav *.sv? *.cfg *.$$$$$$ *.lib *.fil *.res *.sym *.err *.zip *.ovl
 	rm -f *.o16 *.o32 *.p16 *.p32 __tmp.rsp
-	rm -f ../lib/$(VERSION)/$(pname).lib
-	rm -f ../lib/$(VERSION)/w$(pname).lib
-	rm -f ../lib/$(VERSION)/n$(pname).lib
-	rm -f ../lib/$(VERSION)/9$(pname).lib
-	rm -f ../lib/$(VERSION)/o$(pname).lib
-	rm -f ../include/$(pname).hpp
 	rm -f ../../bin/$(datname).znc
 	rm -f ../../lib/$(VERSION)/$(pname).lib
 	rm -f ../../lib/$(VERSION)/w$(pname).lib
@@ -119,9 +113,7 @@ clean: .SYMBOLIC
 	rm -f ../../include/$(pname).hpp
 
 copy_out: .PROCEDURE .EXPLICIT
-	%copy $@ ../lib/$(VERSION)
 	%copy $@ ../../lib/$(VERSION)
-	%copy $(pname).hpp ../include
 	%copy $(pname).hpp ../../include
 	%copy $(datname).dat ../../bin/$(datname).znc
 
