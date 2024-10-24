@@ -69,7 +69,7 @@ LIBRARIAN=wlib -q
 RC=wrc -q -r
 
 CXX_OPTS=-w4 -j -oaxt -I. -I"../include" -I"../../include"
-LINK_OPTS=libpath ../lib/ow20,../../lib/ow20
+LINK_OPTS=libpath '../lib/$(VERSION)' libpath '../../lib/$(VERSION)'
 LIB_OPTS=-pa -n
 
 # ----- DOS extender compiler options ---------------------------------------
