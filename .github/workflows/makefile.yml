@@ -15,19 +15,19 @@ jobs:
       matrix:
         include:
         - image:    'ubuntu-latest'
-          title:    'Linux host build  (cross-compile)'
+          title:    'Linux build host'
           dirsep:   ':'
           owimage:  '2.0'
         - image:    'windows-latest'
-          title:    'Windows host build (cross-compile)'
+          title:    'Windows build host'
           dirsep:   ';'
           owimage:  '2.0'
         - image:    'macos-13'
-          title:    'OSX (Intel) host build  (cross-compile)'
+          title:    'OSX (Intel) build host'
           dirsep:   ':'
           owimage:  '2.0-64'
         - image:    'macos-14'
-          title:    'OSX (ARM) host build  (cross-compile)'
+          title:    'OSX (ARM) build host'
           dirsep:   ':'
           owimage:  '2.0-64'
 
@@ -45,7 +45,7 @@ jobs:
         mkdir lib
         mkdir include
       shell: bash
-    - name: Open Zinc library
+    - name: Build Open Zinc library
       run: |
         wmake -f ow20.mak -h dos32
         wmake -f ow20.mak -h windows
@@ -59,7 +59,7 @@ jobs:
         WINDOWS_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/win
         NT_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/nt
         OS2_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/os2
-    - name: Open Zinc Designer Libraries
+    - name: Build Open Zinc Designer Libraries
       run: |
         wmake -f ow20.mak -h make_dos32_modules
         wmake -f ow20.mak -h make_windows_modules
@@ -73,7 +73,7 @@ jobs:
         WINDOWS_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/win
         NT_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/nt
         OS2_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/os2
-    - name: Open Zinc Designer Executable
+    - name: Build Open Zinc Designer Executables
       run: |
         wmake -f ow20.mak -h dos32
         wmake -f ow20.mak -h windows
