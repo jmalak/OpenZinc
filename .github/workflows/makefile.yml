@@ -20,6 +20,12 @@ jobs:
         - image:    'windows-latest'
           title:    'Windows host build (cross-compile)'
           dirsep:   ';'
+        - image:    'macos-13'
+          title:    'OSX (Intel) host build  (cross-compile)'
+          dirsep:   ':'
+        - image:    'macos-14'
+          title:    'OSX (ARM) host build  (cross-compile)'
+          dirsep:   ':'
 
     runs-on: ${{ matrix.image }}
 
