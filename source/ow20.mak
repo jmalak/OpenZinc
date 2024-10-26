@@ -1,8 +1,8 @@
 # Zinc Application Framework 4.0 library makefile
 # Uses Open Watcom C/C++ 2.0 with Watcom WMAKE.EXE
 #
-# Compiles Zinc for 32 bit DOS (using DOS4GW), 16 bit Windows, Windows NT
-#  (including WIN32s), OS2 2.x.
+# Compiles Zinc for 32 bit DOS, 16 bit Windows, Windows NT (including Win32s)
+#        and 32 bit OS2 2.x.
 #    wmake -f ow20.mak dos32
 #    wmake -f ow20.mak windows
 #    wmake -f ow20.mak winnt
