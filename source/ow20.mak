@@ -223,7 +223,7 @@ RC_OPTS=-r
 
 # ----- DOS 32 bit (DOS4GW extender) compiler options -----------------------
 D32_CXX_OPTS=-bt=dos -dDOS386 -I"gfx/source"
-#D32_LINK_OPTS=SYSTEM dos4g OP stack=20000 DISA 1124
+#D32_LINK_OPTS=SYSTEM dos4g OP stack=20000
 D32_LINK_OPTS=SYSTEM causeway OP stack=20000
 D32_OBJS=
 # --- Use the next line for UI_WCC_DISPLAY ---
