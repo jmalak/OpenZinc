@@ -38,7 +38,7 @@ jobs:
     - name: Open Watcom setup
       uses: open-watcom/setup-watcom@v0
       with:
-        version: "2.0"
+        version: ${{ matrix.owimage }}
     - name: Create build directories
       run: |
         mkdir bin
