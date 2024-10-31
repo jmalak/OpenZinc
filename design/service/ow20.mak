@@ -145,7 +145,7 @@ w$(pname).lib : $(win_lib_objs)
 winnt: n$(exename).exe .SYMBOLIC
 
 n$(exename).exe: main.obn n$(pname).lib
-	$(LINK) $(LINK_OPTS) $(WNT_LINK_OPTS) N $@ F main.obn L {$(w32_dep_libs) $(WNT_LIBS)}
+	$(LINK) $(LINK_OPTS) $(WNT_LINK_OPTS) N $@ F main.obn L {$(wnt_dep_libs) $(WNT_LIBS)}
 
 make_winnt_modules: n$(pname).lib .SYMBOLIC
 
