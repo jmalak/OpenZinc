@@ -10,35 +10,41 @@ on:
 
 jobs:
   build:
-    name: ${{ matrix.title }}
     strategy:
       matrix:
-        include:
+        ow:
+        - ver:      '1.9'
+          id:       '19'
+          makefile: 'ow19.mak'
+        - ver:      '2.0'
+          id:       '20'
+          makefile: 'ow20.mak'
+        host:
         - image:    'ubuntu-latest'
-          title:    'Linux build host'
+          title:    'Linux'
           dirsep:   ':'
-          owimage:  '2.0'
         - image:    'windows-latest'
-          title:    'Windows build host'
+          title:    'Windows'
           dirsep:   ';'
-          owimage:  '2.0'
         - image:    'macos-13'
-          title:    'OSX (Intel) build host'
+          title:    'OSX (Intel)'
           dirsep:   ':'
-          owimage:  '2.0-64'
+          suf:      '-64'
         - image:    'macos-14'
-          title:    'OSX (ARM) build host'
+          title:    'OSX (ARM)'
           dirsep:   ':'
-          owimage:  '2.0-64'
-
-    runs-on: ${{ matrix.image }}
+          suf:      '-64'
+        exclude:
+        - { ow: { ver: '1.9' }, host: { suf: '-64' } }
+    name: ${{ matrix.host.title }} build host (${{ matrix.ow.ver }})
+    runs-on: ${{ matrix.host.image }}
 
     steps:
     - uses: actions/checkout@v4
     - name: Open Watcom setup
       uses: open-watcom/setup-watcom@v0
       with:
-        version: ${{ matrix.owimage }}
+        version: ${{ matrix.ow.ver }}${{ matrix.host.suf }}
     - name: Create build directories
       run: |
         mkdir bin
@@ -47,46 +53,46 @@ jobs:
       shell: bash
     - name: Build Open Zinc library
       run: |
-        wmake -f ow20.mak -h dos32
-        wmake -f ow20.mak -h windows
-        wmake -f ow20.mak -h winnt
-        wmake -f ow20.mak -h win32
-        wmake -f ow20.mak -h os2
+        wmake -f ${{ matrix.ow.makefile }} -h dos32
+        wmake -f ${{ matrix.ow.makefile }} -h windows
+        wmake -f ${{ matrix.ow.makefile }} -h winnt
+        wmake -f ${{ matrix.ow.makefile }} -h win32
+        wmake -f ${{ matrix.ow.makefile }} -h os2
       shell: bash
       working-directory: source
       env:
         DOS_INCLUDE: ${{ env.WATCOM }}/h
-        WINDOWS_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/win
-        NT_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/nt
-        OS2_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/os2
+        WINDOWS_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.host.dirsep }}${{ env.WATCOM }}/h/win
+        NT_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.host.dirsep }}${{ env.WATCOM }}/h/nt
+        OS2_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.host.dirsep }}${{ env.WATCOM }}/h/os2
     - name: Build Open Zinc Designer Libraries
       run: |
-        wmake -f ow20.mak -h make_dos32_modules
-        wmake -f ow20.mak -h make_windows_modules
-        wmake -f ow20.mak -h make_winnt_modules
-        wmake -f ow20.mak -h make_win32_modules
-        wmake -f ow20.mak -h make_os2_modules
+        wmake -f ${{ matrix.ow.makefile }} -h make_dos32_modules
+        wmake -f ${{ matrix.ow.makefile }} -h make_windows_modules
+        wmake -f ${{ matrix.ow.makefile }} -h make_winnt_modules
+        wmake -f ${{ matrix.ow.makefile }} -h make_win32_modules
+        wmake -f ${{ matrix.ow.makefile }} -h make_os2_modules
       shell: bash
       working-directory: design
       env:
         DOS_INCLUDE: ${{ env.WATCOM }}/h
-        WINDOWS_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/win
-        NT_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/nt
-        OS2_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/os2
+        WINDOWS_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.host.dirsep }}${{ env.WATCOM }}/h/win
+        NT_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.host.dirsep }}${{ env.WATCOM }}/h/nt
+        OS2_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.host.dirsep }}${{ env.WATCOM }}/h/os2
     - name: Build Open Zinc Designer Executables
       run: |
-        wmake -f ow20.mak -h dos32
-        wmake -f ow20.mak -h windows
-        wmake -f ow20.mak -h winnt
-        wmake -f ow20.mak -h win32
-        wmake -f ow20.mak -h os2
+        wmake -f ${{ matrix.ow.makefile }} -h dos32
+        wmake -f ${{ matrix.ow.makefile }} -h windows
+        wmake -f ${{ matrix.ow.makefile }} -h winnt
+        wmake -f ${{ matrix.ow.makefile }} -h win32
+        wmake -f ${{ matrix.ow.makefile }} -h os2
       shell: bash
       working-directory: design
       env:
         DOS_INCLUDE: ${{ env.WATCOM }}/h
-        WINDOWS_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/win
-        NT_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/nt
-        OS2_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.dirsep }}${{ env.WATCOM }}/h/os2
+        WINDOWS_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.host.dirsep }}${{ env.WATCOM }}/h/win
+        NT_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.host.dirsep }}${{ env.WATCOM }}/h/nt
+        OS2_INCLUDE: ${{ env.WATCOM }}/h${{ matrix.host.dirsep }}${{ env.WATCOM }}/h/os2
     - name: Zip files
       run: |
           if ($env:RUNNER_OS -eq "Windows") {
@@ -98,7 +104,7 @@ jobs:
     - name: Upload build artifact
       uses: actions/upload-artifact@v4
       with:
-        name:    '${{ matrix.image }}-snapshot'
+        name:    'ow${{ matrix.ow.ver }}-${{ matrix.host.image }}-snapshot'
         path:    openzinc.zip
         overwrite: true
   release:
@@ -106,10 +112,30 @@ jobs:
     needs: build
     runs-on: 'ubuntu-latest'
     steps:
+    - run: mkdir -p release
+      shell: bash
     - name: Download build artifact
       uses: actions/download-artifact@v4
       with:
-        name: 'ubuntu-latest-snapshot'
+        name: 'ow1.9-ubuntu-latest-snapshot'
+    - run: |
+        7z x openzinc.zip -y -orelease
+        rm -f openzinc.zip
+      shell: bash
+    - name: Download build artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: 'ow2.0-ubuntu-latest-snapshot'
+    - run: |
+        7z x openzinc.zip -y -orelease
+        rm -f openzinc.zip
+      shell: bash
+    - run: |
+        cd release
+        7z a openzinc.zip bin lib include
+        mv openzinc.zip ..
+        cd ..
+      shell: bash
     - name: Create release
       run: |
         gh release create "$tag" \

@@ -562,7 +562,7 @@ void ZIL_STORAGE_READ_ONLY::TempName(ZIL_ICHAR *tempname)
 ZIL_DISK_ADDRESS ZIL_STORAGE_READ_ONLY::AllocData(void)
 {
 	abort();
-#ifndef __WATCOMC__
+#if !defined( __WATCOMC__ ) || __WATCOMC__ < 1300
 	return (0);
 #endif
 }
@@ -570,7 +570,7 @@ ZIL_DISK_ADDRESS ZIL_STORAGE_READ_ONLY::AllocData(void)
 ZIL_DISK_ADDRESS ZIL_STORAGE_READ_ONLY::AppendInode(ZIL_INODE_NUMBER)
 {
 	abort();
-#ifndef __WATCOMC__
+#if !defined( __WATCOMC__ ) || __WATCOMC__ < 1300
 	return (0);
 #endif
 }
@@ -1008,7 +1008,7 @@ ZIL_STORAGE_OBJECT_READ_ONLY *ZIL_STORAGE_READ_ONLY::WalkPath(const ZIL_ICHAR *n
 int ZIL_STORAGE_READ_ONLY::WriteAt(long, void *, int)
 {
 	abort();
-#ifndef __WATCOMC__
+#if !defined( __WATCOMC__ ) || __WATCOMC__ < 1300
 	return (0);
 #endif
 }
@@ -1673,7 +1673,7 @@ int ZIL_STORAGE_OBJECT_READ_ONLY::Load(ZIL_ICHAR **string)
 int ZIL_STORAGE_OBJECT_READ_ONLY::Store(void *, int, int)
 {
 	abort();
-#ifndef __WATCOMC__
+#if !defined( __WATCOMC__ ) || __WATCOMC__ < 1300
 	return (0);
 #endif
 }
@@ -1992,7 +1992,7 @@ int ZIL_STORAGE_OBJECT_READ_ONLY::RWData(void *_buffer, unsigned N, int directio
 int ZIL_STORAGE_OBJECT_READ_ONLY::Store(const directoryEntry *)
 {
 	abort();
-#ifndef __WATCOMC__
+#if !defined( __WATCOMC__ ) || __WATCOMC__ < 1300
 	return (0);
 #endif
 }
