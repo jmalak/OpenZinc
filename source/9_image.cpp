@@ -19,7 +19,6 @@
 
 
 #include "ui_win.hpp"
-#include <windowsx.h>
 
 // --------------------------------------------------------------------------
 // ----- UIW_IMAGE ----------------------------------------------------------
@@ -202,7 +201,7 @@ int UIW_IMAGE::LoadImageFromFile(void)
 	// Load the bitmap.
 	ZIL_UINT32 dibSize = bitmapFileHeader.bfSize - sizeof(BITMAPFILEHEADER);
 	ZIL_UINT32 tdibSize = dibSize;
-	ZIL_UINT8 *dib = (ZIL_UINT8 *)GlobalAllocPtr(GMEM_MOVEABLE, dibSize);
+	ZIL_UINT8 *dib = (ZIL_UINT8 *)GlobalLock(GlobalAlloc(GMEM_MOVEABLE, dibSize));
 	ZIL_UINT8 *tdib = dib;
 	for ( ; dibSize; dibSize -= tdibSize, tdib += tdibSize)
 	{
@@ -221,7 +220,9 @@ int UIW_IMAGE::LoadImageFromFile(void)
 	ReleaseDC(NULL, hDC);
 
 	// Clean up.
-	GlobalFreePtr(dib);
+    GlobalUnlock( (HGLOBAL)GlobalHandle( dib ) );
+    GlobalFree( (HGLOBAL)GlobalHandle( dib ) );
+
    	delete bitmapInfo;
 	woStatus &= ~WOS_READ_ERROR;
 	return (image ? TRUE : FALSE);
