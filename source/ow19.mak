@@ -239,7 +239,7 @@ D32_LIBS=d32_wcc.lib
 #D32_LIBS=d32_gfx.lib wc_32gfx.lib
 
 # ----- 16 bit Windows compiler options -------------------------------------
-WIN_CXX_OPTS=-zW -zc -ml -zt=100 -I"../ow19"
+WIN_CXX_OPTS=-zW -zc -ml -zt=100
 WIN_LINK_OPTS=SYSTEM windows OP heapsize=16k OP stack=24k
 WIN_RC_OPTS=-bt=windows
 WIN_OBJS=
